@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Incubeta | Pipeline Test Report</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f8f9fb;
+      color: #1a1d23;
+    }
+
+    /* ── PASSWORD GATE ── */
+    #gate {
+      position: fixed;
+      inset: 0;
+      background: #0d1117;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    #gate-box {
+      width: 100%;
+      max-width: 380px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+    #gate-logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #ffffff;
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+    }
+    #gate-logo span { color: #6c63ff; }
+    #gate h2 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #e2e8f0;
+      margin-bottom: 0.4rem;
+    }
+    #gate p {
+      font-size: 0.875rem;
+      color: #64748b;
+      margin-bottom: 1.75rem;
+    }
+    #gate input[type="password"] {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      color: #e2e8f0;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    #gate input[type="password"]:focus { border-color: #6c63ff; }
+    #gate-error {
+      font-size: 0.8rem;
+      color: #f87171;
+      margin-bottom: 0.75rem;
+      min-height: 1.1rem;
+    }
+    #gate button {
+      width: 100%;
+      padding: 0.75rem;
+      background: #6c63ff;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    #gate button:hover { background: #5a52e0; }
+    #gate-footer {
+      font-size: 0.75rem;
+      color: #334155;
+      margin-top: 2rem;
+    }
+
+    /* ── REPORT ── */
+    #report { display: none; }
+
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #1a1d23;
+    }
+    .logo span { color: #6c63ff; }
+    .report-meta { font-size: 0.8rem; color: #64748b; }
+
+    main { max-width: 960px; margin: 2rem auto; padding: 0 1.5rem 4rem; }
+
+    .report-title { margin-bottom: 2rem; }
+    .report-title h1 { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .report-title p { font-size: 0.9rem; color: #64748b; }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .kpi {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+    }
+    .kpi-label { font-size: 0.75rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+    .kpi-value { font-size: 1.9rem; font-weight: 700; color: #1a1d23; }
+    .kpi-delta { font-size: 0.8rem; margin-top: 0.25rem; }
+    .up { color: #22c55e; }
+    .down { color: #ef4444; }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .card h2 { font-size: 1rem; font-weight: 600; margin-bottom: 1rem; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+    th { text-align: left; font-size: 0.75rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.04em; padding: 0.5rem 0.75rem; border-bottom: 1px solid #e5e7eb; }
+    td { padding: 0.65rem 0.75rem; border-bottom: 1px solid #f1f5f9; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #f8f9fb; }
+
+    .bar-wrap { background: #f1f5f9; border-radius: 4px; height: 8px; flex: 1; overflow: hidden; }
+    .bar { height: 100%; border-radius: 4px; background: #6c63ff; }
+
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+    .badge-green { background: #dcfce7; color: #15803d; }
+    .badge-yellow { background: #fef9c3; color: #854d0e; }
+    .badge-red { background: #fee2e2; color: #b91c1c; }
+
+    .pipeline-test-notice {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      font-size: 0.8rem;
+      color: #92400e;
+      margin-bottom: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div id="gate">
+  <div id="gate-box">
+    <div id="gate-logo">INCU<span>BETA</span></div>
+    <h2>Pipeline Test Report</h2>
+    <p>This report is password protected.<br>Enter the password provided by your Incubeta team.</p>
+    <input type="password" id="pw" placeholder="Password" autofocus>
+    <div id="gate-error"></div>
+    <button onclick="unlock()">Access Report</button>
+    <div id="gate-footer">incubeta.com</div>
+  </div>
+</div>
+
+<!-- REPORT (hidden until unlocked) -->
+<div id="report">
+  <header>
+    <div class="logo">INCU<span>BETA</span></div>
+    <div class="report-meta">Pipeline Test &nbsp;·&nbsp; July 2026</div>
+  </header>
+  <main>
+    <div class="pipeline-test-notice">
+      ⚠️ This is a <strong>pipeline test artifact</strong> — all data is fictional and for deployment verification only.
+    </div>
+
+    <div class="report-title">
+      <h1>Interactive Report: Pipeline Test</h1>
+      <p>Verifying the Claude → GitHub Pages deployment workflow</p>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="kpi-label">Sessions</div>
+        <div class="kpi-value">142K</div>
+        <div class="kpi-delta up">↑ 18% vs prior period</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Conversions</div>
+        <div class="kpi-value">3,841</div>
+        <div class="kpi-delta up">↑ 12% vs prior period</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">CVR</div>
+        <div class="kpi-value">2.7%</div>
+        <div class="kpi-delta down">↓ 0.3pp vs prior period</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">ROAS</div>
+        <div class="kpi-value">4.2x</div>
+        <div class="kpi-delta up">↑ 0.6x vs prior period</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Channel Performance</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Channel</th>
+            <th>Sessions</th>
+            <th>Share</th>
+            <th>CVR</th>
+            <th>ROAS</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Paid Search</td>
+            <td>58,200</td>
+            <td>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div class="bar-wrap"><div class="bar" style="width:41%"></div></div>
+                <span style="font-size:0.8rem;color:#64748b;">41%</span>
+              </div>
+            </td>
+            <td>3.8%</td>
+            <td>5.1x</td>
+            <td><span class="badge badge-green">On Track</span></td>
+          </tr>
+          <tr>
+            <td>Paid Social</td>
+            <td>34,500</td>
+            <td>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div class="bar-wrap"><div class="bar" style="width:24%"></div></div>
+                <span style="font-size:0.8rem;color:#64748b;">24%</span>
+              </div>
+            </td>
+            <td>2.1%</td>
+            <td>3.2x</td>
+            <td><span class="badge badge-yellow">Monitor</span></td>
+          </tr>
+          <tr>
+            <td>Display</td>
+            <td>28,900</td>
+            <td>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div class="bar-wrap"><div class="bar" style="width:20%"></div></div>
+                <span style="font-size:0.8rem;color:#64748b;">20%</span>
+              </div>
+            </td>
+            <td>1.4%</td>
+            <td>2.8x</td>
+            <td><span class="badge badge-yellow">Monitor</span></td>
+          </tr>
+          <tr>
+            <td>Organic</td>
+            <td>20,400</td>
+            <td>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div class="bar-wrap"><div class="bar" style="width:14%"></div></div>
+                <span style="font-size:0.8rem;color:#64748b;">14%</span>
+              </div>
+            </td>
+            <td>2.9%</td>
+            <td>—</td>
+            <td><span class="badge badge-green">On Track</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Deployment Checklist</h2>
+      <table>
+        <thead>
+          <tr><th>Check</th><th>Result</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>HTML artifact generated by Claude</td><td><span class="badge badge-green">✓ Pass</span></td></tr>
+          <tr><td>Password gate rendered correctly</td><td><span class="badge badge-green">✓ Pass</span></td></tr>
+          <tr><td>Report content visible after auth</td><td><span class="badge badge-green">✓ Pass</span></td></tr>
+          <tr><td>File pushed to GitHub via API</td><td><span class="badge badge-green">✓ Pass</span></td></tr>
+          <tr><td>Served via GitHub Pages URL</td><td><span class="badge badge-green">✓ Pass</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+
+<script>
+  const CORRECT = "incubeta2026";
+  const SESSION_KEY = "auth_pipeline_test";
+
+  function unlock() {
+    const val = document.getElementById("pw").value;
+    const err = document.getElementById("gate-error");
+    if (val === CORRECT) {
+      sessionStorage.setItem(SESSION_KEY, "1");
+      document.getElementById("gate").style.display = "none";
+      document.getElementById("report").style.display = "block";
+    } else {
+      err.textContent = "Incorrect password. Try again.";
+      document.getElementById("pw").value = "";
+      document.getElementById("pw").focus();
+    }
+  }
+
+  document.getElementById("pw").addEventListener("keydown", function(e) {
+    if (e.key === "Enter") unlock();
+  });
+
+  if (sessionStorage.getItem(SESSION_KEY) === "1") {
+    document.getElementById("gate").style.display = "none";
+    document.getElementById("report").style.display = "block";
+  }
+</script>
+
+</body>
+</html>
