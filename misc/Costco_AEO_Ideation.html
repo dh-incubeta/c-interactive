@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Answer Engine Optimization — Prep Hub for the Costco Services Summit</title>
+<style>
+:root{
+  color-scheme: light;
+  --page:#f9f9f7; --surface:#fcfcfb; --surface-2:#f4f3ef; --ink:#0b0b0b;
+  --ink-2:#52514e; --muted:#898781; --grid:#e1e0d9; --axis:#c3c2b7;
+  --hair:rgba(11,11,11,0.10);
+  --s1:#4a3aa7; --s2:#eb6834; --s3:#1baf7a;
+  --pos:#4a3aa7; --neg:#eb6834;
+  --good:#0ca30c; --warn:#fab219; --serious:#ec835a; --crit:#d03b3b;
+  --ok-text:#006300;
+  --ink-invert:#fcfcfb;
+  --dark-plane:#181828;
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --page:#0d0d0d; --surface:#1a1a19; --surface-2:#222221; --ink:#ffffff;
+  --ink-2:#c3c2b7; --muted:#898781; --grid:#2c2c2a; --axis:#383835;
+  --hair:rgba(255,255,255,0.10);
+  --s1:#9085e9; --s2:#d95926; --s3:#199e70;
+  --pos:#9085e9; --neg:#d95926;
+  --ok-text:#0ca30c;
+  --ink-invert:#0d0d0d;
+  --dark-plane:#111119;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--page);color:var(--ink);
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{line-height:1.2;margin:0;letter-spacing:-0.02em;font-weight:650}
+p{margin:0 0 1em}
+a{color:var(--s1)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+
+/* progress + nav */
+#prog{position:fixed;top:0;left:0;height:2px;background:var(--s1);width:0;z-index:60}
+nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--page) 88%, transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--hair)}
+.navin{max-width:1080px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:20px}
+.brand{font-weight:700;font-size:14px;letter-spacing:-0.01em;white-space:nowrap}
+.brand span{color:var(--s1)}
+.navlinks{display:flex;gap:2px;overflow-x:auto;flex:1;scrollbar-width:none}
+.navlinks::-webkit-scrollbar{display:none}
+.navlinks a{font-size:12.5px;color:var(--ink-2);text-decoration:none;padding:5px 9px;border-radius:6px;white-space:nowrap;font-weight:500}
+.navlinks a:hover{background:var(--surface-2);color:var(--ink)}
+.navlinks a.on{background:var(--s1);color:#fff}
+.tgl{border:1px solid var(--hair);background:var(--surface);color:var(--ink-2);border-radius:6px;padding:5px 9px;font-size:12px;cursor:pointer;font-family:inherit;white-space:nowrap}
+.tgl:hover{border-color:var(--s1);color:var(--s1)}
+
+section{padding:72px 0;border-top:1px solid var(--hair);scroll-margin-top:64px}
+section:first-of-type{border-top:none}
+.spotgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:16px;align-items:start}
+@media(max-width:860px){.spotgrid{grid-template-columns:minmax(0,1fr)}}
+.lead{font-size:17px;color:var(--ink-2);max-width:68ch}
+
+/* hero */
+.hero{padding:64px 0 56px;border:none}
+.definition{border-left:3px solid var(--s1);padding:20px 0 20px 24px;margin:28px 0}
+.definition .term{font-size:clamp(26px,4vw,40px);font-weight:700;letter-spacing:-0.03em;margin-bottom:6px}
+.definition .gloss{font-size:16px;color:var(--ink-2);max-width:62ch;margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.chip{font-size:12.5px;background:var(--surface);border:1px solid var(--hair);border-radius:999px;padding:6px 13px;color:var(--ink-2)}
+.chip b{color:var(--ink);font-weight:600}
+.notbox{background:var(--surface-2);border:1px solid var(--hair);border-radius:10px;padding:16px 18px;margin-top:28px;font-size:13.5px;color:var(--ink-2)}
+.notbox b{color:var(--ink)}
+
+/* cards */
+.card{background:var(--surface);border:1px solid var(--hair);border-radius:12px;padding:22px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+
+/* segmented control */
+.seg{display:inline-flex;background:var(--surface-2);border:1px solid var(--hair);border-radius:9px;padding:3px;gap:2px;flex-wrap:wrap}
+.seg button{border:0;background:transparent;color:var(--ink-2);font:inherit;font-size:13px;font-weight:550;padding:7px 14px;border-radius:7px;cursor:pointer}
+.seg button.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.seg button:hover:not(.on){color:var(--ink)}
+
+/* claim cards */
+.claim{background:var(--surface);border:1px solid var(--hair);border-left-width:3px;border-radius:10px;padding:16px 18px;margin-bottom:10px}
+.claim.no{border-left-color:var(--crit)}
+.claim.yes{border-left-color:var(--good)}
+.claim .q{font-size:15.5px;font-weight:600;margin-bottom:7px;letter-spacing:-0.01em}
+.claim .why{font-size:14px;color:var(--ink-2);margin:0 0 9px}
+.claim .src{font-size:11.5px;color:var(--muted)}
+.claim .src a{color:var(--muted);text-decoration:underline;text-decoration-color:var(--axis)}
+.tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:4px;margin-bottom:8px}
+.tag.dead{background:color-mix(in srgb,var(--crit) 14%,transparent);color:var(--crit)}
+.tag.live{background:color-mix(in srgb,var(--good) 14%,transparent);color:var(--ok-text)}
+
+/* stat tiles */
+.tile{background:var(--surface);border:1px solid var(--hair);border-radius:12px;padding:20px;display:flex;flex-direction:column}
+.tile .v{font-size:38px;font-weight:700;letter-spacing:-0.035em;line-height:1;margin-bottom:8px;color:var(--s1)}
+.tile .k{font-size:14px;font-weight:600;margin-bottom:8px;letter-spacing:-0.01em}
+.tile .d{font-size:13.5px;color:var(--ink-2);margin:0 0 12px;flex:1}
+.tile .m{font-size:11.5px;color:var(--muted);border-top:1px solid var(--hair);padding-top:10px;margin-top:auto}
+.tile .m a{color:var(--muted)}
+.conf{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px}
+.dot{width:7px;height:7px;border-radius:50%;flex:none}
+.conf.is-ok{color:var(--ok-text);font-size:10px} .conf.is-ok .dot{background:var(--good)}
+.conf.is-dir{color:var(--serious);font-size:10px} .conf.is-dir .dot{background:var(--serious)}
+.conf.is-con{color:var(--crit);font-size:10px} .conf.is-con .dot{background:var(--crit)}
+
+/* charts */
+.figure{background:var(--surface);border:1px solid var(--hair);border-radius:12px;padding:20px 20px 16px;margin:20px 0}
+.figure h4{font-size:15px;margin-bottom:4px;letter-spacing:-0.015em}
+.figsub{font-size:12.5px;color:var(--ink-2);margin:0 0 16px}
+.figfoot{font-size:11.5px;color:var(--muted);border-top:1px solid var(--hair);padding-top:11px;margin-top:14px;display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex-wrap:wrap}
+.figfoot a{color:var(--muted)}
+.viewbtn{border:1px solid var(--hair);background:transparent;color:var(--ink-2);border-radius:6px;padding:4px 9px;font:inherit;font-size:11px;cursor:pointer;white-space:nowrap}
+.viewbtn:hover{border-color:var(--s1);color:var(--s1)}
+svg{display:block;width:100%;height:auto;overflow:visible}
+svg text{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+.tbl{display:none;width:100%;border-collapse:collapse;font-size:13px;margin-top:4px}
+.tbl.show{display:table}
+.tbl th,.tbl td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--hair)}
+.tbl th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700}
+.tbl td:last-child,.tbl th:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--ink-2);margin-bottom:12px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--ink-invert);font-size:12px;padding:7px 10px;border-radius:6px;opacity:0;transition:opacity .1s;z-index:70;max-width:260px;line-height:1.45}
+.tip b{font-weight:650}
+
+/* arcs */
+.arc{display:none}
+.arc.on{display:block}
+.beat{display:grid;grid-template-columns:82px 1fr;gap:18px;padding:15px 0;border-bottom:1px solid var(--hair)}
+.beat:last-child{border-bottom:none}
+.beat .t{font-size:12px;font-weight:700;color:var(--s1);font-variant-numeric:tabular-nums;padding-top:2px}
+.beat .h{font-size:15px;font-weight:600;margin-bottom:4px;letter-spacing:-0.01em}
+.beat .b{font-size:14px;color:var(--ink-2);margin:0}
+.pull{font-size:19px;line-height:1.45;font-weight:550;letter-spacing:-0.02em;border-left:3px solid var(--s2);padding-left:18px;margin:0 0 20px;color:var(--ink)}
+.riskrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:20px}
+.riskrow div{background:var(--surface-2);border-radius:9px;padding:14px 16px}
+.riskrow h5{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:0 0 6px;font-weight:700}
+.riskrow p{font-size:13.5px;margin:0;color:var(--ink-2)}
+
+/* spotlight */
+.spot{display:none}
+.spot.on{display:block}
+.qbox{background:var(--dark-plane);border-radius:12px;padding:22px 24px;color:#fcfcfb}
+.qbox .lbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#a8a3d8;margin-bottom:10px}
+.qbox .qq{font-size:18px;font-weight:550;letter-spacing:-0.015em;margin:0 0 16px;line-height:1.4}
+.qbox .res{font-size:13.5px;color:#d6d4ce;margin:0;padding-top:14px;border-top:1px solid rgba(255,255,255,.12)}
+.qbox .res b{color:#fff}
+.dl{margin:0}
+.dl dt{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700;margin-top:16px}
+.dl dt:first-child{margin-top:0}
+.dl dd{margin:5px 0 0;font-size:14px;color:var(--ink-2)}
+.dl dd b{color:var(--ink);font-weight:600}
+.flag{background:color-mix(in srgb,var(--warn) 12%,transparent);border:1px solid color-mix(in srgb,var(--warn) 35%,transparent);border-radius:9px;padding:13px 15px;font-size:13px;margin-top:16px;color:var(--ink-2)}
+.flag b{color:var(--ink)}
+.money{background:color-mix(in srgb,var(--s1) 8%,transparent);border:1px solid color-mix(in srgb,var(--s1) 28%,transparent);border-radius:9px;padding:13px 15px;font-size:13.5px;margin-top:16px;color:var(--ink-2)}
+.money b{color:var(--ink)}
+
+/* levers */
+.lever{background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:16px 18px;margin-bottom:10px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:start}
+.lever h4{font-size:15px;margin-bottom:5px;letter-spacing:-0.01em}
+.lever p{font-size:13.5px;color:var(--ink-2);margin:0 0 7px}
+.lever .ev{font-size:11.5px;color:var(--muted)}
+.lever .ev a{color:var(--muted)}
+.pill{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:999px;white-space:nowrap}
+.pill.t1{background:color-mix(in srgb,var(--good) 14%,transparent);color:var(--ok-text)}
+.pill.t2{background:color-mix(in srgb,var(--serious) 18%,transparent);color:var(--serious)}
+.pill.t3{background:color-mix(in srgb,var(--crit) 13%,transparent);color:var(--crit)}
+
+/* accordion */
+details{background:var(--surface);border:1px solid var(--hair);border-radius:10px;margin-bottom:9px;overflow:hidden}
+details summary{padding:15px 18px;cursor:pointer;font-size:15px;font-weight:600;letter-spacing:-0.01em;list-style:none;display:flex;justify-content:space-between;gap:14px;align-items:center}
+details summary::-webkit-details-marker{display:none}
+details summary::after{content:'+';color:var(--s1);font-weight:700;font-size:19px;flex:none;line-height:1}
+details[open] summary::after{content:'–'}
+details .body{padding:0 18px 17px;font-size:14px;color:var(--ink-2)}
+details .body p{margin:0 0 10px}
+details .body p:last-child{margin:0}
+details .body strong{color:var(--ink)}
+details .body .cite{font-size:11.5px;color:var(--muted);margin-top:11px;padding-top:10px;border-top:1px solid var(--hair)}
+details .body .cite a{color:var(--muted)}
+
+/* dark feature band */
+.band{background:var(--dark-plane);color:#fcfcfb;border-radius:16px;padding:44px 40px;margin:8px 0}
+.band h2,.band h3,.band h4{color:#fff}
+.band .lead{color:#c9c6dd}
+.band .card{background:rgba(255,255,255,.055);border-color:rgba(255,255,255,.12)}
+.band .card h4{font-size:15px;margin-bottom:7px}
+.band .card p{font-size:13.5px;color:#cfcdc7;margin:0}
+.band .card .src{font-size:11.5px;color:#9a97b5;margin-top:10px}
+.band .card .src a{color:#9a97b5}
+
+/* misc */
+.mwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.matrix{width:100%;min-width:560px;border-collapse:collapse;font-size:13.5px;margin-top:8px}
+.matrix th,.matrix td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--hair);vertical-align:top}
+.matrix th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700}
+.matrix code{font-size:12.5px;background:var(--surface-2);padding:1.5px 5px;border-radius:4px}
+.matrix tr:last-child td{border-bottom:none}
+.todo{display:grid;grid-template-columns:26px 1fr;gap:12px;padding:14px 0;border-bottom:1px solid var(--hair);align-items:start}
+.todo:last-child{border-bottom:none}
+.todo .n{width:24px;height:24px;border-radius:50%;background:var(--s1);color:#fff;font-size:11.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none}
+.todo h4{font-size:15px;margin-bottom:4px;letter-spacing:-0.01em}
+.todo p{font-size:13.5px;color:var(--ink-2);margin:0}
+footer{border-top:1px solid var(--hair);padding:36px 0 56px;font-size:12.5px;color:var(--muted)}
+footer a{color:var(--muted)}
+.srcgrid{columns:2;column-gap:28px;margin-top:14px;font-size:11.5px;line-height:1.75}
+@media(max-width:720px){
+  .srcgrid{columns:1}
+  .band{padding:32px 22px;border-radius:12px}
+  section{padding:52px 0}
+  .beat{grid-template-columns:1fr;gap:4px}
+  .lever{grid-template-columns:1fr}
+  .navlinks{display:none}
+}
+@media print{nav,#prog,.viewbtn,.tgl{display:none}.tbl{display:table}}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<div class="tip" id="tip"></div>
+
+<nav>
+  <div class="navin">
+    <div class="brand">AEO <span>Prep Hub</span></div>
+    <div class="navlinks" id="navlinks">
+      <a href="#filter">Say / Don't Say</a>
+      <a href="#evidence">Evidence</a>
+      <a href="#arcs">Narrative Arcs</a>
+      <a href="#spotlights">Spotlights</a>
+      <a href="#levers">Levers</a>
+      <a href="#middleman">Middleman</a>
+      <a href="#youtube">YouTube</a>
+      <a href="#measure">Measurement</a>
+      <a href="#qa">Q&amp;A Prep</a>
+      <a href="#decisions">Decisions</a>
+    </div>
+    <button class="tgl" id="themebtn">Dark</button>
+  </div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero" id="top">
+  <div class="eyebrow">Preparation hub · Costco Services Summit · Tuesday, August 18, 2026</div>
+  <h1 style="font-size:clamp(30px,5.2vw,50px);letter-spacing:-0.035em;max-width:22ch;margin-bottom:20px">
+    Members are asking. Something is answering.
+  </h1>
+  <p class="lead">
+    A working hub for a 30-minute education session to a room of Costco Services provider teams —
+    marketers and P&amp;L owners together. Not a deck. A place to think, pressure-test the framing,
+    and pick the story worth telling. Every number here has been re-verified against its primary
+    source as of August 3, 2026, with the weak ones removed rather than softened.
+  </p>
+
+  <div class="definition">
+    <div class="term">Answer Engine Optimization</div>
+    <p class="gloss">
+      Earning the answer, not the click. When a member asks an AI assistant a question in their own
+      words, AEO is the work that determines whether Costco and its provider are named in the reply —
+      or whether someone else is.
+    </p>
+  </div>
+
+  <div class="chips">
+    <span class="chip"><b>30 min</b> + 15 Q&amp;A</span>
+    <span class="chip">Mixed room — <b>marketing-savvy and non-digital</b></span>
+    <span class="chip">Education, <b>not a pitch</b></span>
+    <span class="chip">Spotlights: <b>CAP · Elavon · Protective · American Family</b></span>
+  </div>
+
+  <div class="notbox">
+    <b>One term, used once.</b> The source research for this topic uses "AEO" to mean two different
+    things — Answer Engine Optimization and Agent Engine Optimization. This hub uses the first
+    throughout. Agentic commerce appears here only as the horizon it currently is, in the
+    <a href="#middleman">Middleman</a> section, with an honest read on what is actually shipping.
+  </div>
+</section>
+
+<!-- ══════════ FILTER ══════════ -->
+<section id="filter">
+  <div class="eyebrow">The confidence filter</div>
+  <h2 style="font-size:clamp(24px,3.6vw,34px);margin-bottom:14px;max-width:26ch">What is safe to say from the stage — and what is not.</h2>
+  <p class="lead" style="margin-bottom:26px">
+    This field is full of advice that was true eighteen months ago and is now measurably false. Several
+    claims in wide circulation — including a few that appear in most AEO decks — have been tested and
+    failed. Start here. Anything on the left will survive a sharp question from the room; anything on
+    the right will not.
+  </p>
+
+  <div class="seg" id="filterseg" style="margin-bottom:22px">
+    <button class="on" data-f="no">Don't say this <span style="opacity:.55">13</span></button>
+    <button data-f="yes">Say this <span style="opacity:.55">14</span></button>
+  </div>
+
+  <div id="claims"></div>
+</section>
+
+<!-- ══════════ EVIDENCE ══════════ -->
+<section id="evidence">
+  <div class="eyebrow">The evidence base</div>
+  <h2 style="font-size:clamp(24px,3.6vw,34px);margin-bottom:14px;max-width:30ch">The defensible numbers, with their caveats attached.</h2>
+  <p class="lead" style="margin-bottom:26px">
+    Each tile carries its source, sample and date, plus a confidence read. <span style="color:var(--ok-text);font-weight:600">Verified</span>
+    means independent or primary and methodologically sound. <span style="color:var(--serious);font-weight:600">Directional</span>
+    means vendor-published or correlational — usable, but say so. <span style="color:var(--crit);font-weight:600">Contested</span>
+    means credible sources disagree; present a range, never a point.
+  </p>
+
+  <div class="grid3" id="tiles"></div>
+
+  <div class="figure" id="fig-adobe"></div>
+  <div class="figure" id="fig-pew"></div>
+  <div class="figure" id="fig-overlap"></div>
+</section>
+
+<!-- ══════════ ARCS ══════════ -->
+<section id="arcs">
+  <div class="eyebrow">Three ways to tell it</div>
+  <h2 style="font-size:clamp(24px,3.6vw,34px);margin-bottom:14px;max-width:28ch">Same evidence. Three different talks.</h2>
+  <p class="lead" style="margin-bottom:26px">
+    The evidence supports more than one story, and the choice is strategic rather than editorial. Each
+    arc below is a complete 30-minute run-of-show with the opening line, the turn, the moment that
+    lands, and the close — plus what it asks of the room and where it can go wrong. Pick one spine.
+    Mixing them is how a talk to a mixed room loses both halves.
+  </p>
+
+  <div class="seg" id="arcseg" style="margin-bottom:26px">
+    <button class="on" data-a="a">A · The Invisible Aisle</button>
+    <button data-a="b">B · The Middleman Problem</button>
+    <button data-a="c">C · Start From What Works</button>
+  </div>
+
+  <div id="arcbody"></div>
+</section>
+
+<!-- ══════════ SPOTLIGHTS ══════════ -->
+<section id="spotlights">
+  <div class="eyebrow">Provider spotlights</div>
+  <h2 style="font-size:clamp(24px,3.6vw,34px);margin-bottom:14px;max-width:30ch">Four programs, four different failure modes.</h2>
+  <p class="lead" style="margin-bottom:22px">
+    Search results observed August 3, 2026 for non-branded, member-style queries — the way a member
+    actually asks, without the word "Costco" in it. Program facts are drawn from official pages with
+    confidence flagged; anything unverified is marked and should not be stated in front of the partner.
+  </p>
+  <div class="notbox" style="margin-bottom:26px">
+    <b>Before this goes on a slide:</b> these are observed organic result sets and verified article
+    contents, not captured AI-answer text. Screenshots of the actual AI Overview and ChatGPT replies to
+    these exact queries are what will land in the room — and they take about an hour to gather. That is
+    the single highest-value hour of prep available.
+  </div>
+
+  <div class="seg" id="spotseg" style="margin-bottom:26px">
+    <button class="on" data-s="elavon">Elavon</button>
+    <button data-s="cap">Costco Auto Program</button>
+    <button data-s="protective">Protective</button>
+    <button data-s="amfam">American Family</button>
+  </div>
+
+  <div id="spotbody"></div>
+</section>
+
+<!-- ══════════ LEVERS ══════════ -->
+<section id="levers">
+  <div class="eyebrow">What actually moves the needle</div>
+  <h2 style="font-size:clamp(24px,3.6vw,34px);margin-bottom:14px;max-width:30ch">Ranked by strength of evidence, not by how good it sounds.</h2>
+  <p class="lead" style="margin-bottom:24px">
+    The uncomfortable finding: the levers with the strongest evidence are largely earned and
+    operational, while the ones that sound most technical have the weakest support. Filter by tier
+    to see what survives scrutiny.
+  </p>
+
+  <div class="figure" id="fig-corr"></div>
+
+  <div class="seg" id="leverseg" style="margin:26px 0 20px">
+    <button class="on" data-l="all">All</button>
+    <button data-l="t1">Strong evidence</button>
+    <button data-l="t2">Moderate</button>
+    <button data-l="t3">Weak or contradicted</button>
+  </div>
+  <div id="leverbody"></div>
+
+  <h3 style="font-size:19px;margin:44px 0 8px">Crawler access — the one lever with deterministic consequences</h3>
+  <p class="lead" style="margin-bottom:8px;font-size:15.5px">
+    Everything else on this page is correlational. This table is not: the platforms document these
+    behaviours themselves. Conflating the training crawler with the retrieval crawler is the most
+    common and most expensive mistake in the category, and it is worth auditing on every partner site
+    before anything else is discussed.
+  </p>
+  <div class="card mwrap" style="padding:6px 18px;margin-top:16px">
+    <table class="matrix">
+      <thead><tr><th style="width:24%">Decision</th><th>What it actually does</th><th style="width:26%">Verdict</th></tr></thead>
+      <tbody>
+        <tr><td>Block <code>GPTBot</code>, <code>ClaudeBot</code>, <code>Google-Extended</code></td>
+            <td>Opts out of model <em>training</em> only. No effect on whether you are cited or linked in AI answers.</td>
+            <td style="color:var(--ok-text);font-weight:600">Low-cost IP position. Safe.</td></tr>
+        <tr><td>Block <code>OAI-SearchBot</code>, <code>Claude-SearchBot</code>, <code>PerplexityBot</code></td>
+            <td>Opts out of being <em>cited and linked</em>. OpenAI states the site "won't appear in ChatGPT search answers."</td>
+            <td style="color:var(--crit);font-weight:600">Direct visibility loss.</td></tr>
+        <tr><td>Block <code>Googlebot</code></td>
+            <td>Leaves Google Search entirely, AI Overviews and AI Mode included. There is no partial opt-out of AI features while remaining in Search.</td>
+            <td style="color:var(--crit);font-weight:600">Not a viable lever.</td></tr>
+        <tr><td>Block "AI crawlers" wholesale at the CDN</td>
+            <td>The common misconfiguration: kills retrieval bots as collateral damage when the training-opt-out goal could have been met in robots.txt.</td>
+            <td style="color:var(--serious);font-weight:600">Audit this first.</td></tr>
+        <tr><td>Rely on robots.txt alone</td>
+            <td>Insufficient. User-triggered agents are documented as potentially ignoring it, and Cloudflare de-listed Perplexity in Aug 2025 over alleged Chrome-impersonating crawling.</td>
+            <td style="color:var(--serious);font-weight:600">The edge is enforcement.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11.5px;color:var(--muted);margin-top:12px">
+    Sources: <a href="https://developers.openai.com/api/docs/bots">OpenAI bots documentation</a> ·
+    <a href="https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler">Anthropic crawler documentation</a> ·
+    <a href="https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers">Google common crawlers</a> (updated 2026-07-14) ·
+    <a href="https://docs.perplexity.ai/guides/bots">Perplexity bots</a>
+  </p>
+</section>
+
+<!-- ══════════ MIDDLEMAN ══════════ -->
+<section id="middleman">
+  <div class="band">
+    <div class="eyebrow" style="color:#9a97b5">The strategic question</div>
+    <h2 style="font-size:clamp(24px,3.6vw,34px);margin-bottom:16px;max-width:30ch">An answer engine's instinct is to skip the middle.</h2>
+    <p class="lead" style="margin-bottom:14px;max-width:70ch">
+      This is the part of the talk that matters most and is easiest to get wrong. Costco Services sits
+      between a member and a provider. Every study of how AI answers select sources points the same
+      direction: models name the endpoint and summarise away the layer in between. That is not a
+      forecast — Google's May 2026 core update moved visibility in measured, paired swings.
+    </p>
+    <p class="lead" style="max-width:70ch;margin-bottom:0">
+      Which sets up the honest version of the provider conversation. Making a provider more findable in
+      general helps the provider. Making the <em>Costco&nbsp;+&nbsp;provider</em> answer the one that gets
+      named — with member pricing, vetting and Executive benefits inside it — is the only version where
+      provider growth and Costco's interest point the same way.
+    </p>
+  </div>
+
+  <div class="figure" id="fig-core"></div>
+
+  <h3 style="font-size:19px;margin:40px 0 10px">The counter-move: be a tool inside the assistant, not a page it summarises</h3>
+  <p class="lead" style="font-size:15.5px;margin-bottom:20px">
+    The intermediaries holding their ground in 2026 all did the same thing — they exposed themselves as
+    something the assistant can call, keeping the transaction, the loyalty layer and the data on their
+    own rails. This is the most useful precedent set for a services marketplace, and it is a much more
+    interesting close than a technical checklist.
+  </p>
+  <div class="grid3">
+    <div class="card">
+      <h4>Thumbtack inside Claude</h4>
+      <p>A native Thumbtack experience for US users, surfacing matched pros from 300,000+ service
+      businesses. Critically, hiring and payment still happen on Thumbtack.</p>
+      <p class="src"><a href="https://www.businesswire.com/news/home/20260423884720/en/Thumbtack-Delivers-Home-Services-Experience-in-Anthropics-Claude">Business Wire</a> · Apr 23, 2026</p>
+    </div>
+    <div class="card">
+      <h4>Walmart's Sparky inside ChatGPT</h4>
+      <p>Discovery through account linking, loyalty integration and payment — all on Walmart's rails
+      rather than the assistant's. The full journey, not a product feed.</p>
+      <p class="src"><a href="https://www.retaildive.com/news/walmart-sparky-chatgpt-instant-checkout/815647/">Retail Dive</a> · Mar 25, 2026</p>
+    </div>
+    <div class="card">
+      <h4>Google is coming for services booking</h4>
+      <p>Agentic booking extended to home repair, beauty and pet care in the US this summer — including
+      Google placing the call to the business on the member's behalf.</p>
+      <p class="src"><a href="https://blog.google/products-and-platforms/products/search/search-io-2026/">Google I/O 2026</a> · May 19, 2026</p>
+    </div>
+  </div>
+
+  <div class="notbox" style="margin-top:24px">
+    <b>Be precise about maturity — this is where credibility is won or lost.</b> Agentic checkout is
+    less settled than the coverage suggests. OpenAI deprioritised Instant Checkout in March 2026, telling
+    merchants to use their own checkout experiences instead
+    (<a href="https://www.digitalcommerce360.com/2026/03/06/openai-shifts-checkout-plans-agentic-commerce-strategy/">Digital Commerce 360</a>, Mar 6, 2026).
+    Amazon won a preliminary injunction blocking Perplexity's shopping agent, now on appeal at the Ninth
+    Circuit (<a href="https://www.cnbc.com/2026/03/10/amazon-wins-court-order-to-block-perplexitys-ai-shopping-agent.html">CNBC</a>, Mar 10, 2026) —
+    so whether a user's own agent has a right to transact on a platform is genuinely unresolved. And
+    roughly three-quarters of consumers say they will not let an agent autonomously complete a
+    high-value purchase. Anyone still presenting ChatGPT Instant Checkout as the model of agentic
+    commerce is about five months out of date.
+  </div>
+</section>
+
+<!-- ══════════ YOUTUBE ══════════ -->
+<section id="youtube">
+  <div class="eyebrow">The underweighted lever</div>
+  <h2 style="font-size:clamp(24px,3.6vw,34px);margin-bottom:14px;max-width:30ch">YouTube is not a social channel here. It is an answer surface.</h2>
+  <p class="lead" style="margin-bottom:24px">
+    Of every factor tested across 75,000 brands, brand mentions in YouTube titles, transcripts and
+    descriptions correlated highest with AI visibility — ahead of branded web mentions, and far ahead
+    of domain authority and backlinks, which correlate at roughly zero. YouTube is also the single
+    most-cited domain in Google AI Overviews. If the April deck treated YouTube as the broader vision,
+    the evidence argues for promoting it to the main event.
+  </p>
+
+  <div class="figure" id="fig-yt"></div>
+
+  <div class="grid3" style="margin-top:22px">
+    <div class="card">
+      <h4>Reach is irrelevant</h4>
+      <p>View count correlates <b>−0.03</b> with being cited. Subscribers, <b>−0.03</b>. Likes, <b>−0.02</b>.
+      About <b>41% of cited videos had under 1,000 views</b> (40.8% precisely) and 35% of the channels had under 10,000
+      subscribers. This is a structure game, not a scale game — which makes it available to any
+      provider immediately.</p>
+      <p class="src" style="border-top:1px solid var(--hair);padding-top:10px;margin-top:12px;color:var(--muted)"><a href="https://otterly.ai/blog/youtube-ai-citation-study-2026/">Otterly, YouTube AI Citation Study 2026</a></p>
+    </div>
+    <div class="card">
+      <h4>Chapters are a Google-surface tactic</h4>
+      <p>78% of timestamped videos were cited repeatedly, often across two to five different chapters —
+      but timestamped citations appeared <b>only</b> in Google surfaces (73% AI Overviews, 27% AI Mode)
+      and <b>zero times</b> in ChatGPT, Copilot, Gemini or Perplexity. Precision matters: this is not a
+      universal fix.</p>
+      <p class="src" style="border-top:1px solid var(--hair);padding-top:10px;margin-top:12px;color:var(--muted)"><a href="https://otterly.ai/blog/youtube-ai-citation-study-2026/">Otterly, 2026</a></p>
+    </div>
+    <div class="card">
+      <h4>Long-form wins</h4>
+      <p>Long-form video accounts for <b>94%</b> of YouTube's AI citations. Shorts, 5.7%. Playlists,
+      channels and livestreams together, 0.3%. The asset that gets cited is a substantive, chaptered,
+      well-described explainer — which is exactly what a service program needs anyway.</p>
+      <p class="src" style="border-top:1px solid var(--hair);padding-top:10px;margin-top:12px;color:var(--muted)"><a href="https://otterly.ai/blog/youtube-ai-citation-study-2026/">Otterly, 2026</a></p>
+    </div>
+  </div>
+
+  <div class="notbox" style="margin-top:22px">
+    <b>Two honest caveats to carry on the slide.</b> These are correlations on already-cited videos, so
+    they explain repeat citation rather than initial eligibility, and no controlled study has shown that
+    adding a transcript or chapters <em>caused</em> a citation. Separately, a widely-circulated claim that
+    YouTube accounts for 23% of every AI Overview citation traces to a PR firm's aggregation of six
+    vendors' datasets with no disclosed sample or geography. The defensible figure is 5.6% of all AI
+    Overview citations (Ahrefs, 863,000 SERPs, March 2026). Use that one.
+  </div>
+</section>
+
+<!-- ══════════ MEASUREMENT ══════════ -->
+<section id="measure">
+  <div class="eyebrow">Measurement reality</div>
+  <h2 style="font-size:clamp(24px,3.6vw,34px);margin-bottom:14px;max-width:30ch">What can be measured, and what is being sold as measurable.</h2>
+  <p class="lead" style="margin-bottom:24px">
+    A room of P&amp;L owners will ask how this gets tracked, and the honest answer is more persuasive than
+    an invented dashboard. Being straight about the limits here is what separates a subject-matter
+    expert from a vendor.
+  </p>
+
+  <div class="grid2">
+    <div class="card">
+      <h4 style="font-size:16px;margin-bottom:10px">Real and deterministic</h4>
+      <dl class="dl">
+        <dt>Google Search Console — generative AI reports</dt>
+        <dd><b>Impressions</b> for AI Overviews and AI Mode, broken out by page, country, device and date.
+        Launched June 2026. But: <b>no click data</b>, AI Overviews and AI Mode are <b>not separated</b>,
+        and it is still a phased rollout to a subset of sites. Confirm a partner actually has it before
+        promising reporting on it.</dd>
+        <dt>Bing Webmaster Tools — AI Performance</dt>
+        <dd>Citations, page-level activity, and uniquely <b>grounding queries</b> — the phrases the AI
+        actually used to retrieve. Nothing else exposes this. Covers Copilot, Bing and unnamed partner
+        experiences; ChatGPT is not named.</dd>
+        <dt>Server and edge logs</dt>
+        <dd>Fully deterministic and badly underused. Which AI user-agents fetched which URLs, at what
+        frequency, with what response codes. The only way to prove a site is not accidentally blocking
+        retrieval bots.</dd>
+        <dt>Referral analytics</dt>
+        <dd>OpenAI appends <code>utm_source=chatgpt.com</code>, so those sessions are measurable in GA4.
+        Set expectations honestly: AI referrals are still roughly 0.5% of sessions for ecommerce.</dd>
+      </dl>
+    </div>
+    <div class="card">
+      <h4 style="font-size:16px;margin-bottom:10px">Estimated, and structurally so</h4>
+      <p style="font-size:14px;color:var(--ink-2)">Every third-party AI visibility tool works the same
+      way: it runs prompts against public interfaces and counts appearances. None has platform-side
+      data. That does not make them useless — it makes them a directional index rather than a KPI with
+      a target.</p>
+      <div style="border-left:3px solid var(--s1);padding-left:16px;margin:18px 0;font-size:14.5px;color:var(--ink)">
+        "Be wary of third-party tools that promise ranking success or claim to use 'internal' Google
+        metrics. <b>No third-party tool has access to our internal ranking or AI systems.</b>"
+        <div style="font-size:11.5px;color:var(--muted);margin-top:8px">Google, <a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide">Guide to Optimizing for Generative AI Features</a> · updated Jul 10, 2026</div>
+      </div>
+      <dl class="dl">
+        <dt>Non-determinism is the hard limit</dt>
+        <dd>There is less than a <b>1-in-100</b> chance that an AI tool returns the same list of brand
+        recommendations on two runs of the same prompt, and roughly 1 in 1,000 for identical ordering.
+        "Position three" is not a meaningful concept in an LLM answer.</dd>
+        <dt>Citations are not mentions</dt>
+        <dd><b>61.7%</b> of AI citations never name the cited brand; <b>25.1%</b> name a brand without
+        citing it. Gemini names brands 83.7% of the time but cites only 21.4%; ChatGPT is the mirror
+        image. A single blended "AI visibility score" destroys the only actionable signal.</dd>
+        <dt>Cross-platform scores average away the answer</dt>
+        <dd>Only <b>2.4%</b> of cited URLs are shared by all three of ChatGPT, Perplexity and AI Overviews,
+        and <b>91%</b> appear in exactly one. Track citations and mentions separately, by engine.</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="money" style="margin-top:20px">
+    <b>The defensible stack to recommend from the stage:</b> Search Console's generative AI report for
+    impressions, Bing Webmaster Tools for citations and grounding queries, server logs to verify bot
+    access, GA4 for referral outcomes — and <em>one</em> third-party prompt-monitoring tool, reported as a
+    directional index with the variance stated out loud. Not five dashboards. One honest one.
+  </div>
+</section>
+
+<!-- ══════════ Q&A ══════════ -->
+<section id="qa">
+  <div class="eyebrow">Q&amp;A prep</div>
+  <h2 style="font-size:clamp(24px,3.6vw,34px);margin-bottom:14px;max-width:30ch">Fifteen minutes of questions is half the session.</h2>
+  <p class="lead" style="margin-bottom:26px">
+    The hardest questions in this room are the fair ones. Each answer below is short enough to say out
+    loud and anchored to something checkable — including the two where the right answer is "we don't
+    know yet."
+  </p>
+  <div id="qabody"></div>
+</section>
+
+<!-- ══════════ DECISIONS ══════════ -->
+<section id="decisions">
+  <div class="eyebrow">Open decisions</div>
+  <h2 style="font-size:clamp(24px,3.6vw,34px);margin-bottom:14px;max-width:26ch">What still needs deciding before the deck gets built.</h2>
+  <p class="lead" style="margin-bottom:20px">
+    Ranked by how much they change the shape of the talk rather than by effort.
+  </p>
+  <div class="card">
+    <div class="todo"><div class="n">1</div><div>
+      <h4>Pick one narrative arc and commit</h4>
+      <p>All three work. Mixing them is how a 30-minute talk to a mixed room loses the marketers to
+      simplicity and the P&amp;L owners to detail at the same time. This decision drives every other one.</p>
+    </div></div>
+    <div class="todo"><div class="n">2</div><div>
+      <h4>Capture live AI answers for the four spotlight queries</h4>
+      <p>Roughly an hour of work and the highest-leverage hour available. Screenshots of an actual AI
+      Overview and ChatGPT reply — with the competitor named and Costco absent — do more than any chart
+      on this page. Capture the same day as the talk; these answers change week to week.</p>
+    </div></div>
+    <div class="todo"><div class="n">3</div><div>
+      <h4>Verify the shaky program facts, or cut them</h4>
+      <p>Five of them. The CAP Shop Card amount, Protective's Executive-tier discount magnitude and
+      American Family's Costco discount percentage are all unverifiable from public sources. Elavon's
+      equipment-credit window closed July 31. And the CAP incentive dollar figures currently on the site
+      are a Volkswagen model-specific offer expiring Aug 31, not a program-wide benefit. Wrong benefit
+      detail in front of the partner who owns it is the worst possible error in this room.</p>
+    </div></div>
+    <div class="todo"><div class="n">4</div><div>
+      <h4>Decide the position on FAQ work, explicitly</h4>
+      <p>The FAQ programme is sound and worth continuing — but the reason has changed, and the room may
+      include someone who knows Google killed FAQ rich results in May. Getting ahead of that is
+      credibility; getting caught by it is not. Recommended framing: the content matches how members
+      phrase questions and how models fan out queries; the markup is now inert.</p>
+    </div></div>
+    <div class="todo"><div class="n">5</div><div>
+      <h4>Run a crawler-access audit on the four provider sites and the Costco Services pages</h4>
+      <p>Two Costco Services program paths returned HTTP 403 to automated fetch on August 3. Whether AI
+      retrieval bots get the same treatment is a one-afternoon check against server logs, and it either
+      produces the most concrete finding in the deck or removes a claim that would not have held.</p>
+    </div></div>
+    <div class="todo"><div class="n">6</div><div>
+      <h4>Settle what the room is asked to do</h4>
+      <p>Education, not a pitch, still needs a next step or the energy dissipates in the parking lot.
+      The lowest-pressure version that stays inside the brief: name the one thing each provider can
+      check on their own site this week, and let anyone who wants more raise their hand.</p>
+    </div></div>
+  </div>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div style="display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:baseline">
+      <div>
+        <div style="font-weight:700;color:var(--ink);font-size:13px;margin-bottom:4px">AEO Prep Hub · Costco Services Summit</div>
+        <div>All claims verified against primary sources on August 3, 2026. Figures move; re-check before the 18th.</div>
+      </div>
+      <div><a href="#top">Back to top</a></div>
+    </div>
+    <div style="margin-top:26px;padding-top:18px;border-top:1px solid var(--hair)">
+      <div class="eyebrow" style="margin-bottom:8px">Primary sources</div>
+      <div class="srcgrid">
+        <a href="https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/">Pew Research — clicks when an AI summary appears</a><br>
+        <a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide">Google — Guide to Optimizing for Generative AI Features</a><br>
+        <a href="https://developers.google.com/search/docs/appearance/ai-features">Google — AI Features and Your Website</a><br>
+        <a href="https://developers.google.com/search/docs/appearance/structured-data/faqpage">Google — FAQPage deprecation notice</a><br>
+        <a href="https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers">Google — Common crawlers</a><br>
+        <a href="https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports">Google — Generative AI performance reports</a><br>
+        <a href="https://blog.google/products-and-platforms/products/search/search-io-2026/">Google I/O 2026 — Search announcements</a><br>
+        <a href="https://ahrefs.com/blog/schema-ai-citations/">Ahrefs — 1,885 pages adding schema</a><br>
+        <a href="https://ahrefs.com/blog/llmstxt-study/">Ahrefs — 137K sites, 97% of llms.txt never read</a><br>
+        <a href="https://ahrefs.com/blog/ai-brand-visibility-correlations/">Ahrefs — 75,000 brand visibility correlations</a><br>
+        <a href="https://ahrefs.com/blog/ai-overview-citations-top-10/">Ahrefs — top-10 share of AI Overview citations</a><br>
+        <a href="https://ahrefs.com/blog/domain-link-metrics-not-good-mention-predictors/">Ahrefs — domain link metrics are poor predictors</a><br>
+        <a href="https://www.semrush.com/blog/the-ghost-citations-study/">Semrush — Ghost Citations study</a><br>
+        <a href="https://www.semrush.com/news/463141-semrush-releases-expanded-2026-ai-visibility-index-analyzing-126-million-ai-search-prompts/">Semrush — 2026 AI Visibility Index</a><br>
+        <a href="https://www.semrush.com/blog/ai-overviews-commercial-search-study/">Semrush — commercial-intent AI Overviews</a><br>
+        <a href="https://www.semrush.com/blog/reddit-ai-search-visibility-study/">Semrush — Reddit AI search visibility</a><br>
+        <a href="https://www.seoclarity.net/googles-may-2026-core-update-research">seoClarity — May 2026 core update research</a><br>
+        <a href="https://www.seerinteractive.com/insights/aio-impact-on-google-ctr-2026-update">Seer — AI Overview impact on CTR</a><br>
+        <a href="https://www.seerinteractive.com/insights/study-content-recencys-impact-on-ai-visibility-in-2026">Seer — content recency and AI visibility</a><br>
+        <a href="https://otterly.ai/blog/youtube-ai-citation-study-2026/">Otterly — YouTube AI Citation Study 2026</a><br>
+        <a href="https://business.adobe.com/blog/ai-traffic-surge-retail-sites-not-machine-readable">Adobe Analytics — AI traffic to retail sites</a><br>
+        <a href="https://www.searchenginejournal.com/google-ai-overviews-study-finds-lost-clicks-werent-lower-quality/581298/">Agarwal &amp; Sen — randomised AI Overviews experiment</a><br>
+        <a href="https://searchengineland.com/google-ai-overviews-cite-self-serving-listicles-recommend-competitors-480573">Search Engine Land — listicles cited, competitors recommended</a><br>
+        <a href="https://searchengineland.com/what-15-7-million-ai-mode-citations-reveal-about-getting-quoted-by-google-483393">Pillarbase — 15.7M AI Mode citations</a><br>
+        <a href="https://arxiv.org/abs/2311.09735">Aggarwal et al. — GEO: Generative Engine Optimization (KDD '24)</a><br>
+        <a href="https://www.searchviu.com/en/schema-markup-and-ai-in-2025-what-chatgpt-claude-perplexity-gemini-really-see/">searchVIU — what the models really parse</a><br>
+        <a href="https://www.brainlabsdigital.com/ai-visibility-data-accuracy/">Brainlabs — AI visibility data accuracy</a><br>
+        <a href="https://sparktoro.com/blog/in-2026-less-than-one-third-of-google-searches-still-send-a-click/">SparkToro — zero-click search in 2026</a><br>
+        <a href="https://www.similarweb.com/blog/marketing/geo/gen-ai-stats/">Similarweb — generative AI platform statistics</a><br>
+        <a href="https://www.growth-memo.com/p/ai-halftime-report-h1-2026">Kevin Indig — AI Halftime Report H1 2026</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+"use strict";
+
+/* ─────────────── theme ─────────────── */
+var themeBtn=document.getElementById('themebtn');
+themeBtn.addEventListener('click',function(){
+  var d=document.documentElement.getAttribute('data-theme')==='dark';
+  document.documentElement.setAttribute('data-theme',d?'light':'dark');
+  themeBtn.textContent=d?'Dark':'Light';
+  redrawAll();
+});
+
+/* ─────────────── scroll progress + nav ─────────────── */
+var prog=document.getElementById('prog');
+var navA=[].slice.call(document.querySelectorAll('#navlinks a'));
+var secs=navA.map(function(a){return document.querySelector(a.getAttribute('href'));});
+function onScroll(){
+  var h=document.documentElement.scrollHeight-window.innerHeight;
+  prog.style.width=(h>0?(window.scrollY/h)*100:0)+'%';
+  var i=-1;
+  secs.forEach(function(s,k){ if(s && s.getBoundingClientRect().top<160) i=k; });
+  navA.forEach(function(a,k){ a.classList.toggle('on',k===i); });
+}
+window.addEventListener('scroll',onScroll,{passive:true});
+
+/* ─────────────── tooltip ─────────────── */
+var tip=document.getElementById('tip');
+function showTip(e,html){
+  tip.innerHTML=html; tip.style.opacity='1';
+  var r=tip.getBoundingClientRect();
+  var x=e.clientX+14, y=e.clientY-r.height-10;
+  if(x+r.width>window.innerWidth-12) x=e.clientX-r.width-14;
+  if(y<8) y=e.clientY+18;
+  tip.style.left=x+'px'; tip.style.top=y+'px';
+}
+function hideTip(){ tip.style.opacity='0'; }
+
+/* ─────────────── chart helpers ─────────────── */
+function cv(n){ return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function el(tag,attrs,txt){
+  var e=document.createElementNS('http://www.w3.org/2000/svg',tag);
+  for(var k in attrs) e.setAttribute(k,attrs[k]);
+  if(txt!=null) e.textContent=txt;
+  return e;
+}
+/* rough advance-width estimate for 11.5px semibold system sans */
+function txtW(s){ return String(s).length*6.6+2; }
+/* rounded rect with 4px rounding on the data end only */
+function barPath(x,y,w,h,r,dir){
+  r=Math.min(r,h/2,w/2);
+  if(dir==='right'){
+    return 'M'+x+','+y+'H'+(x+w-r)+'a'+r+','+r+' 0 0 1 '+r+','+r+'V'+(y+h-r)+'a'+r+','+r+' 0 0 1 '+(-r)+','+r+'H'+x+'Z';
+  }
+  return 'M'+(x+w)+','+y+'H'+(x+r)+'a'+r+','+r+' 0 0 0 '+(-r)+','+r+'V'+(y+h-r)+'a'+r+','+r+' 0 0 0 '+r+','+r+'H'+(x+w)+'Z';
+}
+
+/* horizontal bar chart, single series */
+function hbar(host,cfg){
+  var data=cfg.data, n=data.length;
+  var labelW=cfg.labelW||188, rowH=cfg.rowH||30, gap=8, padR=54, padT=6;
+  var H=padT+n*rowH+6, W=880, plotW=W-labelW-padR;
+  var max=cfg.max!=null?cfg.max:Math.max.apply(null,data.map(function(d){return d.v;}))*1.06;
+  var col=cfg.color||cv('--s1');
+  var svg=el('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':cfg.title});
+  var ticks=cfg.ticks||4;
+  /* tick and value labels use separate formatters so the unit is never applied twice */
+  var tickFmt=cfg.tickFmt||function(v){ return (Math.round(v*10)/10)+(cfg.unit||''); };
+  var valFmt=cfg.fmt||function(v){ return v+(cfg.unit||''); };
+  for(var t=0;t<=ticks;t++){
+    var vx=labelW+(plotW*t/ticks);
+    svg.appendChild(el('line',{x1:vx,y1:padT,x2:vx,y2:padT+n*rowH,stroke:cv('--grid'),'stroke-width':1}));
+    svg.appendChild(el('text',{x:vx,y:padT+n*rowH+16,fill:cv('--muted'),'font-size':10.5,'text-anchor':'middle'},
+      tickFmt(max*t/ticks)));
+  }
+  svg.appendChild(el('line',{x1:labelW,y1:padT,x2:labelW,y2:padT+n*rowH,stroke:cv('--axis'),'stroke-width':1}));
+  data.forEach(function(d,i){
+    var y=padT+i*rowH+gap/2, h=rowH-gap;
+    var w=Math.max(2,(d.v/max)*plotW);
+    var hi=cfg.highlight===i;
+    var p=el('path',{d:barPath(labelW,y,w,h,4,'right'),fill:hi?col:col,opacity:cfg.highlight!=null?(hi?1:0.42):0.92});
+    svg.appendChild(p);
+    svg.appendChild(el('text',{x:labelW-10,y:y+h/2+3.5,fill:hi?cv('--ink'):cv('--ink-2'),'font-size':11.5,'text-anchor':'end','font-weight':hi?'650':'450'},d.k));
+    /* value label outside the bar end when it fits with padding; inside otherwise */
+    var vtxt=valFmt(d.v);
+    var fitsOut=(labelW+w+8+txtW(vtxt))<=(W-2);
+    var inside=!fitsOut && w>txtW(vtxt)+16;
+    svg.appendChild(el('text',{
+      x: inside?(labelW+w-8):(labelW+w+8),
+      y:y+h/2+3.5,
+      fill: inside?cv('--surface'):cv('--ink'),
+      'font-size':11.5,'font-weight':'650',
+      'text-anchor': inside?'end':'start'
+    },vtxt));
+    var hit=el('rect',{x:labelW,y:padT+i*rowH,width:plotW,height:rowH,fill:'transparent'});
+    hit.style.cursor='default';
+    hit.addEventListener('mousemove',function(e){ showTip(e,'<b>'+esc(d.k)+'</b><br>'+valFmt(d.v)+(d.note?'<br><span style="opacity:.75">'+esc(d.note)+'</span>':'')); });
+    hit.addEventListener('mouseleave',hideTip);
+    svg.appendChild(hit);
+  });
+  host.appendChild(svg);
+}
+
+/* diverging horizontal bar */
+function dbar(host,cfg){
+  var data=cfg.data,n=data.length;
+  var labelW=cfg.labelW||210, rowH=28, gap=8, padR=48, padT=6;
+  var H=padT+n*rowH+24, W=880, plotW=W-labelW-padR;
+  var maxAbs=Math.max.apply(null,data.map(function(d){return Math.abs(d.v);}))*1.12;
+  var zero=labelW+plotW/2;
+  var svg=el('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':cfg.title});
+  [-1,-0.5,0.5,1].forEach(function(f){
+    var x=zero+(plotW/2)*f;
+    svg.appendChild(el('line',{x1:x,y1:padT,x2:x,y2:padT+n*rowH,stroke:cv('--grid'),'stroke-width':1}));
+    svg.appendChild(el('text',{x:x,y:padT+n*rowH+16,fill:cv('--muted'),'font-size':10.5,'text-anchor':'middle'},(f>0?'+':'')+Math.round(maxAbs*f)+'%'));
+  });
+  svg.appendChild(el('line',{x1:zero,y1:padT,x2:zero,y2:padT+n*rowH,stroke:cv('--axis'),'stroke-width':1}));
+  svg.appendChild(el('text',{x:zero,y:padT+n*rowH+16,fill:cv('--muted'),'font-size':10.5,'text-anchor':'middle'},'0'));
+  data.forEach(function(d,i){
+    var y=padT+i*rowH+gap/2,h=rowH-gap;
+    var w=Math.max(2,(Math.abs(d.v)/maxAbs)*(plotW/2));
+    var pos=d.v>=0;
+    var col=pos?cv('--pos'):cv('--neg');
+    var x=pos?zero:zero-w;
+    svg.appendChild(el('path',{d:barPath(x,y,w,h,4,pos?'right':'left'),fill:col,opacity:0.92}));
+    svg.appendChild(el('text',{x:labelW-10,y:y+h/2+3.5,fill:cv('--ink-2'),'font-size':11.5,'text-anchor':'end'},d.k));
+    /* keep the value label clear of the category column: inside the bar when it would collide */
+    var vt=(pos?'+':'')+d.v.toFixed(1)+'%';
+    var fitsOut=pos?((x+w+8+txtW(vt))<=(W-2)):((x-8-txtW(vt))>=(labelW+6));
+    var ins=!fitsOut && w>txtW(vt)+16;
+    svg.appendChild(el('text',{
+      x: ins?(pos?x+w-8:x+8):(pos?x+w+8:x-8),
+      y:y+h/2+3.5,
+      fill: ins?'#fcfcfb':cv('--ink'),
+      'font-size':11.5,'font-weight':'650',
+      'text-anchor': ins?(pos?'end':'start'):(pos?'start':'end')
+    },vt));
+    var hit=el('rect',{x:labelW,y:padT+i*rowH,width:plotW,height:rowH,fill:'transparent'});
+    hit.addEventListener('mousemove',function(e){ showTip(e,'<b>'+esc(d.k)+'</b><br>'+(pos?'+':'')+d.v.toFixed(1)+'% visibility change'+(d.note?'<br><span style="opacity:.75">'+esc(d.note)+'</span>':'')); });
+    hit.addEventListener('mouseleave',hideTip);
+    svg.appendChild(hit);
+  });
+  host.appendChild(svg);
+}
+
+/* figure scaffold + table twin */
+function figure(hostId,cfg){
+  var host=document.getElementById(hostId);
+  host.innerHTML='';
+  var h=document.createElement('h4'); h.textContent=cfg.title; host.appendChild(h);
+  var s=document.createElement('p'); s.className='figsub'; s.innerHTML=cfg.sub; host.appendChild(s);
+  if(cfg.legend){
+    var lg=document.createElement('div'); lg.className='legend'; lg.innerHTML=cfg.legend; host.appendChild(lg);
+  }
+  var plot=document.createElement('div'); host.appendChild(plot);
+  cfg.draw(plot);
+  var tbl=document.createElement('table'); tbl.className='tbl';
+  var head='<thead><tr><th>'+cfg.tcol+'</th><th>'+cfg.vcol+'</th></tr></thead><tbody>';
+  cfg.data.forEach(function(d){ head+='<tr><td>'+esc(d.k)+(d.note?' <span style="color:var(--muted)">— '+esc(d.note)+'</span>':'')+'</td><td>'+(d.v>0&&cfg.signed?'+':'')+d.v+(cfg.unit||'')+'</td></tr>'; });
+  tbl.innerHTML=head+'</tbody>';
+  host.appendChild(tbl);
+  var f=document.createElement('div'); f.className='figfoot';
+  f.innerHTML='<div>'+cfg.foot+'</div>';
+  var b=document.createElement('button'); b.className='viewbtn'; b.textContent='Table view';
+  b.addEventListener('click',function(){
+    var on=tbl.classList.toggle('show');
+    plot.style.display=on?'none':'block'; b.textContent=on?'Chart view':'Table view';
+  });
+  f.appendChild(b); host.appendChild(f);
+}
+
+/* ─────────────── stat tiles ─────────────── */
+var TILES=[
+ {c:'v',v:'8%',k:'Clicks when an AI summary appears',d:'Down from 15% when no summary is shown. And only <b>1%</b> of users clicked a source inside the summary — being cited in the answer is a mention strategy, not a traffic strategy.',
+  m:'Pew Research Center · 900 US adults, 68,879 real searches · <a href="https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/">source</a>'},
+ {c:'v',v:'−39.8%',k:'Outbound clicks, randomised experiment',d:'The first causal estimate rather than a correlation. Critically, the lost clicks showed <b>no difference in bounce rate or time on site</b> — which undercuts the "fewer but better clicks" defence.',
+  m:'Agarwal &amp; Sen · 1,065 users, AI Overviews randomised on/off · <a href="https://www.searchenginejournal.com/google-ai-overviews-study-finds-lost-clicks-werent-lower-quality/581298/">source</a> · pre-peer-review'},
+ {c:'d',v:'0.74',k:'YouTube mentions vs AI visibility',d:'The highest-correlating factor of every one tested across 75,000 brands — ahead of branded web mentions at 0.66. Domain Rating sat at 0.27; domain-level link metrics at roughly <b>zero</b>.',
+  m:'Ahrefs · 75,000 brands, DR&gt;40, Dec 2025 · <a href="https://ahrefs.com/blog/ai-brand-visibility-correlations/">source</a> · correlation, not causation'},
+ {c:'v',v:'97%',k:'llms.txt files never requested',d:'Of the ~38,000 sites publishing one, out of 137,210 domains monitored in May 2026. AI retrieval bots were 1.1% of the requests that did occur; SEO audit tools were 12–22% — the industry auditing itself. <b>Slackbot fetched them more than PerplexityBot did.</b>',
+  m:'Ahrefs · server-log analysis, May 2026 · <a href="https://ahrefs.com/blog/llmstxt-study/">source</a> · Ahrefs notes every figure is a ceiling'},
+ {c:'v',v:'−4.6%',k:'Effect of adding schema on AI citations',d:'1,885 pages that added JSON-LD, against ~4,000 matched controls. AI Overview citations <b>fell</b>. AI Mode +2.4% and ChatGPT +2.2% are indistinguishable from noise.',
+  m:'Ahrefs difference-in-differences study, May 2026 · <a href="https://ahrefs.com/blog/schema-ai-citations/">source</a>'},
+ {c:'d',v:'61.7%',k:'AI citations that never name the brand',d:'A further 25.1% name a brand without citing it. Gemini names brands 83.7% of the time but cites only 21.4%; ChatGPT is the mirror image. <b>A single blended visibility score destroys the signal.</b>',
+  m:'Semrush / Kevin Indig · 3,981 domain appearances from 115 prompts, 4 engines, 14 countries · <a href="https://www.semrush.com/blog/the-ghost-citations-study/">source</a> · small sample'},
+ {c:'c',v:'38%',k:'AI Overview citations from top-10 pages',d:'About 31% come from positions 11–100 and another 31% from beyond position 100. Often quoted as a fall from 76% — but <b>Ahrefs itself says the direct comparison is problematic</b> because it improved its parsing between studies. Safer to use the March 2026 distribution alone.',
+  m:'Ahrefs · 863K keywords, 4M AI Overview URLs, Mar 2026 · <a href="https://ahrefs.com/blog/ai-overview-citations-top-10/">source</a>'},
+ {c:'d',v:'+54%',k:'AI-referred retail conversion vs non-AI',d:'Reversed from <b>43% worse</b> in mid-2024. Present it as two endpoints — the path in between regressed in mid-2025, so a smooth improvement curve is not defensible. Baseline is all non-AI channels combined, not organic search alone.',
+  m:'Adobe Analytics · 1T+ visits to US retail sites, May 2026 · <a href="https://business.adobe.com/blog/ai-traffic-surge-retail-sites-not-machine-readable">source</a> · vendor-published'},
+ {c:'d',v:'2.4%',k:'Citations shared by all three engines',d:'<b>91% of cited URLs appear in exactly one engine.</b> Separately, 86% of the top-50 cited domains are unique per assistant. There is no single AEO playbook — this is the number that proves it.',
+  m:'Kevin Indig · 20,000 prompts, ChatGPT / Perplexity / AI Overviews · <a href="https://www.growth-memo.com/p/the-consensus-gap">source</a> · <a href="https://ahrefs.com/blog/top-mentioned-sources-are-not-shared-across-ai-assistants">Ahrefs</a>'}
+];
+document.getElementById('tiles').innerHTML=TILES.map(function(t){
+  var meta={v:['Verified','is-ok'],d:['Directional','is-dir'],c:['Contested','is-con']}[t.c];
+  return '<div class="tile"><span class="conf '+meta[1]+'"><span class="dot"></span>'+meta[0]+'</span>'+
+    '<div class="v">'+t.v+'</div><div class="k">'+t.k+'</div><p class="d">'+t.d+'</p>'+
+    ''+
+    '<div class="m">'+t.m+'</div></div>';
+}).join('');
+
+/* ─────────────── chart data ─────────────── */
+var D_ADOBE=[
+  {k:'Jul 2024',v:-43,note:'AI-referred visitors converted far worse than every other channel'},
+  {k:'Feb 2025',v:-9,note:'Gap narrowing'},
+  {k:'May 2025',v:-49,note:'Adobe described AI traffic converting "nearly half as much" as non-AI — the path was not a straight line'},
+  {k:'Mar 2026',v:42,note:'Crossed over — the figure most decks are still quoting'},
+  {k:'May 2026',v:54,note:'Latest reading'}
+];
+var D_PEW=[
+  {k:'No AI summary shown',v:15,note:'Baseline click rate'},
+  {k:'AI summary shown',v:8,note:'Clicks roughly halve'},
+  {k:'A link inside the AI summary',v:1,note:'Almost nobody clicks the cited sources'}
+];
+var D_OVERLAP=[
+  {k:'BrightEdge · Aug 2024',v:99,note:'The era most AEO advice still assumes'},
+  {k:'Ahrefs · Jul 2025',v:76,note:'863K keyword SERPs'},
+  {k:'seoClarity · Oct 2025',v:32,note:'362K US desktop queries'},
+  {k:'BrightEdge · Feb 2026',v:17,note:'Lowest reading of any vendor'},
+  {k:'Ahrefs · Mar 2026',v:38,note:'4M AI Overview URLs; ~31% of citations now come from beyond position 100'}
+];
+var D_CORR=[
+  {k:'YouTube brand mentions',v:0.74,note:'Brand named in a video title, transcript or description'},
+  {k:'YouTube mention impressions',v:0.72},
+  {k:'Branded web mentions',v:0.66,note:'Brand named on third-party sites'},
+  {k:'Branded anchor text',v:0.51},
+  {k:'Branded search volume',v:0.35},
+  {k:'Ad traffic',v:0.29},
+  {k:'Domain Rating',v:0.27},
+  {k:'Branded traffic',v:0.24},
+  {k:'Number of pages on site',v:0.19,note:'Publishing volume buys almost nothing'}
+];
+var D_CORE=[
+  {k:'Video & streaming platforms',v:26.3},
+  {k:'Sports brands',v:19.3},
+  {k:'Finance brands (banks, insurers)',v:9.5,note:'Paired with finance comparison sites at −9.1%'},
+  {k:'Direct travel brands',v:8.2,note:'Paired with travel aggregators at −11.0%'},
+  {k:'Retail brand sites',v:4.7},
+  {k:'Reference sites',v:3.7},
+  {k:'News publishers',v:-6.2},
+  {k:'Social & UGC platforms',v:-6.3},
+  {k:'Finance comparison & affiliate',v:-9.1},
+  {k:'Travel aggregators / OTAs',v:-11.0},
+  {k:'Tourism boards',v:-33.2},
+  {k:'App stores / corporate "About" pages',v:-33.4}
+];
+var D_YT=[
+  {k:'Perplexity',v:38.7},
+  {k:'Google AI Overviews',v:36.6},
+  {k:'Google AI Mode',v:19.6},
+  {k:'ChatGPT',v:4.4,note:'YouTube is not a ChatGPT lever'},
+  {k:'Copilot',v:0.5},
+  {k:'Gemini',v:0.2}
+];
+
+function redrawAll(){
+  figure('fig-adobe',{
+    title:'AI-referred traffic to US retail sites: conversion rate vs all non-AI channels',
+    sub:'The endpoints are the story — from worst-in-class to best-in-class. These are discrete published readings, not a continuous series: note the <b>May 2025 regression</b>, which most versions of this chart quietly omit. Present the two endpoints, or present all five. Do not draw a smooth curve.',
+    data:D_ADOBE,unit:'%',signed:true,tcol:'Reading',vcol:'Difference vs non-AI',
+    legend:'<span><i style="background:var(--pos)"></i>Converted better than non-AI</span><span><i style="background:var(--neg)"></i>Converted worse</span>',
+    foot:'Adobe Analytics, 1T+ visits to US retail sites · <a href="https://business.adobe.com/blog/ai-traffic-surge-retail-sites-not-machine-readable">source</a> · <span style="color:var(--serious);font-weight:600">Directional</span> — vendor-published and unaudited; Adobe sells an LLM optimisation product. US retail only, and travel still lags non-AI. The baseline is <em>all</em> non-AI channels combined, not organic search alone.',
+    draw:function(p){ dbar(p,{data:D_ADOBE,labelW:120,title:'AI referral conversion vs non-AI, published readings'}); }
+  });
+  figure('fig-pew',{
+    title:'Share of Google searches where the user clicked a link',
+    sub:'The best independent measurement of what an AI summary does to clicks — real observed behaviour from a research panel, not a vendor sample. Note the bottom bar: almost nobody clicks the sources inside the summary.',
+    data:D_PEW,unit:'%',tcol:'Behaviour',vcol:'Share of searches',
+    foot:'Pew Research Center · 900 US adults, 68,879 real searches, March 2025 data · <a href="https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/">source</a> · <span style="color:var(--ok-text);font-weight:600">Verified</span> — independent and panel-measured. Ageing: predates the AI Mode rollout.',
+    draw:function(p){ hbar(p,{data:D_PEW,unit:'%',max:18,ticks:3,labelW:200,tickFmt:function(v){return Math.round(v)+'%';},title:'Click rates with and without an AI summary',highlight:1}); }
+  });
+  figure('fig-overlap',{
+    title:'Share of Google AI Overview citations that come from top-10 ranking pages',
+    sub:'Two things at once. The trend is a collapse — ranking no longer buys citation. But the vendor spread within the same few months is enormous, which is why this belongs on a slide as a range and never as a single number.',
+    data:D_OVERLAP,unit:'%',tcol:'Study',vcol:'Top-10 share',
+    foot:'Multiple vendors, dated per bar · <a href="https://ahrefs.com/blog/ai-overview-citations-top-10/">Ahrefs</a> · <a href="https://www.seoclarity.net/research/aio-rankings-overlap">seoClarity</a> · <span style="color:var(--crit);font-weight:600">Contested</span> — Ahrefs improved its citation parsing between studies, so part of the drop reflects better detection. A 17%–99% spread across two years is a measurement-methodology problem as much as a behaviour change.',
+    draw:function(p){ hbar(p,{data:D_OVERLAP,unit:'%',max:100,labelW:210,tickFmt:function(v){return Math.round(v)+'%';},title:'Top-10 overlap by study',highlight:4}); }
+  });
+  figure('fig-corr',{
+    title:'What correlates with brand visibility in AI answers',
+    sub:'Spearman correlation across 75,000 brands, ChatGPT column. The top two factors are earned mentions on other people\'s properties. Domain Rating sits near the bottom — and in a separate study, domain-level link metrics correlated at 0.01 for ChatGPT and <b>−0.12</b> for AI Overviews.',
+    data:D_CORR,tcol:'Factor',vcol:'Correlation',
+    foot:'Ahrefs, 75,000 brands with DR&gt;40 · <a href="https://ahrefs.com/blog/ai-brand-visibility-correlations/">source</a> · Dec 2025 · <span style="color:var(--serious);font-weight:600">Directional</span> — correlation, not causation. Ahrefs\' own caveat, which belongs on the slide: these may be markers of existing brand strength rather than levers you can pull.',
+    draw:function(p){ hbar(p,{data:D_CORR,max:0.8,labelW:214,ticks:4,tickFmt:function(v){return v.toFixed(2);},fmt:function(v){return v.toFixed(2);},title:'AI visibility correlates',highlight:0}); }
+  });
+  figure('fig-core',{
+    title:'Google\'s May 2026 core update: visibility change by site type',
+    sub:'Read the pairs, not the extremes. Finance brands gained 9.5% while finance comparison sites lost 9.1%. Direct travel brands gained 8.2% while aggregators lost 11.0%. Google moved visibility from the layer in between toward the endpoint — measured, not theorised.',
+    data:D_CORE,unit:'%',signed:true,tcol:'Site type',vcol:'Visibility change',
+    legend:'<span><i style="background:var(--pos)"></i>Gained visibility</span><span><i style="background:var(--neg)"></i>Lost visibility</span>',
+    foot:'seoClarity · 672,503 US English keywords, top-20 snapshots May 13 vs May 20, 2026 · <a href="https://www.seoclarity.net/googles-may-2026-core-update-research">source</a> · <span style="color:var(--serious);font-weight:600">Directional</span> — single-vendor, one-week window, and a core update is not the same mechanism as AI answer selection, though both point the same way.',
+    draw:function(p){ dbar(p,{data:D_CORE,title:'May 2026 core update winners and losers'}); }
+  });
+  figure('fig-yt',{
+    title:'Where YouTube gets cited: distribution of YouTube citations by AI platform',
+    sub:'YouTube is a Google-surface and Perplexity lever. It is close to irrelevant on ChatGPT and Gemini. There is no single AEO playbook, and this chart is the cleanest illustration of why.',
+    data:D_YT,unit:'%',tcol:'Platform',vcol:'Share of YouTube citations',
+    foot:'Otterly.ai · 100M+ citation instances over 30 days across six platforms · <a href="https://otterly.ai/blog/youtube-ai-citation-study-2026/">source</a> · 2026 · <span style="color:var(--serious);font-weight:600">Directional</span> — vendor research, prompt-sampled. Sample is already-cited videos, so it explains repeat citation rather than initial eligibility.',
+    draw:function(p){ hbar(p,{data:D_YT,unit:'%',max:42,ticks:3,labelW:170,tickFmt:function(v){return Math.round(v)+'%';},fmt:function(v){return v+'%';},title:'YouTube citation share by platform'}); }
+  });
+}
+
+/* ─────────────── say / don't say ─────────────── */
+var CLAIMS={
+no:[
+ {q:'"FAQ schema markup gets us cited in AI answers."',
+  why:'Google ended FAQ rich results in Search entirely on <b>May 7, 2026</b>; tool support was dropped in June, and Search Console API support for FAQ data ends this month. Google has never connected FAQPage markup to AI features, and Ahrefs tracked 1,885 pages that added schema against ~4,000 matched controls: AI Overview citations went <b>−4.6%</b>. The FAQ <em>content</em> still earns its place — question-and-answer prose matches how models fan out queries and how members phrase prompts. The markup does not.',
+  src:'<a href="https://developers.google.com/search/docs/appearance/structured-data/faqpage">Google FAQPage deprecation notice</a> · <a href="https://ahrefs.com/blog/schema-ai-citations/">Ahrefs, May 11, 2026</a>'},
+ {q:'"Publish an llms.txt file so AI engines can find our content."',
+  why:'Across 137,210 monitored domains, <b>97% of published llms.txt files received zero requests</b> in May 2026. AI retrieval bots were 1.1% of the requests that did occur — Slackbot fetched them more often than PerplexityBot did. Google\'s documentation states Search ignores the file entirely. And John Mueller, asked in January 2026 whether Google hosting llms.txt on some of its own properties amounts to an endorsement: <em>"I\'m tempted to say something snarky since this has come up so often, but to be direct, no."</em>',
+  src:'<a href="https://ahrefs.com/blog/llmstxt-study/">Ahrefs, June 15, 2026</a> · <a href="https://www.searchenginejournal.com/google-says-llms-txt-is-purely-speculative-for-now/577576/">Mueller via SEJ, June 2, 2026</a>'},
+ {q:'"Rank in the top 10 and you\'ll be cited in AI Overviews."',
+  why:'As of March 2026 only <b>38%</b> of AI Overview citations came from top-10 pages — roughly 31% came from positions 11–100 and another <b>31% from pages that don\'t rank in the top 100 at all</b>. Ranking still buys eligibility; it no longer buys citation. One caution on how you phrase it: the widely-quoted "fell from 76%" comparison is one Ahrefs partly disowns, because it improved its citation parsing between the two studies. Lead with the March 2026 distribution, not the trend line.',
+  src:'<a href="https://ahrefs.com/blog/ai-overview-citations-top-10/">Ahrefs, March 2, 2026</a> · 863K keywords, 4M AI Overview URLs'},
+ {q:'"Build domain authority and backlinks to win AI citations."',
+  why:'Ahrefs Rank measured against AI mentions: ChatGPT <b>0.01</b>, AI Overviews <b>−0.12</b>, Perplexity <b>−0.34</b>. Ahrefs\' own conclusion: <em>"domain-level link metrics would not be a good predictor for mentions."</em> Branded <em>mentions</em> correlate at 0.66–0.74; links do not. Use it to kill the backlink argument, not to claim links actively hurt — all three coefficients are statistically non-significant on a sample of the top 50 domains per platform.',
+  src:'<a href="https://ahrefs.com/blog/domain-link-metrics-not-good-mention-predictors/">Ahrefs / Patrick Stox</a> · June 2025 data'},
+ {q:'"Chunk content into small standalone blocks so AI can parse it."',
+  why:'Google, verbatim: <em>"There\'s no requirement to break your content into tiny pieces for AI to better understand it"</em> and <em>"There\'s no ideal page length."</em> Ahrefs is blunter — don\'t write articles like a series of status updates. Writing well and answering the question early is good practice; chunking as a parsing hack is not a real mechanism.',
+  src:'<a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide">Google AI optimization guide</a> · updated July 10, 2026'},
+ {q:'"Block Google-Extended to protect our content from AI."',
+  why:'Google-Extended controls training for Gemini models and grounding in Gemini Apps and Vertex AI. It has <b>no effect on AI Overviews or AI Mode</b>, and Google states it "does not impact a site\'s inclusion in Google Search nor is it used as a ranking signal." There is no crawler-level opt-out of AI Overviews short of leaving Search.',
+  src:'<a href="https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers">Google common crawlers</a> · updated July 14, 2026'},
+ {q:'"Blocking GPTBot removes us from ChatGPT."',
+  why:'GPTBot is the <em>training</em> crawler. <code>OAI-SearchBot</code> is what governs whether a site appears in ChatGPT search answers. Conflating them is the most common and most expensive AI-crawler mistake — sites block the wrong one and lose citation eligibility while achieving nothing on training.',
+  src:'<a href="https://developers.openai.com/api/docs/bots">OpenAI bots documentation</a>'},
+ {q:'"Tool X measures our true AI visibility."',
+  why:'Google, verbatim: <em>"No third-party tool has access to our internal ranking or AI systems."</em> Every one of these tools runs prompts against public interfaces and counts appearances. And the underlying system is non-deterministic — there is less than a <b>1-in-100</b> chance of getting the same brand list twice from the same prompt.',
+  src:'<a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide">Google</a> · <a href="https://www.brainlabsdigital.com/ai-visibility-data-accuracy/">Brainlabs, April 20, 2026</a>'},
+ {q:'"AI referrals convert 42% higher than organic search."',
+  why:'Right number, wrong baseline, and out of date. Adobe\'s comparison is against <b>all non-AI channels combined</b> — paid, email, affiliate, social and organic together — not organic search alone. And the figure moved to <b>54%</b> by May 2026. The stronger version is the reversal: from 43% <em>worse</em> in mid-2024 to 54% better.',
+  src:'<a href="https://www.digitalcommerce360.com/2026/06/17/adobe-ai-referred-traffic-to-retail-sites-doubles-in-a-year/">Adobe via Digital Commerce 360</a> · June 17, 2026'},
+ {q:'"87% of local service providers have zero AI citation share."',
+  why:'This is a public-relations firm\'s figure about <b>independent HVAC and plumbing contractors specifically</b>, generated from roughly 65 prompts with no disclosed brand sample or margin of error. It is also close to arithmetically unavoidable: with ~230,000 contractors and answers surfacing 3–15 sources, most must have near-zero share. Generalising it to "local service providers" misrepresents it.',
+  src:'5WPR HVAC &amp; Plumbing AI Visibility Index 2026 · PR-published'},
+ {q:'"Adding statistics to content gives a 41% visibility lift." (the Princeton study)',
+  why:'The paper is real; the numbers are commonly scrambled. <b>+41% belongs to adding quotations, not statistics</b> — statistics measured +31%, fluency +28%, citing sources +27%, keyword stuffing −8%. The metric is "position-adjusted word count" judged by an LLM, not traffic or clicks. And it is a 2024 paper that predates ChatGPT Search, AI Mode and Gemini entirely.',
+  src:'<a href="https://arxiv.org/abs/2311.09735">Aggarwal et al., GEO, KDD \'24</a> · Table 1'},
+ {q:'"Being cited means we\'re visible."',
+  why:'<b>61.7%</b> of AI citations never name the cited brand, and <b>25.1%</b> name a brand without citing it. The asymmetry is extreme by engine: Gemini names brands 83.7% of the time but cites only 21.4%; ChatGPT is the mirror image. A citation-only metric overstates brand impact; a mention-only metric overstates it the other way.',
+  src:'<a href="https://www.semrush.com/blog/the-ghost-citations-study/">Semrush / Kevin Indig</a> · June 9, 2026'},
+ {q:'"Google search is dying."',
+  why:'It is not, and saying so will cost credibility with anyone in the room who follows the numbers. Alphabet\'s Q2 2026 Search advertising revenue grew <b>17% year over year to roughly $63.3B</b>, with query volume at an all-time high. Third-party clicks are being redistributed; Google\'s search business is not shrinking. The real argument is about where the answer gets formed, not whether search survives.',
+  src:'<a href="https://blog.google/company-news/inside-google/message-ceo/alphabet-earnings-q2-2026/">Alphabet Q2 2026</a> · July 22, 2026'}
+],
+yes:[
+ {q:'When an AI summary appears, clicks roughly halve — from 15% to 8%. Only 1% of users click a source inside the summary.',
+  why:'The strongest independent measurement available: a research panel of 900 US adults across 68,879 real searches, observed rather than surveyed. The 1% figure is the one that lands hardest — being cited inside the answer is not a traffic strategy, it is a mention strategy.',
+  src:'<a href="https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/">Pew Research Center</a> · March 2025 data'},
+ {q:'In a randomised experiment, AI Overviews cut outbound organic clicks 39.8% — and the lost clicks were not lower quality.',
+  why:'The first causal estimate rather than a correlation. 1,065 US desktop users, AI Overviews randomly switched on and off. Zero-click searches rose 34.5%. Critically, there was <b>no significant difference in bounce rate or time on site</b> between conditions — which directly undercuts the "we send fewer but better clicks" defence.',
+  src:'<a href="https://www.searchenginejournal.com/google-ai-overviews-study-finds-lost-clicks-werent-lower-quality/581298/">Agarwal &amp; Sen</a> · pre-peer-review working paper, July 2026'},
+ {q:'Brand mentions on other people\'s properties are the strongest measured correlate of AI visibility. YouTube mentions lead at ~0.74.',
+  why:'Across 75,000 brands, YouTube brand mentions correlated highest of every factor tested, followed by branded web mentions at 0.66. Domain Rating sat at 0.27 and content volume at 0.19. This reframes the work from on-site technical to earned and operational — and it is the single most useful finding for a provider audience.',
+  src:'<a href="https://ahrefs.com/blog/ai-brand-visibility-correlations/">Ahrefs</a> · December 2025'},
+ {q:'Roughly 85% of brand mentions in AI answers originate on third-party domains, not the brand\'s own site.',
+  why:'Brands are around 6.5x more likely to be cited via third-party listicles, comparisons and reviews than via their own pages. For a services marketplace this is the strategic crux: the leverage sits in review depth and third-party validation, not in publishing more owned pages.',
+  src:'<a href="https://www.airops.com/report/the-2026-state-of-ai-search">AirOps / Kevin Indig</a> · Dec 2025 — <span style="color:var(--serious)">sample size not disclosed; corroborated by Semrush and Tinuiti, so use as a pattern</span>'},
+ {q:'Google cited brands\' own "best X" listicles 323 times — and recommended a competitor instead in 69% of them.',
+  why:'Across 100 "best [category]" queries, Google repeatedly cited a brand\'s self-promotional roundup and then recommended rivals named <em>inside that brand\'s own page</em>. Brands with third-party endorsement captured the recommendation slots. The practical warning: publishing your own "top providers" page can feed your competitors into the answer.',
+  src:'Research by Lily Ray, reported by <a href="https://searchengineland.com/google-ai-overviews-cite-self-serving-listicles-recommend-competitors-480573">Search Engine Land</a> · 100 B2B queries, 80 triggering AI Overviews · June 18, 2026'},
+ {q:'Being cited in an AI Overview delivers roughly 120% more organic clicks per impression than uncited competitors on the same result page.',
+  why:'The most useful number for answering "why bother if nobody clicks." On the same SERP, cited brands substantially outperform uncited ones — though both still trail a no-AI-Overview result on informational queries. Presence inside the answer is a relative advantage, not a restoration of old traffic.',
+  src:'<a href="https://www.seerinteractive.com/insights/aio-impact-on-google-ctr-2026-update">Seer Interactive</a> · 53 brands, 5.47M queries · April 2026'},
+ {q:'AI Overviews are moving into commercial intent: commercial-intent AI Overviews grew 71% between November 2025 and April 2026.',
+  why:'The best answer to "this only affects informational queries." Across 600,000+ US keywords in 10 verticals, AI Overviews appeared far more often for commercial keywords than transactional ones in every industry, with finance up 231%. Transactional-intent AI Overviews actually <em>declined</em> 5% over the same period — so this is arriving in the consideration stage specifically, which is exactly where a services program competes.',
+  src:'<a href="https://www.semrush.com/blog/ai-overviews-commercial-search-study/">Semrush</a> · July 2, 2026'},
+ {q:'ChatGPT cites around 15 sources per response. Gemini cites around 3.',
+  why:'From 126 million US AI search prompts across four platforms. A brand can dominate one engine and be invisible in another, which is why a single blended "AI visibility score" is worse than no score. It also justifies platform-specific work rather than one playbook.',
+  src:'<a href="https://www.semrush.com/news/463141-semrush-releases-expanded-2026-ai-visibility-index-analyzing-126-million-ai-search-prompts/">Semrush 2026 AI Visibility Index</a> · June 26, 2026'},
+ {q:'Only 2.4% of cited URLs are shared by all three of ChatGPT, Perplexity and AI Overviews. 91% appear in just one.',
+  why:'Separately, 86% of the top-50 cited domains are unique per assistant — only 7 of 50 were shared. There is no single AEO playbook, and any slide implying one is wrong. Say it as "2.4% shared by all three, 91% in only one" rather than as a blended overlap percentage, which is where this number usually gets garbled.',
+  src:'<a href="https://www.growth-memo.com/p/the-consensus-gap">Kevin Indig</a> · 20,000 prompts · <a href="https://ahrefs.com/blog/top-mentioned-sources-are-not-shared-across-ai-assistants">Ahrefs</a>'},
+ {q:'AI-referred retail traffic converted 54% better than non-AI traffic in May 2026 — reversed from 43% worse in mid-2024.',
+  why:'The reversal is far more persuasive than the point estimate, and it is the right frame for a retail audience: this traffic used to be worthless and now outperforms. Two honesty requirements. The baseline is all non-AI channels combined, not organic search alone. And the path was not monotonic — Adobe described AI traffic converting "nearly half as much" as non-AI as late as May 2025 — so quote the endpoints rather than drawing a smooth improvement curve.',
+  src:'<a href="https://business.adobe.com/blog/ai-traffic-surge-retail-sites-not-machine-readable">Adobe Analytics</a> · 1T+ retail visits'},
+ {q:'Freshness means last-updated, not published: 72% of cited pages look fresh by update date, only 42% by publish date.',
+  why:'A 30-point gap, and more than a quarter of "fresh" cited pages were originally published two or more years ago. Pages cited consistently across four study months were <em>older</em> on average than one-month spikes. Maintained evergreen assets beat publishing velocity — a genuinely reassuring message for a provider with a small content team.',
+  src:'<a href="https://www.seerinteractive.com/insights/study-content-recencys-impact-on-ai-visibility-in-2026">Seer Interactive</a> · 7,683 pages, 47,097 citations · 2026'},
+ {q:'About 41% of YouTube videos cited in AI answers had fewer than 1,000 views. View count correlates −0.03 with citation.',
+  why:'Reach is irrelevant to being cited; structure and topical match are not. 35% of the cited channels had under 10,000 subscribers. This makes YouTube immediately actionable for a provider with no audience — which is most of the room.',
+  src:'<a href="https://otterly.ai/blog/youtube-ai-citation-study-2026/">Otterly</a> · 100M+ citation instances · 2026'},
+ {q:'Google\'s May 2026 core update moved visibility from aggregators toward direct brands, in paired swings.',
+  why:'Finance brands +9.5% against finance comparison sites −9.1%. Direct travel +8.2% against travel aggregators −11.0%. Across 672,503 keywords. The disintermediation pressure on any middle layer is measured rather than theorised — the single most important slide for a services marketplace.',
+  src:'<a href="https://www.seoclarity.net/googles-may-2026-core-update-research">seoClarity</a> · May 2026 · <span style="color:var(--serious)">single-vendor, one-week window</span>'},
+ {q:'Google\'s own words: "No third-party tool has access to our internal ranking or AI systems."',
+  why:'Put this on a slide verbatim. It pre-empts every vendor dashboard conversation, establishes that the speaker is not selling a black box, and is the most credibility-positive sentence available on the entire subject of measurement.',
+  src:'<a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide">Google, Guide to Optimizing for Generative AI Features</a> · updated July 10, 2026'}
+]};
+
+function renderClaims(f){
+  var host=document.getElementById('claims');
+  host.innerHTML=CLAIMS[f].map(function(c){
+    return '<div class="claim '+f+'">'+
+      '<span class="tag '+(f==='no'?'dead':'live')+'">'+(f==='no'?'Do not say':'Safe to say')+'</span>'+
+      '<div class="q">'+c.q+'</div>'+
+      '<p class="why">'+c.why+'</p>'+
+      '<div class="src">'+c.src+'</div></div>';
+  }).join('');
+}
+
+/* ─────────────── narrative arcs ─────────────── */
+var ARCS={
+a:{
+ pull:'"Somewhere in the last two years, the aisle your members walk down stopped being a shelf and started being an answer. Let me show you what\'s on it."',
+ desc:'The most intuitive arc for a mixed room, and the easiest to demo live. It opens on a member question, shows what actually comes back, and lets the gap do the arguing. Costco is present in the answer for some services and absent for others — and the difference is structural, not mysterious.',
+ beats:[
+  ['0–4 min','Ask the room a question','Put a real member query on screen — "cheapest credit card processing for a small business" — and ask who thinks their program is named in the answer. Then show the answer. No theory yet. The room is now leaning in.'],
+  ['4–9 min','Name the shift, once, plainly','Search used to return a list you chose from. Now something reads the list and answers for you. One definition of AEO, one slide, no jargon. The Pew number — clicks halve, and only 1% click a source inside the answer — makes it concrete for the non-digital half of the room.'],
+  ['9–17 min','Four programs, four outcomes','The spotlight walk. Elavon is the anchor: objectively cheaper than the brands the comparison sites recommend, and absent from every one of their lists. Then CAP, Protective, American Family. Same member, same assistant, four different failure modes.'],
+  ['17–23 min','Why it happens — and it isn\'t mysterious','Three mechanisms only: what the assistant can read, what other people say about you, and how fresh it looks. Show that top-10 ranking no longer buys citation, and that 85% of brand mentions come from third-party properties. This is where the marketers get their meat.'],
+  ['23–28 min','The one thing each provider can check this week','A single concrete action per provider, framed as a diagnostic they can run themselves. Crawler access is the best candidate: deterministic, documented, and frequently misconfigured.'],
+  ['28–30 min','Close on the asymmetry','Where the page is built right, Costco gets named. Where it isn\'t, a competitor does. That gap is not a technology problem — it\'s a maintenance problem, and it\'s the cheapest one on this list to fix.']
+ ],
+ asks:'To go look at their own answer, not to buy anything.',
+ risk:'Live AI answers change week to week, so any captured screenshot needs a date on it and ideally a same-week recapture. And a provider seeing itself as the "absent" example can read it as criticism — lead each spotlight with the diagnosis, never the deficiency.',
+ best:'A room where most people have never seen their own brand missing from an AI answer. Highest emotional impact, lowest conceptual load.'
+},
+b:{
+ pull:'"An answer engine\'s instinct is to name the endpoint and skip the middle. Costco Services is the middle. So is every relationship in this room."',
+ desc:'The most strategically serious arc, and the one most likely to make a P&L owner sit forward. It argues that the exposure is structural rather than incidental — and it has the strongest evidence behind it, because Google has already been observed doing exactly this.',
+ beats:[
+  ['0–4 min','Start with the mechanism, not the symptom','An assistant asked to recommend something names a provider. It rarely names the channel the member would have bought through. State it flatly, then prove it.'],
+  ['4–10 min','Show the paired swings','The May 2026 core update chart. Finance brands up 9.5% while finance comparison sites down 9.1%. Direct travel up 8.2% while aggregators down 11.0%. This is not a forecast — it is a measurement, across 672,000 keywords.'],
+  ['10–17 min','What that means for a Costco program','A provider who becomes more findable in general gets a more findable provider. The Costco relationship — member pricing, vetting, Executive benefits, the Shop Card — only shows up if it is in the answer. Use American Family as the live case: the parent brand already wins the non-branded bundle query, and the Costco channel is invisible inside that win.'],
+  ['17–24 min','The counter-move that is actually working','Thumbtack inside Claude. Walmart\'s Sparky inside ChatGPT. Both kept the transaction, the loyalty layer and the data on their own rails. Then the honest caveat: OpenAI walked back Instant Checkout in March, and Amazon is in court over whether a user\'s agent may transact at all. This is a direction, not a finished playbook.'],
+  ['24–29 min','What that asks of providers now','Anchor visibility work on the Costco + provider answer rather than the standalone brand. Not because it is generous, but because it is the only version where both parties\' interests point the same way.'],
+  ['29–30 min','Close on the choice','Every intermediary in 2026 is choosing between being a page that gets summarised and being a tool that gets called. That choice is being made now, by default, for anyone not making it deliberately.']
+ ],
+ asks:'To think about the Costco channel as part of their own visibility strategy rather than adjacent to it.',
+ risk:'Highest conceptual load of the three — the non-digital half of the room can lose the thread by minute 10 unless every abstraction is immediately followed by a concrete example. It also edges close to sounding like it serves Costco\'s interests over the provider\'s, which needs the "both directions" argument made explicitly rather than implied.',
+ best:'A room weighted toward P&L and relationship owners, or a follow-up session after the basics have landed.'
+},
+c:{
+ pull:'"Two of these programs already get named. Let\'s start there, because the difference between them and the others is smaller than you\'d think."',
+ desc:'The lowest-risk arc and the most generous to the room. It opens on what already works, reverse-engineers why, then applies it. Nobody is the cautionary tale, which matters if any provider in the room is sensitive about being used as an example.',
+ beats:[
+  ['0–5 min','Open on a win','A service where Costco is cited cleanly today. Show the answer, then show the page behind it. The point lands before any theory: this is structure, not luck.'],
+  ['5–12 min','Reverse-engineer it','What is true of the pages that get named — answers early, maintained rather than merely published, described in third-party sources, readable by retrieval bots. Every item is checkable, and none of it is exotic.'],
+  ['12–20 min','Apply it to the four spotlights','Now the gaps, framed as the same checklist with items missing. Elavon carries the most weight here because the benefit is objectively strong — it is purely a retrievability failure, which is the most hopeful version of the problem.'],
+  ['20–26 min','What the evidence says actually matters','The correlation chart. Earned mentions and YouTube lead; domain authority and backlinks are near zero. Then the reassuring part for a small team: 41% of cited YouTube videos had under 1,000 views, and maintained evergreen pages outperform publishing volume.'],
+  ['26–29 min','Where it goes next','A short, honest look at agentic booking arriving in services this summer. Framed as why the foundations are worth building now, not as a reason to panic.'],
+  ['29–30 min','Close on replicability','The programs that get named did nothing the rest cannot do. That is the whole message, and it leaves the room feeling capable rather than exposed.']
+ ],
+ asks:'To copy something that is already working inside their own portfolio.',
+ risk:'Lowest urgency of the three — a room that leaves feeling good may not leave feeling motivated. If the goal includes provider follow-up, this arc needs a sharper ask at the end than the other two do.',
+ best:'A room with known sensitivities, mixed sophistication, or where preserving relationships matters more than creating urgency.'
+}};
+
+function renderArc(k){
+  var a=ARCS[k];
+  document.getElementById('arcbody').innerHTML=
+    '<p class="pull">'+a.pull+'</p>'+
+    '<p class="lead" style="margin-bottom:24px">'+a.desc+'</p>'+
+    '<div class="card">'+a.beats.map(function(b){
+      return '<div class="beat"><div class="t">'+b[0]+'</div><div><div class="h">'+b[1]+'</div><p class="b">'+b[2]+'</p></div></div>';
+    }).join('')+'</div>'+
+    '<div class="riskrow">'+
+      '<div><h5>What it asks of the room</h5><p>'+a.asks+'</p></div>'+
+      '<div><h5>Where it can go wrong</h5><p>'+a.risk+'</p></div>'+
+      '<div><h5>Best fit</h5><p>'+a.best+'</p></div>'+
+    '</div>';
+}
+
+/* ─────────────── spotlights ─────────────── */
+var SPOTS={
+elavon:{
+ badge:'The money slide',
+ q:'"Cheapest credit card processing for a small business"',
+ res:'<b>What comes back:</b> NerdWallet ranks Square, Helcim, Chase Payment Solutions, Stripe and Payment Depot. Merchant Maverick ranks Helcim, Stax, Payline, Square, Dharma and six more. <b>Elavon appears in neither. Costco appears in neither.</b>',
+ dl:[
+  ['The verified benefit','<b>1.10% + 12¢</b> per qualified swipe or chip transaction; 1.90% + 25¢ online. No annual, batch, authorization, cancellation or reporting fees. Executive Members pay no application fee and no monthly statement fee — Gold Star and Business tiers pay $25 and $4.95/month. Source: Elavon\'s Costco pricing page, retrieved Aug 3, 2026.'],
+  ['The comparison that makes the point','Square, which appears in nearly every "cheapest" list, is <b>2.6% + 15¢</b> in person on its Free plan (2.5% Plus, 2.4% Premium). Elavon\'s Costco rate is materially cheaper than most of the brands being recommended as the cheap option. <b>Name the plan when you say it</b> — otherwise the comparison is attackable, and this is the slide you least want picked apart. Two Elavon caveats to state alongside: a $20 monthly minimum applies, and lodging is carved out at 1.79% + 20¢.'],
+  ['The diagnosis','This is not a competitiveness failure. It is a retrievability failure — and those are two very different conversations to have with a partner. The comparison publishers that answer engines lean on have datasets that Elavon is simply not in.'],
+  ['Why the category makes it worse','Payment processing is the least hedged of the four categories — models will confidently state Square\'s and Helcim\'s rates. So the omission does not read as "no data available." It reads as "not competitive." Elavon\'s tiered "qualified transaction" structure is also harder for a model to normalise than a single flat rate, which pushes answers toward flat-rate brands with one quotable number.'],
+  ['Who owns the category','<b>Merchant Maverick</b> is the kingmaker here, with NerdWallet, Fit Small Business, TechnologyAdvice and US News behind it. Unusually, vendor-owned editorial hubs also rank well — Stripe and QuickBooks win category queries with their own resource content, which is a repeatable pattern worth naming.']
+ ],
+ money:'<b>Why this is the slide to build the talk around:</b> it is the cleanest possible demonstration that AI visibility is not a proxy for product quality. The benefit is real, verified, and better than what gets recommended. The gap is entirely in whether the answer engine can find and trust it. Nobody in the room can argue with the arithmetic, and no provider is embarrassed by it.',
+ flag:'<b>Do not state:</b> the equipment-rental credit promotion. That sign-up window closed July 31, 2026 and the terms did not re-render on a second fetch. Verify with Elavon before referencing any current offer.'
+},
+cap:{
+ badge:'The split-domain problem',
+ q:'"Car buying service" / "best way to buy a new car"',
+ res:'<b>What comes back:</b> NerdWallet, Consumer Reports, TrueCar, CarEdge, AAA, Navy Federal, Edmunds. <b>Costco is absent from all three query variants tested.</b> It surfaces only once the word "Costco" is already in the query.',
+ dl:[
+  ['The finding that stings','NerdWallet\'s own "Car-Buying Services: What To Know" names Carvana, CarMax, AAA, TrueCar, Enterprise, AARP, American Express, Geico — <b>and Sam\'s Club. But not Costco.</b>'],
+  ['Why Sam\'s Club is there and Costco is not','Sam\'s Club\'s program is TrueCar-powered, so it inherits TrueCar\'s citation graph and appears wherever TrueCar appears. The Costco Auto Program is self-operated and inherits nothing. That is a structural explanation, not a quality one — and it is a genuinely interesting slide.'],
+  ['The domain split','The program is operated by Affinity Auto Programs under the Costco Auto Program name, and its content lives on <b>costcoauto.com</b> rather than costco.com. Brand and authority signals are therefore split across two domains, and the stronger domain is not the one holding the content.'],
+  ['A content-hygiene exhibit','The live Limited-Time Specials page still carried a Volvo Polestar software offer dated <b>"June 1 – August 2, 2021"</b> when checked on Aug 3, 2026. Given that freshness research shows 72% of cited pages look current by last-update date, a five-year-stale offer on a live commercial page is exactly the signal that erodes trust — and it is a two-minute fix.'],
+  ['Verified benefits','Prearranged pricing through Approved Dealers, and <b>15% off parts and service capped at $500 per visit</b>. Source: costcoauto.com, retrieved Aug 3, 2026.<br><br><b>Be careful with the incentive figures.</b> The $1,250 Executive / $1,000 Gold Star and Business amounts currently on the site are a <em>Volkswagen limited-time special</em> on specific 2026 models, expiring Aug 31, 2026 — not a program-wide benefit. Presenting them as standard program incentives overstates the scope, and stackability is not stated on that offer page.'],
+  ['Category friction','Prearranged prices sit behind member login, so no answer engine can state the benefit concretely. The category\'s dominant framing — "negotiate," "get three quotes" — is also structurally hostile to a no-haggle proposition, which suppresses named-brand recommendations across the board.']
+ ],
+ flag:'<b>Do not state:</b> a Costco Shop Card amount for this program. The value did not resolve on the live page and is unverified. Also note that two Costco Services program paths returned HTTP 403 to automated fetch — worth confirming against server logs before presenting it as a crawler-access finding.'
+},
+protective:{
+ badge:'The hijacked branded query',
+ q:'"Best term life insurance" / "affordable life insurance for families"',
+ res:'<b>What comes back:</b> NerdWallet ranks Guardian, New York Life, USAA, Northwestern Mutual and Thrivent. <b>Protective is absent. Costco is absent.</b> Both hold for the second query too.',
+ dl:[
+  ['The worse problem is the branded query','Searching "Costco life insurance" surfaces a page almost entirely owned by <b>independent insurance agency blogs whose business model is redirecting the searcher to a different carrier</b>. That is worse than absence — the branded query has become a competitor lead-generation funnel.'],
+  ['The staleness exhibit','Policygenius\' Costco review — updated October 2023 and still a top result for the branded query — states the product offers "10- or 20-year terms." The current official product guide offers <b>10, 20 and 30</b>. A three-year-old third-party page is both the highest-authority source on the branded query and factually wrong about the product line.'],
+  ['Verified program facts','Member Advantage Life term policy underwritten by Protective Life, issued exclusively to Costco members. Terms of 10, 20 and 30 years; face amounts $100,000–$5M; reduced premium in policy years 1–5, reverting to standard cost in year six. <b>Not available in New York.</b> Sources: costco.com, protective.com/costco, and the official product guide.'],
+  ['What the "15% saving" actually is','Worth getting exactly right, because it is easy to overstate. The 15% is an average <b>first-year annual premium</b> saving measured against <b>Protective\'s own Classic Choice product</b> — not a saving versus the market, and not 15% across the first five years. Stating it as "members save 15% on life insurance" is the kind of compression that will not survive a question from someone who has read the product guide.'],
+  ['A nuance models will flatten','The five-year entry pricing followed by a step-up is exactly the kind of detail an answer engine compresses into "15% discount," which overstates the benefit twice over. Worth naming from the stage as an example of why precision in the source content matters — the model will simplify whatever you give it, so the page has to be unambiguous.'],
+  ['Category friction','The heaviest "your money or your life" behaviour of the four. Expect refusal to recommend, "consult a licensed agent" framing, and pricing quoted only as illustrative ranges. State-by-state licensing variation pushes answers toward generic national brands, and the New York exclusion is a hard fact models will surface prominently.'],
+  ['Who owns the category','NerdWallet, Policygenius, Investopedia, Bankrate and Forbes Advisor, with carrier-owned editorial behind them. A.M. Best and J.D. Power ratings are the trust substrate cited in nearly every AI answer on life insurance.']
+ ],
+ flag:'<b>Do not state:</b> the magnitude of the Executive Member uplift. Costco.com references "additional savings for Executive Members" but the figure is not quantified on any official source. Do not put a number on it.'
+},
+amfam:{
+ badge:'The rebrand window',
+ q:'"Best home and auto insurance bundle" / "cheapest car insurance bundle"',
+ res:'<b>What comes back:</b> NerdWallet\'s bundle ranking names American Family, Amica, Auto-Owners, Country Financial, Farmers, State Farm, Travelers and USAA — quoting American Family\'s bundle discount at up to 40%. <b>The parent brand already wins the query. Neither Connect nor Costco is mentioned anywhere in it.</b>',
+ dl:[
+  ['Correct the record first','The program was <b>not discontinued — it was renamed.</b> CONNECT, powered by American Family Insurance became American Family Insurance in <b>December 2025</b>. Costco.com and costco.amfam.com both confirm it, and the FAQ states no policyholder action was required. NerdWallet corroborates independently.'],
+  ['The opportunity nobody is exploiting','The parent brand already ranks first-set on the non-branded bundle query with a quoted 40% bundle discount. The Costco channel is invisible inside that win. The rebrand also removed a real entity-resolution problem — models no longer have to work out what "CONNECT" is. That is a genuine, time-limited AI-visibility opening.'],
+  ['The rebrand-lag risk','Third-party sources are still split across <b>three names</b>. NerdWallet hosts a review at a /connect URL. Wikipedia\'s article is still titled "Connect (insurance company)" and does not mention the December 2025 rename. An answer engine resolving "Costco car insurance" retrieves a mix of Ameriprise, CONNECT and American Family — one of which is obsolete — and will produce inconsistent answers for several more quarters.'],
+  ['Verified benefits and exclusions','Lifetime renewability, 24-hour roadside assistance and home lockout assistance included with most policies for Executive Members; home glass repair reimbursement cited on costco.com. Lifetime Renewability excludes CA, MD and MI plus certain FL policies. The member discount is not available on home insurance in FL or TN, nor on auto for non-Executive Members in MA.'],
+  ['Category friction','The highest of the four. Models refuse to name a single "cheapest" insurer, caveat every rate as ZIP-, record- and credit-dependent, and route users to get three quotes. Dollar figures <em>are</em> quoted in this category — but they come from the comparison sites\' own rate datasets, not from carriers. A carrier absent from those datasets is invisible even when it is cheaper.'],
+  ['Who owns the category','NerdWallet, ValuePenguin, MoneyGeek, Bankrate, Forbes Advisor, Insurance.com and CNBC Select — with J.D. Power and NAIC complaint-index data as the evidence layer. Regulator and quasi-official sources carry disproportionate weight in AI answers here.']
+ ],
+ flag:'<b>Do not state:</b> a Costco member discount percentage. No figure is published on either official page. Also treat state availability as low confidence — NerdWallet says 50 states plus DC, CNBC Select says California and Florida are unavailable, and the official pages support neither cleanly. Verify per state with the partner.'
+}};
+
+function renderSpot(k){
+  var s=SPOTS[k];
+  document.getElementById('spotbody').innerHTML=
+    '<div class="spotgrid">'+
+      '<div>'+
+        '<div class="qbox">'+
+          '<div class="lbl">'+s.badge+'</div>'+
+          '<p class="qq">'+s.q+'</p>'+
+          '<p class="res">'+s.res+'</p>'+
+        '</div>'+
+        (s.money?'<div class="money">'+s.money+'</div>':'')+
+        (s.flag?'<div class="flag">'+s.flag+'</div>':'')+
+      '</div>'+
+      '<div class="card"><dl class="dl">'+s.dl.map(function(d){
+        return '<dt>'+d[0]+'</dt><dd>'+d[1]+'</dd>';
+      }).join('')+'</dl></div>'+
+    '</div>';
+}
+
+/* ─────────────── levers ─────────────── */
+var LEVERS=[
+ {t:'t1',n:'Crawler access',p:'The only lever with deterministic, platform-documented consequences. Blocking a retrieval bot forfeits citation eligibility outright — no correlation required. Mueller names it the single biggest hurdle for most sites.',e:'Platform documentation · OpenAI, Anthropic, Google, Perplexity'},
+ {t:'t1',n:'Brand mentions on third-party properties',p:'The strongest measured correlate across 75,000 brands: YouTube mentions ~0.74, branded web mentions 0.66. Roughly 85% of brand mentions in AI answers originate off the brand\'s own domain, and brands are ~6.5x more likely to be cited via third-party comparisons than via their own pages.',e:'<a href="https://ahrefs.com/blog/ai-brand-visibility-correlations/">Ahrefs, 75K brands</a> · correlational'},
+ {t:'t1',n:'Freshness — measured as last-updated',p:'72% of cited pages look fresh by update date versus only 42% by publish date. More than a quarter of "fresh" cited pages were originally published 2+ years ago. Maintaining evergreen assets beats publishing new ones.',e:'<a href="https://www.seerinteractive.com/insights/study-content-recencys-impact-on-ai-visibility-in-2026">Seer</a> · 7,683 pages, 47,097 citations'},
+ {t:'t1',n:'YouTube presence and structure',p:'The single most-cited domain in Google AI Overviews at 5.6% of all citations, and 18.2% of citations from pages that don\'t rank for the query. Long-form is 94% of YouTube citations; view count is irrelevant. A Google-surface and Perplexity lever specifically.',e:'<a href="https://ahrefs.com/blog/ai-overview-citations-top-10/">Ahrefs</a> · <a href="https://otterly.ai/blog/youtube-ai-citation-study-2026/">Otterly</a>'},
+ {t:'t1',n:'Reddit and review-site prominence',p:'Reddit citations are substantial and rising on some engines. Notably, 80% of cited Reddit posts have under 20 upvotes and the median cited thread is around 900 days old — engagement is not the gate, format and topical match are. Over half of citations come from Q&A-format threads.',e:'<a href="https://www.semrush.com/blog/reddit-ai-search-visibility-study/">Semrush</a> · 248K Reddit URLs, 217K prompts'},
+ {t:'t1',n:'Organic ranking — as eligibility, not as guarantee',p:'Still the retrieval substrate, but only 38% of AI Overview citations came from top-10 pages as of March 2026, and AI Mode never had strong overlap (~35% at URL level). Treat ranking as necessary-ish and far from sufficient. Note that Ahrefs partly disowns the "fell from 76%" trend comparison — its parsing changed between studies — so quote the distribution, not the decline.',e:'<a href="https://ahrefs.com/blog/ai-overview-citations-top-10/">Ahrefs, Mar 2026</a> · <a href="https://www.semrush.com/blog/ai-mode-comparison-study/">Semrush</a>'},
+ {t:'t2',n:'Passage-level answer structure',p:'Across 15.7M AI Mode citations, 47.7% used scroll-to-text passage highlights — the unit being cited is the passage, not the page. Winning passages ran a median of 117 words, with 80% leading with the answer in the first sentence and 85% self-contained. Compelling, but correlational.',e:'<a href="https://searchengineland.com/what-15-7-million-ai-mode-citations-reveal-about-getting-quoted-by-google-483393">Pillarbase</a> · July 2026'},
+ {t:'t2',n:'Breadth of angle coverage on a topic',p:'Google defines query fan-out as generating concurrent related queries to fetch more results. Combined with the collapse in top-10 sourcing, covering more angles on a subject is a rational bet — but no controlled study quantifies the lift.',e:'<a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide">Google</a> · mechanism documented, effect unmeasured'},
+ {t:'t2',n:'Answer-first formatting',p:'Consistent with the Reddit Q&A finding and with the passage research, and it is good writing regardless. But every source promoting it as a ranking factor is a vendor blog with no disclosed methodology. Present it as practice that happens to align with retrieval, not as an evidenced lever.',e:'No rigorous controlled study located'},
+ {t:'t3',n:'Schema markup',p:'Measured effect approximately zero, possibly slightly negative. Ahrefs tracked 1,885 pages adding JSON-LD against ~4,000 matched controls: AI Overviews −4.6%, AI Mode +2.4%, ChatGPT +2.2% (the latter two indistinguishable from noise). In controlled parsing tests, no system extracted data that existed only in JSON-LD.',e:'<a href="https://ahrefs.com/blog/schema-ai-citations/">Ahrefs DiD study</a> · <a href="https://www.searchviu.com/en/schema-markup-and-ai-in-2025-what-chatgpt-claude-perplexity-gemini-really-see/">searchVIU</a>'},
+ {t:'t3',n:'FAQPage markup specifically',p:'Now inert on both counts. FAQ rich results ended in Google Search on May 7, 2026; tool support was dropped in June; API support ends this month. No published evidence the markup ever affected AI answers. The FAQ <em>content</em> keeps its place for a different reason.',e:'<a href="https://developers.google.com/search/docs/appearance/structured-data/faqpage">Google deprecation notice</a>'},
+ {t:'t3',n:'llms.txt',p:'97% of published files got zero requests in May 2026. AI retrieval bots were 1.1% of the requests that occurred; SEO audit tools were 12–22% — the industry auditing itself. Costs almost nothing and delivers almost nothing. Legitimate only for developer documentation consumed by coding agents.',e:'<a href="https://ahrefs.com/blog/llmstxt-study/">Ahrefs</a> · 137,210 domains monitored, May 2026'},
+ {t:'t3',n:'Domain authority and backlinks',p:'Ahrefs Rank measured against AI mentions: ChatGPT 0.01, AI Overviews −0.12, Perplexity −0.34 — all statistically non-significant, on the top 50 domains per platform. Read it as "links don\'t predict citation," not as "links actively hurt." The mechanism that matters is being <em>mentioned</em>, not being linked.',e:'<a href="https://ahrefs.com/blog/domain-link-metrics-not-good-mention-predictors/">Ahrefs / Patrick Stox</a> · n=50 per platform, p&gt;0.05'},
+ {t:'t3',n:'Content volume',p:'Correlates ~0.19 with AI visibility. Programmatic content scale does not buy citations, and pages cited consistently over four months were older than one-month spikes. This is the finding that saves a small provider team from a bad recommendation.',e:'<a href="https://ahrefs.com/blog/ai-brand-visibility-correlations/">Ahrefs, 75K brands</a>'},
+ {t:'t3',n:'Entity consistency and sameAs markup',p:'Theoretically coherent, widely asserted, and — as far as the published record goes — never isolated or quantified. Defensible only in the narrow case: brands with thin entity footprints where disambiguation is a genuine problem. Not a citation lever for an established brand.',e:'No study isolating the effect located'}
+];
+var LNAME={t1:'Strong',t2:'Moderate',t3:'Weak / contradicted'};
+function renderLevers(f){
+  var host=document.getElementById('leverbody');
+  var rows=LEVERS.filter(function(l){return f==='all'||l.t===f;});
+  host.innerHTML=rows.map(function(l){
+    return '<div class="lever"><div><h4>'+l.n+'</h4><p>'+l.p+'</p><div class="ev">'+l.e+'</div></div>'+
+      '<span class="pill '+l.t+'">'+LNAME[l.t]+'</span></div>';
+  }).join('');
+}
+
+/* ─────────────── Q&A ─────────────── */
+var QA=[
+ ['"Isn\'t this just SEO with a new name?"',
+  '<p>Partly, and it is worth conceding that immediately — it buys credibility for the part that is genuinely different. The overlap is real: crawlability, being findable, and organic strength all still matter.</p><p>What has changed is the unit of competition. <strong>Ranking a page and being named in an answer have come apart.</strong> Only 38% of AI Overview citations came from top-10 pages as of March 2026, and about 31% now come from pages that don\'t rank in the top 100 at all. And the strongest correlates are no longer on-page factors — they are brand mentions on other people\'s properties, at 0.66 to 0.74, while domain-level link metrics sit at zero or slightly negative.</p><p>So: same plumbing, different game.</p>',
+  '<a href="https://ahrefs.com/blog/ai-overview-citations-top-10/">Ahrefs, Mar 2026</a> · <a href="https://ahrefs.com/blog/ai-brand-visibility-correlations/">Ahrefs, 75K brands</a>'],
+ ['"If AI answers don\'t send clicks, why invest at all?"',
+  '<p>Three reasons, in ascending order of strength.</p><p><strong>First, the clicks that remain are worth more.</strong> AI-referred retail traffic converted 54% better than non-AI traffic in May 2026 — reversed from 43% worse in mid-2024.</p><p><strong>Second, being cited is a relative advantage on the same result page.</strong> Cited brands see roughly 120% more organic clicks per impression than uncited competitors on the same SERP.</p><p><strong>Third, and most important: the mention moves behaviour without the click.</strong> Users who received a brand mention in ChatGPT without clicking were significantly more likely to visit that brand\'s site within seven days than users shown a competitor. The visit arrives as direct or organic traffic and gets attributed away from AI entirely — which means the channel is systematically undercounted by exactly the analytics people use to dismiss it.</p>',
+  '<a href="https://business.adobe.com/blog/ai-traffic-surge-retail-sites-not-machine-readable">Adobe</a> · <a href="https://www.seerinteractive.com/insights/aio-impact-on-google-ctr-2026-update">Seer</a> · <a href="https://www.similarweb.com/blog/marketing/geo/ai-search-trends/">Similarweb</a>'],
+ ['"How do we measure this?"',
+  '<p>Honestly, and with the limits stated. Search Console now reports AI Overview and AI Mode <em>impressions</em> at page level — but no clicks, the two surfaces are not separated, and it is still a phased rollout. Bing Webmaster Tools gives citations plus <em>grounding queries</em>, which is the phrase the AI actually used to retrieve; nothing else exposes that. Server logs verify bot access deterministically. GA4 catches ChatGPT referrals via a UTM parameter.</p><p>Third-party tools are useful as a directional index and nothing more. Google\'s own words: <em>"No third-party tool has access to our internal ranking or AI systems."</em> And the system is non-deterministic — there is less than a 1-in-100 chance of getting the same brand list twice from the same prompt, so "we\'re position three" is not a meaningful sentence.</p><p>The right answer is one honest dashboard, not five confident ones.</p>',
+  '<a href="https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports">Google Search Console</a> · <a href="https://www.brainlabsdigital.com/ai-visibility-data-accuracy/">Brainlabs</a>'],
+ ['"Should we block AI crawlers to protect our content?"',
+  '<p>Block the training crawlers if legal or brand requires it — <code>GPTBot</code>, <code>ClaudeBot</code>, <code>Google-Extended</code>. That costs nothing in visibility.</p><p>Do <strong>not</strong> block the retrieval crawlers — <code>OAI-SearchBot</code>, <code>Claude-SearchBot</code>, <code>PerplexityBot</code>. OpenAI states plainly that a site blocking OAI-SearchBot "won\'t appear in ChatGPT search answers."</p><p>The expensive mistake is blocking "AI crawlers" wholesale at the CDN, which kills retrieval as collateral damage when robots.txt would have achieved the training goal. Worth auditing on any site before anything else is discussed. And note that robots.txt is a request rather than enforcement — Cloudflare de-listed Perplexity in August 2025 over alleged Chrome-impersonating crawling.</p>',
+  '<a href="https://developers.openai.com/api/docs/bots">OpenAI</a> · <a href="https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers">Google</a>'],
+ ['"Why would we optimise for Costco\'s visibility instead of our own?"',
+  '<p>The fairest question in the room, and it deserves a direct answer rather than a diplomatic one.</p><p>Because in the categories represented here, the non-branded query is already won by comparison publishers and by the handful of brands inside their datasets. Winning it outright is a multi-year, expensive fight against NerdWallet and Merchant Maverick.</p><p>The Costco-plus-provider answer is a narrower, less contested surface with a differentiated benefit attached — member pricing, vetting, Executive benefits. It is genuinely easier to win. And Google\'s May 2026 core update showed the middle layer losing ground to endpoints in paired swings, which means the channel benefit only appears in answers if someone deliberately puts it there.</p><p>It is not charity in either direction. It is the version where both parties\' incentives point the same way.</p>',
+  '<a href="https://www.seoclarity.net/googles-may-2026-core-update-research">seoClarity, May 2026</a>'],
+ ['"How long until we see results?"',
+  '<p>Nobody credible can put a number on this, and pretending otherwise is how trust gets lost. What the evidence does support:</p><p>Crawler-access fixes are effectively immediate — retrieval either can reach the page or it cannot. Content freshness effects show up on the timescale that pages get recrawled and re-updated, with 72% of cited pages looking current by update date. Third-party mention building is the slowest and strongest lever, and it operates on a quarters-not-weeks horizon.</p><p>What can be promised is a diagnosis rather than a date: whether a site is currently retrievable, whether it appears in the datasets that answer engines lean on, and which of those is the binding constraint.</p>',
+  '<a href="https://www.seerinteractive.com/insights/study-content-recencys-impact-on-ai-visibility-in-2026">Seer, 2026</a>'],
+ ['"Do we need to add schema markup?"',
+  '<p>For AI answers, no — and this is worth being unusually direct about, because a lot of budget is being spent here on the wrong premise.</p><p>Google\'s documentation, updated last month: <em>"Structured data isn\'t required for generative AI search, and there\'s no special schema.org markup you need to add."</em> Ahrefs tested 1,885 pages that added schema against matched controls and found AI Overview citations went <strong>down</strong> 4.6%.</p><p>Keep schema for what it actually does — rich results eligibility and entity disambiguation in traditional Search. Just don\'t buy it as an AI-visibility deliverable. If a vendor is billing for it on that basis, ask for the sample size, the control group, and the effect size.</p>',
+  '<a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide">Google</a> · <a href="https://ahrefs.com/blog/schema-ai-citations/">Ahrefs</a>'],
+ ['"Should we publish our own \'best providers\' comparison page?"',
+  '<p>Careful — this can backfire in a specific, measurable way. Across 100 "best [category]" queries, Google cited brands\' own self-promotional roundups 323 times and <strong>recommended a competitor instead in 69% of those cases</strong> — competitors named inside the brand\'s own page.</p><p>The pages that captured the recommendation slots did so on third-party endorsement, not citation volume. So a comparison page can end up feeding rivals into the answer while earning you the citation and none of the recommendation.</p>',
+  'Research by Lily Ray, reported by <a href="https://searchengineland.com/google-ai-overviews-cite-self-serving-listicles-recommend-competitors-480573">Search Engine Land</a> · June 2026'],
+ ['"Is agentic AI going to book our services for us soon?"',
+  '<p>Directionally yes, but the timeline is less certain than the coverage implies, and being precise here is a credibility opportunity.</p><p>What is real: Google extended agentic booking to home repair, beauty and pet care in the US this summer, including placing the call to the business. Amazon\'s Rufus reached 250M+ customers and now completes purchases at target prices.</p><p>What is not settled: OpenAI deprioritised Instant Checkout in March 2026 and told merchants to use their own checkout instead. Amazon won a preliminary injunction blocking Perplexity\'s shopping agent, now on appeal — so whether a user\'s own agent has the right to transact on a platform is genuinely unresolved. And roughly three-quarters of consumers say they will not let an agent autonomously complete a high-value purchase.</p><p>So: build the foundations because the direction is clear, not because a deadline is.</p>',
+  '<a href="https://blog.google/products-and-platforms/products/search/search-io-2026/">Google I/O 2026</a> · <a href="https://www.digitalcommerce360.com/2026/03/06/openai-shifts-checkout-plans-agentic-commerce-strategy/">Digital Commerce 360</a> · <a href="https://www.cnbc.com/2026/03/10/amazon-wins-court-order-to-block-perplexitys-ai-shopping-agent.html">CNBC</a>'],
+ ['"What\'s the one thing we should do first?"',
+  '<p>Check whether the AI retrieval crawlers can actually read your pages. It is the only lever on this entire subject with documented, deterministic consequences rather than a correlation, it is frequently misconfigured, and it takes an afternoon against server logs.</p><p>Everything else — mentions, freshness, video, structure — is worth doing and takes quarters. This one is a gate. If retrieval cannot reach the page, none of the rest of it matters.</p>',
+  'Platform documentation · OpenAI, Anthropic, Google, Perplexity'],
+ ['"Can you guarantee we\'ll get cited?"',
+  '<p>No. And anyone who says otherwise is describing a system that does not exist.</p><p>These are non-deterministic models — less than a 1-in-100 chance of returning the same brand list twice from the same prompt. Only 36 brands globally held top-100 visibility across all four major platforms every month in a 126-million-prompt study. And just 2.4% of cited URLs are shared across all three of ChatGPT, Perplexity and AI Overviews.</p><p>What is possible is raising the probability across the factors with real evidence behind them, and measuring honestly enough to know whether it is working. That is a less exciting promise than a guarantee, and it is the only one worth making.</p>',
+  '<a href="https://www.brainlabsdigital.com/ai-visibility-data-accuracy/">Brainlabs</a> · <a href="https://www.semrush.com/news/463141-semrush-releases-expanded-2026-ai-visibility-index-analyzing-126-million-ai-search-prompts/">Semrush AI Visibility Index</a>']
+];
+document.getElementById('qabody').innerHTML=QA.map(function(q){
+  return '<details><summary>'+q[0]+'</summary><div class="body">'+q[1]+'<div class="cite">'+q[2]+'</div></div></details>';
+}).join('');
+
+/* ─────────────── wire up ─────────────── */
+function segWire(id,attr,fn){
+  var seg=document.getElementById(id);
+  seg.addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    [].forEach.call(seg.querySelectorAll('button'),function(x){x.classList.remove('on');});
+    b.classList.add('on'); fn(b.getAttribute(attr));
+  });
+}
+segWire('filterseg','data-f',renderClaims);
+segWire('arcseg','data-a',renderArc);
+segWire('spotseg','data-s',renderSpot);
+segWire('leverseg','data-l',renderLevers);
+
+renderClaims('no');
+renderArc('a');
+renderSpot('elavon');
+renderLevers('all');
+redrawAll();
+onScroll();
+window.addEventListener('resize',function(){ hideTip(); });
+</script>
+</body>
+</html>
