@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equinix Community Report · RocketSource</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0B0D12;
+      --bg-card:  #141720;
+      --border:   rgba(255,255,255,0.08);
+      --text:     #E8EAF0;
+      --muted:    rgba(232,234,240,0.45);
+      --teal:     #2EE6C1;
+      --purple:   #B14BFF;
+      --warn:     #FFB547;
+      --neg:      #FF4B82;
+      --grad:     linear-gradient(90deg, #2EE6C1, #B14BFF);
+    }
+
+    html, body { background: var(--bg); min-height: 100vh; }
+    body { font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 15px; line-height: 1.7; color: var(--text); }
+
+    /* ─── PASSWORD GATE ─── */
+    #gate {
+      position: fixed; inset: 0; z-index: 9999;
+      background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity 0.5s ease;
+    }
+    #gate.fade-out { opacity: 0; pointer-events: none; }
+
+    .gate-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 48px 52px;
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .gate-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--grad);
+    }
+    .gate-wordmark { margin-bottom: 32px; }
+    .gate-wordmark svg { height: 28px; }
+    .gate-title { font-size: 1.1rem; font-weight: 600; color: #fff; margin-bottom: 6px; }
+    .gate-sub { font-size: 13px; color: var(--muted); margin-bottom: 28px; }
+
+    .gate-input {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 13px 16px;
+      font-family: inherit;
+      font-size: 15px;
+      color: #fff;
+      letter-spacing: 0.05em;
+      outline: none;
+      transition: border-color 0.2s;
+      margin-bottom: 14px;
+      text-align: center;
+    }
+    .gate-input:focus { border-color: var(--teal); }
+    .gate-input.error { border-color: var(--neg); }
+
+    .gate-btn {
+      width: 100%;
+      background: var(--grad);
+      background-size: 200% 100%;
+      border: none;
+      border-radius: 8px;
+      padding: 13px 16px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      color: #0B0D12;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .gate-btn:hover { opacity: 0.88; }
+    .gate-error { font-size: 12px; color: var(--neg); margin-top: 10px; min-height: 18px; }
+
+    /* ─── MAIN REPORT ─── */
+    #report { display: none; }
+    #report.visible { display: block; }
+
+    .report-wrap { max-width: 1200px; margin: 0 auto; padding: 48px 52px 72px; }
+
+    /* Gradient text */
+    .grad-text {
+      background: var(--grad);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    /* Header */
+    .rs-logo { margin-bottom: 28px; }
+    .rs-logo svg { height: 28px; }
+    .report-meta { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 12px; }
+    .report-title { font-size: 2.1rem; font-weight: 700; color: #fff; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 12px; }
+    .report-sub { font-size: 14px; color: var(--muted); max-width: 640px; }
+
+    /* Signal wave */
+    .signal-wave { margin: 26px 0 32px; }
+
+    /* ─── TABS ─── */
+    .tab-nav-label {
+      font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em;
+      color: var(--teal); margin-bottom: 12px; font-weight: 600;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .tab-nav-label::before { content: '▸'; font-size: 10px; }
+    .tab-nav {
+      display: flex; gap: 10px;
+      margin-bottom: 40px;
+    }
+    .tab-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 20px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      color: rgba(232,234,240,0.45);
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      transition: all 0.25s;
+      flex: 1;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+    .tab-btn::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: var(--border);
+      transition: background 0.25s;
+    }
+    .tab-btn:hover {
+      color: var(--text);
+      border-color: rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.05);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    }
+    .tab-btn.active {
+      color: #fff;
+      border-color: rgba(46,230,193,0.55);
+      background: linear-gradient(135deg, rgba(46,230,193,0.1) 0%, rgba(177,75,255,0.1) 100%);
+      animation: tabPulse 2.8s ease-in-out infinite;
+    }
+    .tab-btn.active::after {
+      background: linear-gradient(90deg, #2EE6C1, #B14BFF);
+    }
+    @keyframes tabPulse {
+      0%, 100% { box-shadow: 0 0 14px rgba(46,230,193,0.3), 0 0 28px rgba(177,75,255,0.12); }
+      50%       { box-shadow: 0 0 28px rgba(46,230,193,0.55), 0 0 52px rgba(177,75,255,0.25); }
+    }
+    .tab-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(232,234,240,0.2); transition: all 0.25s; flex-shrink: 0; }
+    .tab-btn.active .tab-dot { background: var(--teal); box-shadow: 0 0 6px var(--teal); }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ─── COMPONENTS ─── */
+    h2.section-head {
+      font-size: 10px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.14em; color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px; margin-bottom: 18px; margin-top: 44px;
+    }
+
+    /* Exec summary */
+    .exec-summary {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-left: 3px solid var(--teal);
+      padding: 20px 24px; border-radius: 0 8px 8px 0; margin-bottom: 40px;
+    }
+    .exec-summary h3 {
+      font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em;
+      font-weight: 600; color: var(--teal); margin-bottom: 12px;
+    }
+    .exec-summary ul { padding-left: 18px; }
+    .exec-summary li { margin-bottom: 7px; font-size: 13.5px; color: rgba(232,234,240,0.85); line-height: 1.6; }
+
+    /* KPI grid */
+    .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 8px; }
+    .kpi-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 20px 22px; position: relative; overflow: hidden;
+    }
+    .kpi-card::before { content:''; position:absolute; top:0;left:0;right:0; height:2px; background:var(--grad); }
+    .kpi-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 7px; font-weight: 500; }
+    .kpi-value { font-size: 2.2rem; font-weight: 700; line-height: 1; letter-spacing: -0.03em; color: #fff; }
+    .kpi-value.grad { background: var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .kpi-sub { font-size: 11px; color: var(--muted); margin-top: 7px; }
+
+    /* Chart card */
+    .card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 22px 26px; margin-bottom: 14px;
+    }
+    .card-title { font-size: 13px; font-weight: 600; color: #fff; margin-bottom: 3px; }
+    .card-sub { font-size: 12px; color: var(--muted); margin-bottom: 18px; }
+    .chart-source { font-size: 11px; color: var(--muted); margin-top: 8px; }
+
+    /* 2-col chart row */
+    .chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+    .chart-row .card { margin-bottom: 0; }
+
+    /* Page detail */
+    .page-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .page-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; }
+    .page-tag { font-size: 11px; font-family: 'Courier New', monospace; color: var(--teal); background: rgba(46,230,193,0.1); padding: 3px 9px; border-radius: 4px; display: inline-block; margin-bottom: 12px; }
+    .page-label { font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 16px; }
+    .mrow { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+    .mrow:last-child { border-bottom: none; }
+    .mrow .ml { color: var(--muted); }
+    .mrow .mv { font-weight: 600; color: #fff; }
+    .mrow .mv.good { color: var(--teal); }
+    .mrow .mv.warn { color: var(--warn); }
+
+    /* Insight box */
+    .insight {
+      background: rgba(46,230,193,0.05); border: 1px solid rgba(46,230,193,0.18);
+      border-left: 3px solid var(--teal);
+      padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 18px 0 4px;
+      font-size: 13.5px; color: rgba(232,234,240,0.85); line-height: 1.65;
+    }
+
+    /* Rec grid */
+    .rec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .rec-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 20px 22px; }
+    .rec-num { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; background: var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom: 8px; }
+    .rec-title { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .rec-body { font-size: 12.5px; color: var(--muted); line-height: 1.65; }
+    .rec-body em { color: var(--warn); font-style: normal; }
+
+    /* MoM comparison table */
+    .mom-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .mom-table thead th { padding: 10px 14px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-weight: 500; text-align: left; border-bottom: 1px solid var(--border); }
+    .mom-table thead th:not(:first-child) { text-align: right; }
+    .mom-table tbody td { padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .mom-table tbody tr:last-child td { border-bottom: none; }
+    .mom-table tbody td:not(:first-child) { text-align: right; font-variant-numeric: tabular-nums; }
+    .mom-table .row-head { font-weight: 600; color: #fff; }
+    .mom-table .row-sub { color: var(--muted); font-size: 12px; }
+    .delta-pos { color: var(--teal); }
+    .delta-neg { color: var(--neg); }
+    .delta-warn { color: var(--warn); }
+
+    /* Footnote */
+    .footnote { font-size: 11px; color: var(--muted); margin-top: 10px; line-height: 1.6; }
+    .footnote a { color: var(--teal); text-decoration: none; }
+
+    /* Footer */
+    footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: var(--muted); letter-spacing: 0.03em; }
+
+    @media (max-width: 800px) {
+      .report-wrap { padding: 24px 20px; }
+      .kpi-grid, .rec-grid, .chart-row, .page-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════
+     PASSWORD GATE
+═══════════════════════════════════════════════════ -->
+<div id="gate">
+  <div class="gate-card">
+    <div class="gate-wordmark">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 180" fill="none">
+        <g fill="#FFFFFF" font-family="'Space Grotesk','Inter',system-ui,sans-serif" font-weight="500" letter-spacing="6">
+          <text x="0" y="70" font-size="64">R</text><text x="56" y="70" font-size="64">O</text>
+          <text x="120" y="70" font-size="64">C</text><text x="182" y="70" font-size="64">K</text>
+          <text x="246" y="70" font-size="64">E</text><text x="302" y="70" font-size="64">T</text>
+        </g>
+        <g fill="#FFFFFF" font-family="'Space Grotesk','Inter',system-ui,sans-serif" font-weight="500" letter-spacing="6">
+          <text x="0" y="150" font-size="64">S</text><text x="54" y="150" font-size="64">O</text>
+          <text x="118" y="150" font-size="64">U</text><text x="180" y="150" font-size="64">R</text>
+          <text x="240" y="150" font-size="64">C</text><text x="302" y="150" font-size="64">E</text>
+        </g>
+        <rect x="0" y="162" width="358" height="2" fill="url(#rg1)"/>
+        <defs><linearGradient id="rg1" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#2EE6C1"/><stop offset="1" stop-color="#B14BFF"/></linearGradient></defs>
+      </svg>
+    </div>
+    <p class="gate-title">Equinix Community Report</p>
+    <p class="gate-sub">This report is confidential. Enter the access password to continue.</p>
+    <input type="password" id="pwd-input" class="gate-input" placeholder="Password" autocomplete="off">
+    <button class="gate-btn" onclick="checkPassword()">Access Report</button>
+    <p class="gate-error" id="gate-error"></p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     REPORT
+═══════════════════════════════════════════════════ -->
+<div id="report">
+<div class="report-wrap">
+
+  <!-- Header -->
+  <div class="rs-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 180" fill="none">
+      <g fill="#FFFFFF" font-family="'Space Grotesk','Inter',system-ui,sans-serif" font-weight="500" letter-spacing="6">
+        <text x="0" y="70" font-size="64">R</text><text x="56" y="70" font-size="64">O</text>
+        <text x="120" y="70" font-size="64">C</text><text x="182" y="70" font-size="64">K</text>
+        <text x="246" y="70" font-size="64">E</text><text x="302" y="70" font-size="64">T</text>
+      </g>
+      <g fill="#FFFFFF" font-family="'Space Grotesk','Inter',system-ui,sans-serif" font-weight="500" letter-spacing="6">
+        <text x="0" y="150" font-size="64">S</text><text x="54" y="150" font-size="64">O</text>
+        <text x="118" y="150" font-size="64">U</text><text x="180" y="150" font-size="64">R</text>
+        <text x="240" y="150" font-size="64">C</text><text x="302" y="150" font-size="64">E</text>
+      </g>
+      <rect x="0" y="162" width="358" height="2" fill="url(#rg2)"/>
+      <defs><linearGradient id="rg2" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#2EE6C1"/><stop offset="1" stop-color="#B14BFF"/></linearGradient></defs>
+    </svg>
+  </div>
+
+  <p class="report-meta">Equinix · equinixtogether.com · GA4 Rollup · Confidential</p>
+  <h1 class="report-title">Community Pages<br><span class="grad-text">Performance Report</span></h1>
+  <p class="report-sub">Month-by-month analysis of /community-principles and the community blog post across June and July 2026. Blog page data has been stitched across both URL variants.<sup>*</sup></p>
+
+  <div class="signal-wave">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 32" fill="none" style="width:100%;height:22px;">
+      <defs>
+        <linearGradient id="sw" x1="0" x2="1" y1="0" y2="0">
+          <stop offset="0" stop-color="#2EE6C1" stop-opacity="0"/>
+          <stop offset="0.15" stop-color="#2EE6C1" stop-opacity="0.7"/>
+          <stop offset="0.5" stop-color="#2EE6C1"/>
+          <stop offset="0.75" stop-color="#B14BFF" stop-opacity="0.7"/>
+          <stop offset="1" stop-color="#B14BFF" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <line x1="0" y1="16" x2="400" y2="16" stroke="url(#sw)" stroke-width="1"/>
+      <path d="M400 16 L430 8 L450 24 L475 4 L500 28 L520 10 L545 16" stroke="#2EE6C1" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="545" y1="16" x2="1100" y2="16" stroke="url(#sw)" stroke-width="1"/>
+    </svg>
+  </div>
+
+  <!-- Tab nav -->
+  <p class="tab-nav-label">Select a view</p>
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('june', this)"><span class="tab-dot"></span> June 2026</button>
+    <button class="tab-btn" onclick="switchTab('july', this)"><span class="tab-dot"></span> July 2026</button>
+    <button class="tab-btn" onclick="switchTab('combined', this)"><span class="tab-dot"></span> Jun 2–Jul 31 Combined</button>
+  </div>
+
+  <!-- ═══ TAB: JUNE ═══ -->
+  <div id="tab-june" class="tab-panel active">
+
+    <div class="exec-summary">
+      <h3>Executive Summary · June 2026</h3>
+      <ul>
+        <li><strong style="color:#fff;">429 sessions across both pages</strong> in June, with a 64.1% overall engagement rate — healthy signal for launch month content.</li>
+        <li><strong style="color:#fff;">/community-principles led on volume:</strong> 282 sessions vs 147 for the blog, with longer avg read time (54s vs 43s) — visitors are absorbing the content.</li>
+        <li><strong style="color:#fff;">Blog page shows stronger retention:</strong> lower bounce rate (34.7% vs 36.5%) and higher engagement rate (65.3% vs 63.5%).</li>
+        <li><strong style="color:#fff;">New users dominated:</strong> 158 of 239 total users (66%) were first-time visitors — the launch successfully reached new audiences.</li>
+      </ul>
+    </div>
+
+    <h2 class="section-head">Overall Performance · Jun 1–30, 2026</h2>
+    <div class="kpi-grid">
+      <div class="kpi-card"><div class="kpi-label">Total Sessions</div><div class="kpi-value grad">429</div><div class="kpi-sub">282 principles · 147 blog</div></div>
+      <div class="kpi-card"><div class="kpi-label">Total Views</div><div class="kpi-value grad">711</div><div class="kpi-sub">429 principles · 282 blog</div></div>
+      <div class="kpi-card"><div class="kpi-label">Unique Users</div><div class="kpi-value grad">239</div><div class="kpi-sub">156 new · 105 returning</div></div>
+      <div class="kpi-card"><div class="kpi-label">Engagement Rate</div><div class="kpi-value">64.1%</div><div class="kpi-sub">275 of 429 sessions engaged</div></div>
+      <div class="kpi-card"><div class="kpi-label">Avg. Engagement Time</div><div class="kpi-value">50.2s</div><div class="kpi-sub">Weighted across both pages</div></div>
+      <div class="kpi-card"><div class="kpi-label">Bounce Rate</div><div class="kpi-value">35.9%</div><div class="kpi-sub">Weighted across both pages</div></div>
+    </div>
+
+    <h2 class="section-head">Page Comparison · June</h2>
+    <div class="card">
+      <div class="card-title">Sessions & Engagement Rate by Page</div>
+      <div class="card-sub">Volume vs. quality — principles leads on traffic, blog leads on engagement</div>
+      <div id="j-chart-main" style="height:300px;"></div>
+      <div class="chart-source">Source: Equinix GA4 Rollup · Jun 1–30, 2026</div>
+    </div>
+
+    <div class="chart-row">
+      <div class="card">
+        <div class="card-title">Avg. Engagement Time per Session</div>
+        <div class="card-sub">Seconds per session by page</div>
+        <div id="j-chart-time" style="height:220px;"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Bounce Rate by Page</div>
+        <div class="card-sub">Lower is better</div>
+        <div id="j-chart-bounce" style="height:220px;"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">User Mix: New vs. Returning</div>
+      <div class="card-sub">Both pages skew toward new visitors in launch month</div>
+      <div id="j-chart-users" style="height:240px;"></div>
+    </div>
+
+    <h2 class="section-head">Page Detail · June</h2>
+    <div class="page-grid">
+      <div class="page-card">
+        <span class="page-tag">/community-principles</span>
+        <div class="page-label">Community Principles</div>
+        <div class="mrow"><span class="ml">Views</span><span class="mv">429</span></div>
+        <div class="mrow"><span class="ml">Sessions</span><span class="mv">282</span></div>
+        <div class="mrow"><span class="ml">Engaged Sessions</span><span class="mv">179</span></div>
+        <div class="mrow"><span class="ml">Engagement Rate</span><span class="mv warn">63.5%</span></div>
+        <div class="mrow"><span class="ml">Avg. Engagement Time</span><span class="mv good">54s</span></div>
+        <div class="mrow"><span class="ml">Bounce Rate</span><span class="mv warn">36.5%</span></div>
+        <div class="mrow"><span class="ml">Total Users</span><span class="mv">171</span></div>
+        <div class="mrow"><span class="ml">New Users</span><span class="mv">108 (63%)</span></div>
+        <div class="mrow"><span class="ml">Returning Users</span><span class="mv">75 (44%)</span></div>
+      </div>
+      <div class="page-card">
+        <span class="page-tag">/blog · we-are-building-communities</span>
+        <div class="page-label">We Are Building Communities <sup style="font-size:10px;color:var(--muted);">*</sup></div>
+        <div class="mrow"><span class="ml">Views</span><span class="mv">282</span></div>
+        <div class="mrow"><span class="ml">Sessions</span><span class="mv">147</span></div>
+        <div class="mrow"><span class="ml">Engaged Sessions</span><span class="mv">96</span></div>
+        <div class="mrow"><span class="ml">Engagement Rate</span><span class="mv good">65.3%</span></div>
+        <div class="mrow"><span class="ml">Avg. Engagement Time</span><span class="mv warn">43s</span></div>
+        <div class="mrow"><span class="ml">Bounce Rate</span><span class="mv good">34.7%</span></div>
+        <div class="mrow"><span class="ml">Total Users</span><span class="mv">97</span></div>
+        <div class="mrow"><span class="ml">New Users</span><span class="mv">50 (52%)</span></div>
+        <div class="mrow"><span class="ml">Returning Users</span><span class="mv">46 (47%)</span></div>
+      </div>
+    </div>
+
+    <div class="insight">
+      <strong style="color:var(--teal);">June read:</strong> Launch month brought a healthy mix of new visitors (66%) with above-average engagement across both pages. The blog post's lower bounce rate and higher engagement rate suggest it hooks visitors more effectively — despite shorter read time. Avg. engagement time of 54s on /community-principles indicates visitors are reading deliberately.
+    </div>
+
+    <p class="footnote" style="margin-top:20px;"><sup>*</sup> Blog page data combines traffic from two URLs that were active in June: <code style="color:var(--teal);font-size:10px;">/blog/2026/06/02/we-are-building-communities</code> (139 sessions) and <code style="color:var(--teal);font-size:10px;">/2026/06/02/we-are-building-communities</code> (8 sessions). Totals and weighted averages are stitched from GA4 exports.</p>
+  </div>
+
+  <!-- ═══ TAB: JULY ═══ -->
+  <div id="tab-july" class="tab-panel">
+
+    <div class="exec-summary">
+      <h3>Executive Summary · July 2026</h3>
+      <ul>
+        <li><strong style="color:#fff;">Traffic fell month-over-month</strong> — 252 total sessions vs 429 in June (-41%), a typical post-launch cooldown pattern.</li>
+        <li><strong style="color:#fff;">Engagement quality improved despite lower volume:</strong> overall engagement rate rose to 71.0% (from 64.1%) and bounce rate dropped to 29.0% (from 35.9%).</li>
+        <li><strong style="color:#fff;">Avg. engagement time fell sharply</strong> to 25.6s (from 50.2s) — the standout question for July. Worth investigating whether content is shorter to read or visitors are finding answers faster.</li>
+        <li><strong style="color:#fff;">Blog page only tracked via new URL</strong> in July. 79 sessions with a 75.9% engagement rate — the highest of any page across both months.</li>
+      </ul>
+    </div>
+
+    <h2 class="section-head">Overall Performance · Jul 1–31, 2026</h2>
+    <div class="kpi-grid">
+      <div class="kpi-card"><div class="kpi-label">Total Sessions</div><div class="kpi-value grad">252</div><div class="kpi-sub">173 principles · 79 blog</div></div>
+      <div class="kpi-card"><div class="kpi-label">Total Views</div><div class="kpi-value grad">495</div><div class="kpi-sub">355 principles · 140 blog</div></div>
+      <div class="kpi-card"><div class="kpi-label">Unique Users</div><div class="kpi-value grad">187</div><div class="kpi-sub">120 new · 66 returning</div></div>
+      <div class="kpi-card"><div class="kpi-label">Engagement Rate</div><div class="kpi-value">71.0%</div><div class="kpi-sub">179 of 252 sessions engaged</div></div>
+      <div class="kpi-card"><div class="kpi-label">Avg. Engagement Time</div><div class="kpi-value">25.6s</div><div class="kpi-sub">Down from 50.2s in June</div></div>
+      <div class="kpi-card"><div class="kpi-label">Bounce Rate</div><div class="kpi-value">29.0%</div><div class="kpi-sub">Down from 35.9% in June</div></div>
+    </div>
+
+    <h2 class="section-head">Page Comparison · July</h2>
+    <div class="card">
+      <div class="card-title">Sessions & Engagement Rate by Page</div>
+      <div class="card-sub">Blog page reaches 75.9% engagement rate — strongest of both months</div>
+      <div id="jul-chart-main" style="height:300px;"></div>
+      <div class="chart-source">Source: Equinix GA4 Rollup · Jul 1–31, 2026</div>
+    </div>
+
+    <div class="chart-row">
+      <div class="card">
+        <div class="card-title">Avg. Engagement Time per Session</div>
+        <div class="card-sub">Both pages down sharply from June</div>
+        <div id="jul-chart-time" style="height:220px;"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Bounce Rate by Page</div>
+        <div class="card-sub">Both pages improved vs June</div>
+        <div id="jul-chart-bounce" style="height:220px;"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">User Mix: New vs. Returning</div>
+      <div class="card-sub">New users still dominant; returning share grew slightly on the blog</div>
+      <div id="jul-chart-users" style="height:240px;"></div>
+    </div>
+
+    <h2 class="section-head">Page Detail · July</h2>
+    <div class="page-grid">
+      <div class="page-card">
+        <span class="page-tag">/community-principles</span>
+        <div class="page-label">Community Principles</div>
+        <div class="mrow"><span class="ml">Views</span><span class="mv">355</span></div>
+        <div class="mrow"><span class="ml">Sessions</span><span class="mv">173</span></div>
+        <div class="mrow"><span class="ml">Engaged Sessions</span><span class="mv">119</span></div>
+        <div class="mrow"><span class="ml">Engagement Rate</span><span class="mv good">68.8%</span></div>
+        <div class="mrow"><span class="ml">Avg. Engagement Time</span><span class="mv warn">28s</span></div>
+        <div class="mrow"><span class="ml">Bounce Rate</span><span class="mv good">31.2%</span></div>
+        <div class="mrow"><span class="ml">Total Users</span><span class="mv">123</span></div>
+        <div class="mrow"><span class="ml">New Users</span><span class="mv">80 (65%)</span></div>
+        <div class="mrow"><span class="ml">Returning Users</span><span class="mv">42 (34%)</span></div>
+      </div>
+      <div class="page-card">
+        <span class="page-tag">/2026/06/02/we-are-building-communities</span>
+        <div class="page-label">We Are Building Communities <sup style="font-size:10px;color:var(--muted);">*</sup></div>
+        <div class="mrow"><span class="ml">Views</span><span class="mv">140</span></div>
+        <div class="mrow"><span class="ml">Sessions</span><span class="mv">79</span></div>
+        <div class="mrow"><span class="ml">Engaged Sessions</span><span class="mv">60</span></div>
+        <div class="mrow"><span class="ml">Engagement Rate</span><span class="mv good">75.9%</span></div>
+        <div class="mrow"><span class="ml">Avg. Engagement Time</span><span class="mv warn">21s</span></div>
+        <div class="mrow"><span class="ml">Bounce Rate</span><span class="mv good">24.1%</span></div>
+        <div class="mrow"><span class="ml">Total Users</span><span class="mv">64</span></div>
+        <div class="mrow"><span class="ml">New Users</span><span class="mv">40 (63%)</span></div>
+        <div class="mrow"><span class="ml">Returning Users</span><span class="mv">24 (38%)</span></div>
+      </div>
+    </div>
+
+    <div class="insight">
+      <strong style="color:var(--teal);">July read:</strong> Post-launch traffic normalization is expected — what stands out is that the audience that did arrive in July was more engaged (71% rate, 29% bounce). The dramatic drop in avg. engagement time (25.6s vs 50.2s in June) is the key open question: scroll-depth tracking would confirm whether this reflects faster content consumption or early exits.
+    </div>
+
+    <p class="footnote" style="margin-top:20px;"><sup>*</sup> Blog page URL changed during this period. July traffic is tracked entirely under the new URL: <code style="color:var(--teal);font-size:10px;">/2026/06/02/we-are-building-communities</code>. No traffic was recorded to the old URL in July.</p>
+  </div>
+
+  <!-- ═══ TAB: COMBINED ═══ -->
+  <div id="tab-combined" class="tab-panel">
+
+    <div class="exec-summary">
+      <h3>Executive Summary · Jun 2–Jul 31, 2026</h3>
+      <ul>
+        <li><strong style="color:#fff;">674 sessions and 1,185 views</strong> across the two-month window, with a 66.5% combined engagement rate.</li>
+        <li><strong style="color:#fff;">/community-principles carried the majority</strong> of traffic (452 of 674 sessions, 67%), with consistent engagement at 65.3%.</li>
+        <li><strong style="color:#fff;">Blog page held up well:</strong> 222 stitched sessions across both URL variants, 68.9% engagement rate, and a 31.1% bounce rate — the strongest quality metrics of any page across the full period.</li>
+        <li><strong style="color:#fff;">New users accounted for 232 of 332 total</strong> (70%), confirming the pages are successfully reaching new audiences over the two-month window.</li>
+        <li><strong style="color:var(--warn);">Month-over-month:</strong> Traffic declined from June to July as expected post-launch, but engagement quality improved. Avg. engagement time halved — the key metric to watch as content matures.</li>
+      </ul>
+    </div>
+
+    <h2 class="section-head">Overall Performance · Jun 2–Jul 31, 2026</h2>
+    <div class="kpi-grid">
+      <div class="kpi-card"><div class="kpi-label">Total Sessions</div><div class="kpi-value grad">674</div><div class="kpi-sub">452 principles · 222 blog</div></div>
+      <div class="kpi-card"><div class="kpi-label">Total Views</div><div class="kpi-value grad">1,185</div><div class="kpi-sub">777 principles · 408 blog</div></div>
+      <div class="kpi-card"><div class="kpi-label">Unique Users</div><div class="kpi-value grad">332</div><div class="kpi-sub">232 new · 125 returning</div></div>
+      <div class="kpi-card"><div class="kpi-label">Engagement Rate</div><div class="kpi-value">66.5%</div><div class="kpi-sub">448 of 674 sessions engaged</div></div>
+      <div class="kpi-card"><div class="kpi-label">Avg. Engagement Time</div><div class="kpi-value">41.4s</div><div class="kpi-sub">Weighted across both pages</div></div>
+      <div class="kpi-card"><div class="kpi-label">Bounce Rate</div><div class="kpi-value">33.5%</div><div class="kpi-sub">Weighted across both pages</div></div>
+    </div>
+
+    <h2 class="section-head">Page Comparison · Combined</h2>
+    <div class="card">
+      <div class="card-title">Sessions & Engagement Rate by Page</div>
+      <div class="card-sub">Jun 2–Jul 31 combined view</div>
+      <div id="c-chart-main" style="height:300px;"></div>
+      <div class="chart-source">Source: Equinix GA4 Rollup · Jun 2–Jul 31, 2026</div>
+    </div>
+
+    <div class="chart-row">
+      <div class="card">
+        <div class="card-title">Avg. Engagement Time per Session</div>
+        <div class="card-sub">Seconds per session — full period</div>
+        <div id="c-chart-time" style="height:220px;"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Bounce Rate by Page</div>
+        <div class="card-sub">Blog page lowest bounce across the period</div>
+        <div id="c-chart-bounce" style="height:220px;"></div>
+      </div>
+    </div>
+
+    <h2 class="section-head">Month-over-Month Trends</h2>
+    <div class="card">
+      <div class="card-title">Sessions by Page: June vs. July</div>
+      <div class="card-sub">Post-launch traffic normalization — quality metrics (engagement rate, bounce) both improved</div>
+      <div id="mom-chart-sessions" style="height:280px;"></div>
+    </div>
+
+    <div class="chart-row">
+      <div class="card">
+        <div class="card-title">Engagement Rate: June vs. July</div>
+        <div class="card-sub">Both pages improved month-over-month</div>
+        <div id="mom-chart-engrate" style="height:240px;"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Avg. Engagement Time: June vs. July</div>
+        <div class="card-sub">Significant drop — key metric to investigate</div>
+        <div id="mom-chart-time" style="height:240px;"></div>
+      </div>
+    </div>
+
+    <!-- MoM table -->
+    <div class="card">
+      <div class="card-title">Month-over-Month Summary</div>
+      <div class="card-sub">June vs. July, by page</div>
+      <table class="mom-table">
+        <thead>
+          <tr>
+            <th>Page</th>
+            <th>Metric</th>
+            <th>June</th>
+            <th>July</th>
+            <th>Change</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="row-head" rowspan="4">/community-principles</td><td>Sessions</td><td>282</td><td>173</td><td class="delta-neg">▼ −38.7%</td></tr>
+          <tr><td>Engagement Rate</td><td>63.5%</td><td>68.8%</td><td class="delta-pos">▲ +5.3pp</td></tr>
+          <tr><td>Avg. Eng. Time</td><td>54s</td><td>28s</td><td class="delta-neg">▼ −48.9%</td></tr>
+          <tr><td>Bounce Rate</td><td>36.5%</td><td>31.2%</td><td class="delta-pos">▲ −5.3pp improved</td></tr>
+          <tr style="border-top:1px solid var(--border);"><td class="row-head" rowspan="4">Blog Post <sup>*</sup></td><td>Sessions</td><td>147</td><td>79</td><td class="delta-neg">▼ −46.3%</td></tr>
+          <tr><td>Engagement Rate</td><td>65.3%</td><td>75.9%</td><td class="delta-pos">▲ +10.6pp</td></tr>
+          <tr><td>Avg. Eng. Time</td><td>43s</td><td>21s</td><td class="delta-neg">▼ −50.1%</td></tr>
+          <tr><td>Bounce Rate</td><td>34.7%</td><td>24.1%</td><td class="delta-pos">▲ −10.6pp improved</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="section-head">Page Detail · Combined</h2>
+    <div class="page-grid">
+      <div class="page-card">
+        <span class="page-tag">/community-principles</span>
+        <div class="page-label">Community Principles</div>
+        <div class="mrow"><span class="ml">Views</span><span class="mv">777</span></div>
+        <div class="mrow"><span class="ml">Sessions</span><span class="mv">452</span></div>
+        <div class="mrow"><span class="ml">Engaged Sessions</span><span class="mv">295</span></div>
+        <div class="mrow"><span class="ml">Engagement Rate</span><span class="mv warn">65.3%</span></div>
+        <div class="mrow"><span class="ml">Avg. Engagement Time</span><span class="mv good">44s</span></div>
+        <div class="mrow"><span class="ml">Bounce Rate</span><span class="mv warn">34.7%</span></div>
+        <div class="mrow"><span class="ml">Total Users</span><span class="mv">266</span></div>
+        <div class="mrow"><span class="ml">New Users</span><span class="mv">187 (70%)</span></div>
+        <div class="mrow"><span class="ml">Returning Users</span><span class="mv">97 (36%)</span></div>
+      </div>
+      <div class="page-card">
+        <span class="page-tag">/blog · we-are-building-communities</span>
+        <div class="page-label">We Are Building Communities <sup style="font-size:10px;color:var(--muted);">*</sup></div>
+        <div class="mrow"><span class="ml">Views</span><span class="mv">408</span></div>
+        <div class="mrow"><span class="ml">Sessions</span><span class="mv">222</span></div>
+        <div class="mrow"><span class="ml">Engaged Sessions</span><span class="mv">153</span></div>
+        <div class="mrow"><span class="ml">Engagement Rate</span><span class="mv good">68.9%</span></div>
+        <div class="mrow"><span class="ml">Avg. Engagement Time</span><span class="mv warn">36s</span></div>
+        <div class="mrow"><span class="ml">Bounce Rate</span><span class="mv good">31.1%</span></div>
+        <div class="mrow"><span class="ml">Total Users</span><span class="mv">153</span></div>
+        <div class="mrow"><span class="ml">New Users</span><span class="mv">87 (57%)</span></div>
+        <div class="mrow"><span class="ml">Returning Users</span><span class="mv">65 (43%)</span></div>
+      </div>
+    </div>
+
+    <div class="insight">
+      <strong style="color:var(--teal);">Combined read:</strong> The consistent pattern across both months is a paradox worth surfacing to the Equinix team — engagement rates are high and improving, but avg. engagement time is falling. This typically means the audience is becoming more self-selecting (only genuinely interested visitors arrive), but they're spending less time per visit. Whether that's efficiency or drop-off requires scroll-depth data to resolve.
+    </div>
+
+    <h2 class="section-head">Recommendations</h2>
+    <div class="rec-grid">
+      <div class="rec-card">
+        <div class="rec-num">01 — Action</div>
+        <div class="rec-title">Set up scroll-depth tracking</div>
+        <div class="rec-body">The drop in avg. engagement time (−49% on both pages June→July) is the single most important open question. GA4 scroll-depth events will reveal whether visitors are reading more efficiently or leaving earlier. <em>Requires a dedicated GA4 property setup before implementation.</em></div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-num">02 — Monitor</div>
+        <div class="rec-title">Track August to confirm trend direction</div>
+        <div class="rec-body">Two months establishes a direction, not a trend. Pull August data and focus on three signals: does engagement rate continue rising? Does avg. engagement time stabilize or keep falling? Does returning user share grow month-over-month?</div>
+      </div>
+    </div>
+
+    <p class="footnote" style="margin-top:24px;"><sup>*</sup> Blog page data is stitched across two URLs active during this window: <code style="color:var(--teal);font-size:10px;">/blog/2026/06/02/we-are-building-communities</code> (active Jun 1 onward, 135 sessions in this window) and <code style="color:var(--teal);font-size:10px;">/2026/06/02/we-are-building-communities</code> (new URL, 87 sessions in this window). Averages are session-weighted. User counts may have minor overlap between URLs.</p>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <span>Equinix GA4 Rollup · equinixtogether.com · June–July 2026 · Confidential</span>
+    <span style="display:flex;align-items:center;gap:8px;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" fill="none" style="height:14px;width:14px;">
+        <defs>
+          <linearGradient id="wg3" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#2EE6C1"/><stop offset="1" stop-color="#B14BFF"/></linearGradient>
+          <radialGradient id="gl3" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#2EE6C1" stop-opacity="0.35"/><stop offset="100%" stop-color="#2EE6C1" stop-opacity="0"/></radialGradient>
+        </defs>
+        <circle cx="48" cy="48" r="44" fill="url(#gl3)"/>
+        <path d="M8 48 L28 48 L34 30 L44 66 L54 22 L62 54 L68 48 L88 48" stroke="url(#wg3)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Analysis by RocketSource · August 2026
+    </span>
+  </footer>
+
+</div><!-- /report-wrap -->
+</div><!-- /report -->
+
+<script>
+// ─── PASSWORD ───────────────────────────────────────────────
+function checkPassword() {
+  const val = document.getElementById('pwd-input').value;
+  const err = document.getElementById('gate-error');
+  const inp = document.getElementById('pwd-input');
+  if (val === 'rocketsource') {
+    document.getElementById('gate').classList.add('fade-out');
+    setTimeout(() => {
+      document.getElementById('gate').style.display = 'none';
+      const r = document.getElementById('report');
+      r.classList.add('visible');
+      initCharts();
+    }, 500);
+  } else {
+    inp.classList.add('error');
+    err.textContent = 'Incorrect password. Please try again.';
+    inp.value = '';
+    setTimeout(() => { inp.classList.remove('error'); err.textContent = ''; }, 2500);
+  }
+}
+document.getElementById('pwd-input').addEventListener('keydown', e => { if (e.key === 'Enter') checkPassword(); });
+
+// ─── TABS ────────────────────────────────────────────────────
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+  setTimeout(() => { Object.values(charts).forEach(c => c && c.resize()); }, 50);
+}
+
+// ─── CHARTS ──────────────────────────────────────────────────
+const charts = {};
+const teal = '#2EE6C1', purple = '#B14BFF', warn = '#FFB547', neg = '#FF4B82';
+const gl = 'rgba(255,255,255,0.06)', ml = 'rgba(232,234,240,0.45)', wh = '#E8EAF0';
+const bg = '#141720';
+
+const tealGradV = { type:'linear',x:0,y:0,x2:0,y2:1, colorStops:[{offset:0,color:teal},{offset:1,color:'rgba(46,230,193,0.25)'}] };
+const tealGradH = { type:'linear',x:0,y:0,x2:1,y2:0, colorStops:[{offset:0,color:'rgba(46,230,193,0.5)'},{offset:1,color:teal}] };
+const purpGradH = { type:'linear',x:0,y:0,x2:1,y2:0, colorStops:[{offset:0,color:'rgba(177,75,255,0.5)'},{offset:1,color:purple}] };
+const warnGradH = { type:'linear',x:0,y:0,x2:1,y2:0, colorStops:[{offset:0,color:'rgba(255,181,71,0.4)'},{offset:1,color:warn}] };
+
+function tt(bg2,bc,tc) { return { backgroundColor: bg2||bg, borderColor: bc||'rgba(255,255,255,0.1)', textStyle:{color:tc||wh,fontSize:12}}; }
+function mkGrid(l,r) { return { top:36, right:r||50, bottom:44, left:l||60 }; }
+function xCat(data) { return { type:'category', data, axisLabel:{fontSize:11,color:ml}, axisLine:{lineStyle:{color:'rgba(255,255,255,0.1)'}}, axisTick:{show:false} }; }
+function yCat(data) { return { type:'category', data, axisLabel:{fontSize:12,color:wh}, axisLine:{show:false}, axisTick:{show:false} }; }
+function yVal(max,fmt) { return { type:'value', min:0, max, axisLabel:{formatter:fmt||'{value}',fontSize:11,color:ml}, splitLine:{lineStyle:{color:gl,type:'dashed'}}, axisLine:{show:false}, axisTick:{show:false} }; }
+function xVal(max,fmt) { return { type:'value', min:0, max, axisLabel:{formatter:fmt||'{value}',fontSize:11,color:ml}, splitLine:{lineStyle:{color:gl,type:'dashed'}}, axisLine:{show:false}, axisTick:{show:false} }; }
+
+function mainChart(id, sessions, engRates, labels) {
+  const c = echarts.init(document.getElementById(id), 'dark');
+  c.setOption({
+    backgroundColor:'transparent',
+    grid: mkGrid(60,80),
+    tooltip: { ...tt(), trigger:'axis', axisPointer:{type:'cross',crossStyle:{color:'rgba(255,255,255,0.1)'}} },
+    legend: { bottom:0, icon:'circle', itemWidth:8, textStyle:{fontSize:11,color:ml} },
+    xAxis: xCat(labels || ['Community Principles','Blog Post']),
+    yAxis: [
+      { ...yVal(Math.ceil(Math.max(...sessions)*1.3), '{value}') },
+      { type:'value', min:0, max:100, axisLabel:{formatter:'{value}%',fontSize:11,color:ml}, splitLine:{show:false}, axisLine:{show:false}, axisTick:{show:false} }
+    ],
+    series: [
+      { name:'Sessions', type:'bar', data:sessions, barMaxWidth:64,
+        itemStyle:{ borderRadius:[4,4,0,0], color:tealGradV },
+        label:{show:true,position:'top',fontSize:12,fontWeight:600,color:teal} },
+      { name:'Engagement Rate', type:'line', yAxisIndex:1, data:engRates,
+        smooth:0.4, lineStyle:{width:2.5,color:purple}, itemStyle:{color:purple},
+        symbol:'circle', symbolSize:8,
+        areaStyle:{color:{type:'linear',x:0,y:0,x2:0,y2:1,colorStops:[{offset:0,color:'rgba(177,75,255,0.15)'},{offset:1,color:'rgba(177,75,255,0)'}]}},
+        label:{show:true,position:'top',formatter:p=>`${p.value}%`,fontSize:11,color:purple} }
+    ]
+  });
+  return c;
+}
+
+function hBarChart(id, data, colors, fmt) {
+  const c = echarts.init(document.getElementById(id), 'dark');
+  c.setOption({
+    backgroundColor:'transparent',
+    grid: { top:16, right:60, bottom:28, left:170 },
+    tooltip: { ...tt(), trigger:'axis' },
+    xAxis: xVal(null, fmt||'{value}'),
+    yAxis: yCat(['Blog Post','Community Principles']),
+    series: [{
+      type:'bar', data, barMaxWidth:30,
+      itemStyle:{ borderRadius:[0,4,4,0], color:p => colors[p.dataIndex] },
+      label:{show:true,position:'right',formatter:p=>`${p.value}${fmt?.includes('%')?'%':'s'}`,fontSize:12,fontWeight:600,color:wh}
+    }]
+  });
+  return c;
+}
+
+function usersChart(id, newU, retU) {
+  const c = echarts.init(document.getElementById(id), 'dark');
+  c.setOption({
+    backgroundColor:'transparent',
+    grid: { top:16, right:20, bottom:40, left:170 },
+    tooltip: { ...tt(), trigger:'axis', axisPointer:{type:'shadow'} },
+    legend:{ bottom:0, icon:'circle', itemWidth:8, textStyle:{fontSize:11,color:ml} },
+    xAxis: xVal(),
+    yAxis: yCat(['Overall','Blog Post','Community Principles']),
+    series: [
+      { name:'New Users', type:'bar', stack:'u', data:newU, barMaxWidth:34,
+        itemStyle:{color:tealGradH},
+        label:{show:true,position:'inside',fontSize:11,color:'#0B0D12',fontWeight:700} },
+      { name:'Returning Users', type:'bar', stack:'u', data:retU, barMaxWidth:34,
+        itemStyle:{borderRadius:[0,4,4,0],color:purpGradH},
+        label:{show:true,position:'inside',fontSize:11,color:'#fff',fontWeight:700} }
+    ]
+  });
+  return c;
+}
+
+function momBarChart(id, juneData, julyData, cats) {
+  const c = echarts.init(document.getElementById(id), 'dark');
+  c.setOption({
+    backgroundColor:'transparent',
+    grid: mkGrid(60,30),
+    tooltip:{ ...tt(), trigger:'axis', axisPointer:{type:'shadow'} },
+    legend:{ bottom:0, icon:'circle', itemWidth:8, textStyle:{fontSize:11,color:ml} },
+    xAxis: xCat(cats||['Community Principles','Blog Post']),
+    yAxis: yVal(),
+    series:[
+      { name:'June', type:'bar', data:juneData, barGap:'10%', barMaxWidth:40,
+        itemStyle:{ borderRadius:[4,4,0,0], color:tealGradV },
+        label:{show:true,position:'top',fontSize:11,fontWeight:600,color:teal} },
+      { name:'July', type:'bar', data:julyData, barMaxWidth:40,
+        itemStyle:{ borderRadius:[4,4,0,0], color:{ type:'linear',x:0,y:0,x2:0,y2:1,colorStops:[{offset:0,color:purple},{offset:1,color:'rgba(177,75,255,0.25)'}] }},
+        label:{show:true,position:'top',fontSize:11,fontWeight:600,color:purple} }
+    ]
+  });
+  return c;
+}
+
+function momGroupedH(id, juneData, julyData, yLabels, fmt) {
+  const c = echarts.init(document.getElementById(id), 'dark');
+  const fmtFn = v => fmt === '%' ? `${v}%` : `${v}s`;
+  c.setOption({
+    backgroundColor:'transparent',
+    grid:{ top:16, right:70, bottom:40, left:170 },
+    tooltip:{ ...tt(), trigger:'axis', axisPointer:{type:'shadow'} },
+    legend:{ bottom:0, icon:'circle', itemWidth:8, textStyle:{fontSize:11,color:ml} },
+    xAxis: xVal(null, fmt==='%'?'{value}%':'{value}s'),
+    yAxis: yCat(yLabels),
+    series:[
+      { name:'June', type:'bar', data:juneData, barGap:'10%', barMaxWidth:22,
+        itemStyle:{borderRadius:[0,4,4,0],color:tealGradH},
+        label:{show:true,position:'right',formatter:p=>fmtFn(p.value),fontSize:11,color:wh} },
+      { name:'July', type:'bar', data:julyData, barMaxWidth:22,
+        itemStyle:{borderRadius:[0,4,4,0],color:purpGradH},
+        label:{show:true,position:'right',formatter:p=>fmtFn(p.value),fontSize:11,color:wh} }
+    ]
+  });
+  return c;
+}
+
+function initCharts() {
+  // ── JUNE ──
+  charts.jMain   = mainChart('j-chart-main', [282,147], [63.5,65.3]);
+  charts.jTime   = hBarChart('j-chart-time', [43,54], [purpGradH, tealGradH], '{value}s');
+  charts.jBounce = hBarChart('j-chart-bounce',[34.7,36.5],[tealGradH,warnGradH],'{value}%');
+  charts.jUsers  = usersChart('j-chart-users',[156,50,108],[105,46,75]);
+
+  // ── JULY ──
+  charts.julMain   = mainChart('jul-chart-main',[173,79],[68.8,75.9]);
+  charts.julTime   = hBarChart('jul-chart-time',[21,28],[purpGradH,tealGradH],'{value}s');
+  charts.julBounce = hBarChart('jul-chart-bounce',[24.1,31.2],[tealGradH,tealGradH],'{value}%');
+  charts.julUsers  = usersChart('jul-chart-users',[120,40,80],[66,24,42]);
+
+  // ── COMBINED ──
+  charts.cMain   = mainChart('c-chart-main',[452,222],[65.3,68.9]);
+  charts.cTime   = hBarChart('c-chart-time',[36,44],[purpGradH,tealGradH],'{value}s');
+  charts.cBounce = hBarChart('c-chart-bounce',[31.1,34.7],[tealGradH,warnGradH],'{value}%');
+
+  // ── MoM ──
+  charts.momSess    = momBarChart('mom-chart-sessions',[282,147],[173,79]);
+  charts.momEngRate = momGroupedH('mom-chart-engrate',[65.3,63.5],[75.9,68.8],['Blog Post','Community Principles'],'%');
+  charts.momTime    = momGroupedH('mom-chart-time',[43,54],[21,28],['Blog Post','Community Principles'],'s');
+
+  window.addEventListener('resize', () => Object.values(charts).forEach(c => c && c.resize()));
+}
+</script>
+</body>
+</html>
