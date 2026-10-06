@@ -1,0 +1,730 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>xinsurance.com: Two Paths, One Foundation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#06060A; --ink-2:#2E2E40; --accent:#9027FF; --accent-deep:#7A2CCB;
+  --cyan:#50E3C2; --cyan-fill:#E6FBF6; --violet-fill:#F5ECFF;
+  --alt:#F4F4F4; --rule:#D1D1D5; --paper:#FFFFFF;
+  --a:#2E2E40; --b:#7A2CCB;
+  --radius:4px; --max:1120px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Montserrat,system-ui,-apple-system,Segoe UI,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent-deep)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-deep)}
+h1,h2,h3,h4{line-height:1.2;margin:0;font-weight:600;letter-spacing:-.01em}
+h2{font-size:clamp(26px,3.2vw,34px);margin:8px 0 12px}
+h3{font-size:19px}
+p{margin:0 0 12px}
+.lead{font-size:18px;color:var(--ink-2);max-width:760px}
+.muted{color:var(--ink-2)}
+.small{font-size:14px}
+
+/* nav */
+.topnav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--rule)}
+.topnav .wrap{display:flex;align-items:center;gap:24px;height:60px}
+.brand{font-weight:700;font-size:14px;white-space:nowrap}
+.brand span{font-weight:500;color:var(--ink-2)}
+.navlinks{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin-left:auto}
+.navlinks::-webkit-scrollbar{display:none}
+.navlinks a{font-size:13px;font-weight:500;text-decoration:none;color:var(--ink-2);padding:8px 10px;border-radius:var(--radius);white-space:nowrap}
+.navlinks a:hover,.navlinks a.active{color:var(--ink);background:var(--alt)}
+
+/* hero */
+.hero{background:var(--ink);color:#fff;padding:72px 0 64px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--cyan)}
+.hero .eyebrow{color:var(--cyan)}
+.hero h1{font-size:clamp(32px,5vw,54px);max-width:900px;margin:12px 0 20px;font-weight:600}
+.hero h1 em{font-style:normal;color:#C9A6FF}
+.hero .lead{color:#D8D8E2;font-size:19px}
+.meta{margin-top:28px;font-size:13px;color:#B9B9C8;display:flex;flex-wrap:wrap;gap:8px 24px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}
+.stat{border-top:2px solid var(--cyan);padding-top:14px}
+.stat b{display:block;font-size:clamp(28px,4vw,40px);font-weight:600;line-height:1.1}
+.stat span{font-size:14px;color:#D8D8E2}
+
+section{padding:80px 0;border-bottom:1px solid var(--rule)}
+section.alt{background:var(--alt)}
+.sec-head{margin-bottom:32px}
+.sec-head .rule{width:48px;height:3px;background:var(--cyan);margin-bottom:16px}
+
+/* reframe */
+.reframe{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.card{background:#fff;border:1px solid var(--rule);border-radius:var(--radius);padding:24px}
+.card h3{margin-bottom:8px}
+.card.accent{border-color:var(--accent);box-shadow:inset 4px 0 0 var(--accent)}
+ul.clean{list-style:none;padding:0;margin:0}
+ul.clean li{padding:6px 0 6px 22px;position:relative}
+ul.clean li::before{content:"";position:absolute;left:0;top:15px;width:10px;height:2px;background:var(--accent)}
+
+/* selector */
+.selector{display:grid;grid-template-columns:1.3fr 1fr;gap:32px;align-items:start}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{border:1px solid var(--rule);background:#fff;border-radius:999px;padding:10px 16px;font-size:14px;font-weight:500;cursor:pointer;text-align:left;transition:background .15s,border-color .15s}
+.chip:hover{border-color:var(--accent)}
+.chip[aria-pressed="true"]{background:var(--violet-fill);border-color:var(--accent);color:var(--ink)}
+.chip[aria-pressed="true"]::before{content:"✓ ";color:var(--accent-deep);font-weight:700}
+.chip.locked{background:var(--cyan-fill);border-color:#9FE9D7;cursor:default}
+.chip.locked::before{content:"● ";color:#14A383}
+.group-label{font-size:13px;font-weight:600;margin:24px 0 10px;color:var(--ink-2)}
+.group-label:first-child{margin-top:0}
+.result{position:sticky;top:84px;background:#fff;border:1px solid var(--rule);border-radius:var(--radius);padding:24px}
+.result .verdict{font-size:22px;font-weight:600;margin:6px 0 10px;line-height:1.25}
+.meter{display:grid;grid-template-columns:72px 1fr 28px;align-items:center;gap:10px;font-size:13px;margin:8px 0}
+.bar{height:10px;background:var(--alt);border-radius:999px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;transition:width .35s ease}
+.bar.a i{background:var(--a)} .bar.b i{background:var(--b)}
+.reasons{margin-top:14px;font-size:14px}
+.reasons li{margin-bottom:6px}
+.reset{margin-top:10px;background:none;border:none;color:var(--accent-deep);font-size:13px;font-weight:600;cursor:pointer;padding:0;text-decoration:underline}
+
+/* under the hood */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.filter{border:1px solid var(--rule);background:#fff;border-radius:var(--radius);padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer}
+.filter[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.hood{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:start}
+.hcard{background:#fff;border:1px solid var(--rule);border-radius:var(--radius);display:flex;flex-direction:column}
+.hcard button{all:unset;cursor:pointer;padding:20px;display:block}
+.hcard button:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
+.tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;border-radius:2px;background:var(--alt);color:var(--ink-2);margin-bottom:10px}
+.tag.revenue{background:var(--violet-fill);color:var(--accent-deep)}
+.tag.compliance{background:#FFF1E6;color:#9A4A00}
+.tag.visibility{background:var(--cyan-fill);color:#0B7A62}
+.tag.operations{background:#EEF0F4;color:var(--ink-2)}
+.hcard h3{font-size:17px;margin-bottom:6px}
+.hcard .sum{font-size:14px;color:var(--ink-2);margin:0}
+.hcard .more{font-size:13px;font-weight:600;color:var(--accent-deep);margin-top:10px;display:inline-block}
+.hcard .detail{display:none;padding:0 20px 20px;font-size:14px;border-top:1px solid var(--rule)}
+.hcard.open .detail{display:block}
+.hcard.open{border-color:var(--accent)}
+.detail h4{font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin:16px 0 6px;color:var(--ink-2)}
+.detail ul{margin:0;padding-left:18px}
+.risk{background:#FFF7F0;border-left:3px solid #E07B00;padding:10px 12px;margin-top:12px}
+.hcard[hidden]{display:none}
+
+/* roadmap */
+.roadmap{display:grid;gap:0}
+.foundation{border:2px solid var(--accent);background:var(--violet-fill);border-radius:var(--radius);padding:20px}
+.fhead{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.fhead strong{font-size:15px}
+.row2{display:grid;grid-template-columns:1fr 40px 1fr;align-items:stretch}
+.arrow-r{pointer-events:none;display:flex;align-items:center;justify-content:center;color:var(--ink-2);font-size:22px}
+.arrow-r::before{content:"\2192"}
+.phase{all:unset;box-sizing:border-box;cursor:pointer;background:#fff;border:1px solid var(--rule);border-radius:var(--radius);padding:16px 18px;display:block;transition:border-color .15s,box-shadow .15s}
+.phase:hover{border-color:var(--accent)}
+.phase:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.phase[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
+.phase .num{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-deep)}
+.phase .name{font-size:17px;font-weight:600;margin:2px 0 4px}
+.phase .one{font-size:14px;color:var(--ink-2)}
+.phase .cost{font-size:13px;font-weight:600;margin-top:8px;color:var(--ink)}
+.connector{display:flex;justify-content:center;padding:6px 0}
+.connector span{width:2px;height:28px;background:var(--ink-2);position:relative}
+.connector span::after{content:"";position:absolute;bottom:-2px;left:-5px;border:6px solid transparent;border-top:7px solid var(--ink-2);border-bottom:0}
+.gate-wrap{display:flex;justify-content:center}
+.gate{all:unset;cursor:pointer;box-sizing:border-box;background:#fff;border:1.5px solid var(--ink);border-radius:999px;padding:12px 26px;font-weight:600;font-size:15px;min-width:220px;text-align:center}
+.gate::before{content:"\25C6  ";color:var(--accent)}
+.gate[aria-pressed="true"]{background:var(--ink);color:#fff}
+.gate:focus-visible{outline:3px solid var(--accent)}
+.fork{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:0}
+.forklabel{text-align:center;font-size:13px;color:var(--ink-2);padding:8px 0 6px}
+.pathbox{border:1px solid var(--rule);border-radius:var(--radius);padding:16px;background:#fff;height:100%}
+.pathbox h4{font-size:15px;margin-bottom:10px}
+.pathbox .row2{grid-template-columns:1fr 28px 1fr}
+.panel{margin-top:28px;background:#fff;border:1px solid var(--rule);border-top:4px solid var(--accent);border-radius:var(--radius);padding:24px 28px}
+.panel h3{font-size:22px;margin-bottom:4px}
+.panel .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:18px}
+.panel h4{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin-bottom:8px}
+.panel ul{margin:0;padding-left:18px;font-size:15px}
+.panel li{margin-bottom:6px}
+
+/* cost */
+.cost-chip{display:inline-flex;gap:2px;font-weight:700;letter-spacing:.06em}
+.cost-chip .on{color:var(--ink)} .cost-chip .off{color:#C4C4CC}
+.swipe{display:none;font-size:13px;color:var(--ink-2);margin:0 0 8px}
+.legend{font-size:13px;color:var(--ink-2);margin-top:14px}
+
+/* tables */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--rule);border-radius:var(--radius);background:#fff}
+table{border-collapse:collapse;width:100%;font-size:15px;min-width:640px}
+th,td{text-align:left;padding:14px 16px;vertical-align:top;border-bottom:1px solid var(--rule)}
+thead th{background:var(--ink);color:#fff;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+tbody th{font-weight:600;width:22%;background:var(--alt)}
+tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
+
+/* platforms */
+.ptabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;align-items:center}
+.ptab{border:1px solid var(--rule);background:#fff;border-radius:var(--radius);padding:10px 16px;font-size:14px;font-weight:600;cursor:pointer}
+.ptab[aria-selected="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.ptab .rec{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-deep);margin-left:6px}
+.ptab[aria-selected="true"] .rec{color:#C9A6FF}
+.toggle{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;cursor:pointer}
+.toggle input{width:18px;height:18px;accent-color:var(--accent)}
+.pview{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.pblock{background:#fff;border:1px solid var(--rule);border-radius:var(--radius);padding:20px}
+.pblock h4{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin-bottom:8px}
+.pblock.wide{grid-column:1/-1}
+.pblock p,.pblock li{font-size:15px}
+.pblock ul{margin:0;padding-left:18px}
+.fit{display:flex;gap:16px;flex-wrap:wrap;font-size:14px}
+.fit div{flex:1 1 160px}
+.dots{display:inline-flex;gap:4px;vertical-align:middle;margin-left:6px}
+.dots i{width:10px;height:10px;border-radius:50%;background:#D9D9DF;display:inline-block}
+.dots i.on{background:var(--accent)}
+#pcompare[hidden],#pdetail[hidden]{display:none}
+
+/* principles */
+.principles{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.pr{border-top:3px solid var(--cyan);padding-top:14px}
+.pr h3{font-size:17px;margin-bottom:6px}
+.pr p{font-size:15px;color:var(--ink-2)}
+
+/* next */
+.steps{counter-reset:s;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.step{background:#fff;border:1px solid var(--rule);border-radius:var(--radius);padding:24px;position:relative}
+.step::before{counter-increment:s;content:counter(s);display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:var(--ink);color:#fff;font-weight:600;font-size:14px;margin-bottom:14px}
+.step h3{font-size:17px;margin-bottom:6px}
+.step p{font-size:15px;color:var(--ink-2);margin:0}
+
+footer{background:var(--ink);color:#C8C8D4;padding:48px 0;font-size:13px}
+footer a{color:#C9A6FF}
+footer h4{color:#fff;font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+footer ol{padding-left:18px;margin:0 0 24px}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr;gap:32px}
+
+@media (max-width:900px){
+  .hood{grid-template-columns:1fr 1fr}
+  .principles{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:1fr}
+  .selector{grid-template-columns:1fr}
+  .result{position:static}
+  .panel .cols{grid-template-columns:1fr}
+}
+@media (max-width:680px){
+  .wrap{padding:0 16px}
+  section{padding:56px 0}
+  .hero{padding:48px 0 44px}
+  .stats{grid-template-columns:1fr;gap:12px}
+  .reframe,.hood,.principles,.pview,.fork,.foot-grid{grid-template-columns:1fr}
+  .row2,.pathbox .row2{grid-template-columns:1fr}
+  .arrow-r{height:32px}
+  .arrow-r::before{content:"\2193"}
+  .brand span{display:none}
+  .toggle{margin-left:0}
+  .panel{padding:20px}
+  .swipe{display:block}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media print{.topnav{display:none}.hcard .detail{display:block}section{padding:32px 0}}
+</style>
+</head>
+<body>
+
+<nav class="topnav" aria-label="Sections">
+  <div class="wrap">
+    <div class="brand">RocketSource <span>by Incubeta</span></div>
+    <div class="navlinks">
+      <a href="#start">Start</a>
+      <a href="#new">What “new” means</a>
+      <a href="#hood">Under the hood</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#compare">A vs B</a>
+      <a href="#platforms">Platforms</a>
+      <a href="#next">Next steps</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="start">
+  <div class="wrap">
+    <div class="eyebrow">Prepared for Prime Insurance · xinsurance.com</div>
+    <h1>A new xinsurance.com, built with AI, <em>without breaking what earns the leads.</em></h1>
+    <p class="lead">AI can make the site faster and cheaper to change, and we already use it in our design, copy and code work for you. What matters is what AI is allowed to change. This page sets out two ways forward. Both start on the same foundation, so Prime chooses the bigger investment only once it knows what it is buying.</p>
+    <div class="stats" role="list">
+      <div class="stat" role="listitem"><b>60+</b><span>risk-class pages that feed quote requests straight into your CRM</span></div>
+      <div class="stat" role="listitem"><b>7 years</b><span>of rules built into the site: forms, routing, consent, accessibility</span></div>
+      <div class="stat" role="listitem"><b>23%</b><span>share of AI-engine answers in your category, ahead of State Farm (17%) and Allstate (16%), Aug 2026</span></div>
+    </div>
+    <div class="meta"><span>RocketSource by Incubeta</span><span>October 2026</span><span>Confidential · for discussion</span></div>
+  </div>
+</header>
+
+<main>
+
+<section id="reframe">
+  <div class="wrap">
+    <div class="sec-head"><div class="rule"></div><div class="eyebrow">The starting point</div>
+      <h2>xinsurance.com is a lead engine with a design on top</h2>
+      <p class="lead">A ChatGPT mock-up shows what a page could look like. It can't show what the page has to do. Seven years of business rules sit beneath the design, and they are the part an AI tool can't see.</p>
+    </div>
+    <div class="reframe">
+      <div class="card">
+        <h3>What AI tools do well today</h3>
+        <ul class="clean">
+          <li>Generate design directions and layouts in minutes</li>
+          <li>Draft and improve page copy, metadata and FAQs</li>
+          <li>Speed up coding, QA checklists and content migration</li>
+          <li>Analyze competitors, keyword gaps and AI-search visibility</li>
+        </ul>
+      </div>
+      <div class="card accent">
+        <h3>What AI can't see on its own</h3>
+        <ul class="clean">
+          <li>How each risk-class button pre-fills the right quote form</li>
+          <li>How every form field maps into ClickDimensions and Dynamics 365</li>
+          <li>Which cookies fire, when, and under which consent choice</li>
+          <li>Which copy legal has already approved, and why it must stay</li>
+        </ul>
+      </div>
+    </div>
+    <p class="muted" style="margin-top:20px">The fix isn't avoiding AI. It's giving AI the context and guardrails it needs, which is what the foundation phases below deliver.</p>
+  </div>
+</section>
+
+<section id="new" class="alt">
+  <div class="wrap">
+    <div class="sec-head"><div class="rule"></div><div class="eyebrow">Interactive · 1 of 4</div>
+      <h2>What does “new” mean for Prime?</h2>
+      <p class="lead">Select the outcomes that matter. The recommendation updates as you go. The items in green are fixed for any option.</p>
+    </div>
+    <div class="selector">
+      <div>
+        <div class="group-label">Look and feel</div>
+        <div class="chips" id="chips-look"></div>
+        <div class="group-label">Speed and ownership</div>
+        <div class="chips" id="chips-speed"></div>
+        <div class="group-label">Budget and technology</div>
+        <div class="chips" id="chips-budget"></div>
+        <div class="group-label">Fixed for any option</div>
+        <div class="chips">
+          <span class="chip locked">Quote forms keep working</span>
+          <span class="chip locked">CRM lead flow stays intact</span>
+          <span class="chip locked">GDPR / CCPA and accessibility compliance</span>
+          <span class="chip locked">Protect AI-search and SEO visibility</span>
+        </div>
+      </div>
+      <aside class="result" aria-live="polite">
+        <div class="eyebrow">Our read</div>
+        <div class="verdict" id="verdict">Pick a few outcomes to see a recommendation.</div>
+        <div class="meter"><span>Option A</span><div class="bar a"><i id="barA"></i></div><span id="scoreA">0</span></div>
+        <div class="meter"><span>Option B</span><div class="bar b"><i id="barB"></i></div><span id="scoreB">0</span></div>
+        <ul class="reasons" id="reasons"></ul>
+        <p class="small muted" style="margin:12px 0 0">Either way, Phases 1 and 2 come first. <a href="#roadmap">See the roadmap</a></p>
+        <button class="reset" id="resetSel" type="button">Clear selections</button>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="hood">
+  <div class="wrap">
+    <div class="sec-head"><div class="rule"></div><div class="eyebrow">Interactive · 2 of 4</div>
+      <h2>What's under the hood</h2>
+      <p class="lead">This is what seven years of work on xinsurance.com does today. Whichever path Prime picks, all of it has to come through. Open a card to see what's involved and what's at risk if it's missed.</p>
+    </div>
+    <div class="filters" role="group" aria-label="Filter capabilities">
+      <button class="filter" aria-pressed="true" data-f="all">All</button>
+      <button class="filter" aria-pressed="false" data-f="revenue">Revenue</button>
+      <button class="filter" aria-pressed="false" data-f="compliance">Compliance</button>
+      <button class="filter" aria-pressed="false" data-f="visibility">Visibility</button>
+      <button class="filter" aria-pressed="false" data-f="operations">Operations</button>
+    </div>
+    <div class="hood" id="hoodGrid"></div>
+  </div>
+</section>
+
+<section id="roadmap" class="alt">
+  <div class="wrap">
+    <div class="sec-head"><div class="rule"></div><div class="eyebrow">Interactive · 3 of 4</div>
+      <h2>One foundation, one decision, two paths</h2>
+      <p class="lead">Phases 1 and 2 are worth doing whichever path follows. At the gate, Prime chooses Option A or Option B with real evidence in hand. Select any step for details.</p>
+    </div>
+    <div class="roadmap">
+      <div class="foundation">
+        <div class="fhead"><strong>Shared foundation · start here</strong><span class="small muted">Valuable on either path</span></div>
+        <div class="row2">
+          <button class="phase" data-p="p1" aria-pressed="true"><div class="num">Phase 1</div><div class="name">Process</div><div class="one">How AI is used on the site: who creates, who reviews, what must pass before anything goes live</div><div class="cost" data-cost="1"></div></button>
+          <div class="arrow-r" aria-hidden="true"></div>
+          <button class="phase" data-p="p2" aria-pressed="false"><div class="num">Phase 2</div><div class="name">Context layer</div><div class="one">Seven years of site rules turned into a structured knowledge base that any AI tool can work from safely</div><div class="cost" data-cost="2"></div></button>
+        </div>
+      </div>
+      <div class="connector" aria-hidden="true"><span></span></div>
+      <div class="gate-wrap"><button class="gate" data-p="gate" aria-pressed="false">Decision gate</button></div>
+      <div class="fork">
+        <div>
+          <div class="forklabel">Lower investment, fastest visible change</div>
+          <div class="pathbox">
+            <h4>Option A · Modernize the current site</h4>
+            <button class="phase" data-p="a" aria-pressed="false"><div class="num">Option A</div><div class="name">New look, same engine</div><div class="one">New design, homepage, navigation and templates on today's platform</div><div class="cost" data-cost="2"></div></button>
+          </div>
+        </div>
+        <div>
+          <div class="forklabel">Bigger step, AI built into how the site runs</div>
+          <div class="pathbox">
+            <h4>Option B · AI-native rebuild</h4>
+            <div class="row2">
+              <button class="phase" data-p="p3" aria-pressed="false"><div class="num">Phase 3</div><div class="name">New stack</div><div class="one">Approved components, AI tooling, automated QA</div><div class="cost" data-cost="3"></div></button>
+              <div class="arrow-r" aria-hidden="true"></div>
+              <button class="phase" data-p="p4" aria-pressed="false"><div class="num">Phase 4</div><div class="name">Launch</div><div class="one">Pilot, migrate, cut over, support</div><div class="cost" data-cost="3"></div></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel" aria-live="polite"></div>
+    <p class="legend"><span class="cost-chip"><span class="on">$</span><span class="off">$$$</span></span> = relative investment, compared within this page only. These are not quotes. Each phase is scoped and priced separately after discovery.</p>
+  </div>
+</section>
+
+<section id="compare">
+  <div class="wrap">
+    <div class="sec-head"><div class="rule"></div><div class="eyebrow">Side by side</div>
+      <h2>Option A vs Option B</h2>
+      <p class="lead">Option A wins on speed and cost. Option B is the one that puts AI in the hands of Prime's own team without putting the lead engine at risk.</p>
+    </div>
+    <p class="swipe">Swipe the table sideways to see both options →</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th scope="col"></th><th scope="col">Option A · Modernize current site</th><th scope="col">Option B · AI-native rebuild</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">What Prime gets</th><td>A refreshed look across the site, designed with AI support</td><td>A new site that Prime's team can extend with AI, inside guardrails</td></tr>
+          <tr><th scope="row">Who uses AI</th><td>RocketSource, to speed up design, copy and code</td><td>RocketSource and Prime marketing, under an agreed operating model</td></tr>
+          <tr><th scope="row">First visible change</th><td>Fastest: homepage and navigation first</td><td>A working proof in Phase 1; the full site at Phase 4</td></tr>
+          <tr><th scope="row">Relative investment</th><td><span class="cost-chip" data-cost-inline="2"></span> after the foundation</td><td><span class="cost-chip" data-cost-inline="3"></span> to <span class="cost-chip" data-cost-inline="4"></span> after the foundation, depending on platform</td></tr>
+          <tr><th scope="row">Ongoing cost of change</th><td>Similar to today</td><td>Lower per change once quality checks are automated</td></tr>
+          <tr><th scope="row">Quote forms and CRM</th><td>Untouched</td><td>Carried over and reconnected using documented data rules, then tested end to end</td></tr>
+          <tr><th scope="row">Compliance</th><td>Existing controls stay in place</td><td>Built into automated checks; closely managed during migration</td></tr>
+          <tr><th scope="row">AI-search and SEO</th><td>Low risk</td><td>Managed through a URL plan and visibility tracking before and after launch</td></tr>
+          <tr><th scope="row">Legacy technology</th><td>Carried forward</td><td>Retired</td></tr>
+          <tr><th scope="row">Best fit if</th><td>“The site looks dated.”</td><td>“We want AI to be part of how the site runs.”</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="platforms" class="alt">
+  <div class="wrap">
+    <div class="sec-head"><div class="rule"></div><div class="eyebrow">Interactive · 4 of 4 · Option B</div>
+      <h2>Which platform for an AI-native xinsurance.com?</h2>
+      <p class="lead">Our working recommendation is to stay on WordPress, rebuilt on a modern foundation. WordPress 7.0 now has AI built into its core, and your forms and CRM connection carry over. We have also mapped what a move off WordPress would involve, so the choice is an informed one.</p>
+    </div>
+    <div class="ptabs" role="tablist" aria-label="Platform options" id="ptabs">
+      <label class="toggle"><input type="checkbox" id="cmpToggle"> Compare all three</label>
+    </div>
+    <div id="pdetail" role="tabpanel"></div>
+    <div id="pcompare" hidden>
+      <p class="swipe">Swipe the table sideways to see all three →</p>
+      <div class="tbl-wrap"><table id="ptable"></table></div>
+    </div>
+    <p class="legend">Dots are our relative assessment for Prime’s situation (more is better). Platform names are examples of each approach, not endorsements. We would confirm the final tool choice in Phase 3, because this market changes month to month.</p>
+  </div>
+</section>
+
+<section id="principles">
+  <div class="wrap">
+    <div class="sec-head"><div class="rule"></div><div class="eyebrow">How we work with AI</div>
+      <h2>AI builds the pages. People approve what goes live.</h2>
+    </div>
+    <div class="principles">
+      <div class="pr"><h3>AI-assisted content</h3><p>AI drafts copy, layouts and metadata. Your team and legal review it before it publishes.</p></div>
+      <div class="pr"><h3>Approved building blocks</h3><p>AI works from a vetted set of components and tools, not one-off code that has never been reviewed.</p></div>
+      <div class="pr"><h3>Automated guardrails</h3><p>Every change runs accessibility, consent, form and CRM checks before release.</p></div>
+      <div class="pr"><h3>Clear accountability</h3><p>Compliance and legal liability stay with checked, documented work. That's why core architecture is never left to AI alone.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="next" class="alt">
+  <div class="wrap">
+    <div class="sec-head"><div class="rule"></div><div class="eyebrow">Next steps</div>
+      <h2>Three moves to get started</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><h3>A 30-minute working session</h3><p>Prime marketing leadership, JD and RocketSource agree on what “new” means, using the selector above as the agenda.</p></div>
+      <div class="step"><h3>Turn the AI concept into a working page</h3><p>Share the AI-generated homepage concept. We build it as an editable page on the development site, so the team can see AI-led design running on real infrastructure.</p></div>
+      <div class="step"><h3>Scope Phases 1 and 2</h3><p>A fixed-scope proposal for the foundation, with a clear gate before any larger commitment.</p></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <h4>Sources for platform information</h4>
+      <ol>
+        <li><a href="https://www.searchenginejournal.com/wordpress-7-0-launches-with-native-ai-integration/" target="_blank" rel="noopener">Search Engine Journal: WordPress 7.0 launches with native AI integration</a></li>
+        <li><a href="https://webdevstudios.com/2026/03/16/wordpress-and-ai-how-native-ai-is-changing-enterprise-wordpress/" target="_blank" rel="noopener">WebDevStudios: How native AI is changing enterprise WordPress</a></li>
+        <li><a href="https://www.contentful.com/developers/docs/tools/mcp-server/" target="_blank" rel="noopener">Contentful: MCP server documentation</a></li>
+        <li><a href="https://focusreactive.com/blog/agentic-cms/" target="_blank" rel="noopener">FocusReactive: Agentic CMS in 2026</a></li>
+        <li><a href="https://webflow.com/updates/ai-site-builder-evolved" target="_blank" rel="noopener">Webflow: AI site builder update</a></li>
+      </ol>
+      <p>Site figures come from RocketSource's project records for xinsurance.com (2019–2026) and the August 2026 AI visibility report.</p>
+    </div>
+    <div>
+      <h4>Prepared by</h4>
+      <p>RocketSource by Incubeta<br>October 2026</p>
+      <p>Confidential. Prepared for Prime Insurance for discussion purposes.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var $ = function(s, r){ return (r || document).querySelector(s); };
+  var $$ = function(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  function el(tag, attrs, html){ var e = document.createElement(tag); if (attrs) Object.keys(attrs).forEach(function(k){ e.setAttribute(k, attrs[k]); }); if (html != null) e.innerHTML = html; return e; }
+  function cost(n, max){ max = max || 4; var s = '<span class="cost-chip" aria-label="Relative investment ' + n + ' of ' + max + '">'; for (var i = 1; i <= max; i++) s += '<span class="' + (i <= n ? 'on' : 'off') + '">$</span>'; return s + '</span>'; }
+  function dots(n){ var s = '<span class="dots" aria-label="' + n + ' of 5">'; for (var i = 1; i <= 5; i++) s += '<i class="' + (i <= n ? 'on' : '') + '"></i>'; return s + '</span>'; }
+
+  /* cost chips in static markup */
+  $$('[data-cost]').forEach(function(n){ n.innerHTML = 'Relative investment ' + cost(+n.getAttribute('data-cost')); });
+  $$('[data-cost-inline]').forEach(function(n){ n.outerHTML = cost(+n.getAttribute('data-cost-inline')); });
+
+  /* ---------- 1. What "new" means ---------- */
+  var goals = [
+    {g:'look', t:'A fresh visual identity: type, color, imagery', a:3, b:1, why:'A visual refresh is exactly what Option A delivers, on the current platform.'},
+    {g:'look', t:'A new homepage and navigation', a:3, b:1, why:'The homepage and navigation can be rebuilt today without touching the forms underneath.'},
+    {g:'look', t:'A more modern mobile experience', a:2, b:2, why:'Mobile work is already under way, and both options build on it.'},
+    {g:'look', t:'Retire pages for products we no longer market', a:2, b:2, why:'Retiring pages works on either path, with redirects that protect search visibility.'},
+    {g:'speed', t:'Our marketing team creates pages themselves with AI', a:0, b:4, why:'Self-serve AI page creation needs approved components and automated checks, which is Option B.'},
+    {g:'speed', t:'Launch new risk-class pages in days, not weeks', a:1, b:3, why:'Faster launches come from a component library that AI assembles pages from (Phase 3).'},
+    {g:'speed', t:'Restructure how the whole site is organized', a:1, b:3, why:'A full restructure is cleaner as a rebuild than as layers on top of the current templates.'},
+    {g:'speed', t:'Content that also powers apps, portals and AI agents', a:0, b:3, why:'Reusing content across channels points to structured content, possibly on a headless platform.'},
+    {g:'budget', t:'Keep spend low this year', a:3, b:0, why:'Option A, and the foundation phases on their own, keep near-term investment lowest.'},
+    {g:'budget', t:'Lower the cost of every future change', a:0, b:3, why:'Automated quality checks and approved components cut the cost of each later change (Option B).'},
+    {g:'budget', t:'Retire legacy technology', a:0, b:3, why:'Only a rebuild retires the current theme and page-builder layer.'},
+    {g:'budget', t:'Minimal disruption to the team and the leads', a:3, b:1, why:'Option A leaves the editing experience and the lead flow exactly as they are today.'}
+  ];
+  var groups = {look:'#chips-look', speed:'#chips-speed', budget:'#chips-budget'};
+  goals.forEach(function(x, i){
+    var b = el('button', {type:'button', 'class':'chip', 'aria-pressed':'false', 'data-i':i}, x.t);
+    b.addEventListener('click', function(){ b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') === 'true' ? 'false' : 'true'); score(); });
+    $(groups[x.g]).appendChild(b);
+  });
+  function score(){
+    var on = $$('.chip[aria-pressed="true"]').map(function(b){ return goals[+b.getAttribute('data-i')]; });
+    var A = 0, B = 0; on.forEach(function(x){ A += x.a; B += x.b; });
+    var max = Math.max(A, B, 1);
+    $('#barA').style.width = (A / max * 100) + '%'; $('#barB').style.width = (B / max * 100) + '%';
+    $('#scoreA').textContent = A; $('#scoreB').textContent = B;
+    var v;
+    if (!on.length) v = 'Pick a few outcomes to see a recommendation.';
+    else if (B >= A + 3) v = 'Option B: an AI-native rebuild fits what you described.';
+    else if (A >= B + 3) v = 'Option A: modernize the current site.';
+    else v = 'A close call. Build the foundation first, then decide at the gate.';
+    $('#verdict').textContent = v;
+    var r = $('#reasons'); r.innerHTML = '';
+    on.slice().sort(function(p, q){ return Math.abs(q.a - q.b) - Math.abs(p.a - p.b); }).slice(0, 4).forEach(function(x){ r.appendChild(el('li', null, x.why)); });
+  }
+  $('#resetSel').addEventListener('click', function(){ $$('.chip[aria-pressed]').forEach(function(b){ b.setAttribute('aria-pressed', 'false'); }); score(); });
+  score();
+
+  /* ---------- 2. Under the hood ---------- */
+  var hood = [
+    {c:'revenue', t:'Quote Qualifier lead engine', s:'A multi-step quote form running on 60+ risk-class pages.',
+     d:['Save &amp; Continue, so applicants can return to a partly finished quote','Conditional logic, including content that changes with the state selected','Risk-class buttons that pre-fill the right form and option','Variants for allied health and direct-to-consumer audiences','Duplicate-submission and spam protection'],
+     r:'A page generated without these rules looks right, but quote requests stop arriving complete, or stop arriving at all.'},
+    {c:'revenue', t:'CRM lead pipeline', s:'Form data flows into ClickDimensions and Microsoft Dynamics 365.',
+     d:['Field-by-field mapping for every active form','Risk descriptions translated into risk codes for routing','Fixes for double-firing and partial submissions','Data that supports Prime’s internal lead-assignment rules'],
+     r:'Every new page or form has to keep this mapping exactly, or leads land in the wrong place.'},
+    {c:'revenue', t:'Attribution and tracking', s:'Every lead keeps its source, so media spend can be measured.',
+     d:['First- and last-touch campaign data carried in hidden fields','The referring page captured with each submission','Google Tag Manager, GA4, Google Ads and Meta (pixel and server-side, de-duplicated)','Call tracking and partner-agency tags'],
+     r:'If tracking drops during a redesign, the media reporting behind each budget decision goes with it.'},
+    {c:'compliance', t:'Privacy and consent', s:'GDPR and CCPA consent across all Prime sites.',
+     d:['Cookie consent banner with Google Consent Mode v2','Global Privacy Control (GPC) honored, with a visible confirmation','Cookies classified by category, and no pixels before consent','Personal data stripped from ad platforms; form entries purged on a set schedule'],
+     r:'AI-generated pages often load scripts directly, which can fire tracking before consent. That is a regulatory exposure.'},
+    {c:'compliance', t:'Accessibility', s:'Audited and remediated to WCAG 2.1 AA.',
+     d:['Accessible labels, contrast ratios and keyboard navigation','Forms that screen readers can use','Checks repeated as pages change'],
+     r:'Accessibility is easy to lose in a redesign and expensive to defend. It has to be verified, not assumed.'},
+    {c:'compliance', t:'Legal-approved copy', s:'Risk-class body copy has been through legal review.',
+     d:['Our current design work changes layout only, so approved copy stays approved','Disclaimers on every form and in the footer','Privacy policy and notices kept up to date'],
+     r:'AI-rewritten copy puts every page back into legal review. That decision should be made on purpose, page by page.'},
+    {c:'visibility', t:'AI-search visibility', s:'A 23% share of AI-engine answers in the category (Aug 2026).',
+     d:['Measured across ChatGPT, Claude, Gemini, Perplexity and Google AI','Ahead of State Farm (17%) and Allstate (16%)','Strong in niche risk classes such as dog bite, exotic pets and bounce houses','Opportunity: more citations as a primary source'],
+     r:'Changing URLs, page structure or copy without a plan can hand this lead to competitors.'},
+    {c:'visibility', t:'Search foundation', s:'Years of SEO structure and redirects.',
+     d:['Structured data and FAQ markup','A redirect library from retired domains and pages','Product-lines search across ~110–120 risk classes','Sitemaps and Search Console coverage fixes'],
+     r:'A site relaunch without a redirect and structure plan is the most common cause of traffic loss.'},
+    {c:'operations', t:'Editing for the Prime team', s:'Templates your team edits without code.',
+     d:['Landing-page templates for new risk classes','Global styles that keep the brand consistent','Navigation that steps aside inside forms, to protect conversion','Written instructions for common updates'],
+     r:'Hard-coded AI pages remove this. Every later edit then needs another AI pass and another full round of QA.'},
+    {c:'operations', t:'Security and release discipline', s:'Separate staging and production, with every change reviewed before release.',
+     d:['Two-factor authentication on all admin access','Vulnerability monitoring and patching','Firewall, activity logging and bot protection','Every change pushed from staging to live in a controlled process'],
+     r:'Unreviewed code, from AI or anyone else, is the easiest way into an enterprise site.'},
+    {c:'operations', t:'Performance and mobile', s:'Site speed and a mobile program focused on the top pages.',
+     d:['Caching and image optimization','A mobile redesign program covering the highest-traffic pages','A new navigation already designed and ready to build'],
+     r:'Work already in progress should feed the new design, not be thrown away.'}
+  ];
+  var grid = $('#hoodGrid');
+  var labels = {revenue:'Revenue', compliance:'Compliance', visibility:'Visibility', operations:'Operations'};
+  hood.forEach(function(h, i){
+    var card = el('article', {'class':'hcard', 'data-c':h.c});
+    var id = 'hd' + i;
+    var btn = el('button', {type:'button', 'aria-expanded':'false', 'aria-controls':id},
+      '<span class="tag ' + h.c + '">' + labels[h.c] + '</span><h3>' + h.t + '</h3><p class="sum">' + h.s + '</p><span class="more">Show details</span>');
+    var det = el('div', {'class':'detail', id:id},
+      '<h4>What’s involved</h4><ul>' + h.d.map(function(x){ return '<li>' + x + '</li>'; }).join('') + '</ul><div class="risk"><strong>If it’s missed:</strong> ' + h.r + '</div>');
+    btn.addEventListener('click', function(){
+      var open = card.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      $('.more', btn).textContent = open ? 'Hide details' : 'Show details';
+    });
+    card.appendChild(btn); card.appendChild(det); grid.appendChild(card);
+  });
+  $$('.filter').forEach(function(f){
+    f.addEventListener('click', function(){
+      $$('.filter').forEach(function(x){ x.setAttribute('aria-pressed', 'false'); });
+      f.setAttribute('aria-pressed', 'true');
+      var k = f.getAttribute('data-f');
+      $$('.hcard').forEach(function(c){ c.hidden = !(k === 'all' || c.getAttribute('data-c') === k); });
+    });
+  });
+
+  /* ---------- 3. Roadmap ---------- */
+  var phases = {
+    p1:{k:'Phase 1 · Shared foundation', t:'Process: an AI operating model for xinsurance.com', c:1,
+      lead:'Agree how AI is used on the site before anything is built, and prove it on a real page.',
+      do:['Discovery with marketing leadership: what “new” means, the goals and the constraints','Define who generates, who reviews, and what has to pass legal, compliance, accessibility and CRM checks','Build the AI-generated homepage concept as an editable page on the development site','Optional: run Phase 1 as a facilitated outcomes workshop'],
+      get:['A written AI operating model the team can follow','A working proof that AI-led design runs on real infrastructure','Agreed success measures (for example quote starts and completion rate)'],
+      need:['Time from marketing leadership and JD','The AI concept and any brand direction','A named owner on the Prime side']},
+    p2:{k:'Phase 2 · Shared foundation', t:'Context layer: the site’s rules, made readable by AI', c:2,
+      lead:'Turn seven years of site knowledge into structured context that any AI tool or agent can work from safely.',
+      do:['Document form logic and routing: Quote Qualifier rules, state-based content, pre-fill behavior','Document the data rules: each field into ClickDimensions and Dynamics 365, plus campaign tracking','Codify compliance: consent categories, GPC, personal-data handling, accessibility checks','Capture brand and design rules as reusable tokens','Map the content model for ~110–120 risk-class pages, flagging legal-approved copy','Baseline SEO and AI-search visibility, including the redirect library'],
+      get:['A knowledge base that makes AI tools safer and more accurate on Prime’s site','Lower risk and cost for any future change, on either path','Evidence for the gate decision'],
+      need:['Access to CRM and lead-assignment owners for validation','Legal input on which copy can change']},
+    gate:{k:'Decision gate', t:'Choose the path with evidence, not assumptions', c:0,
+      lead:'After Phase 2, Prime decides between Option A and Option B, or stops with the foundation in place.',
+      do:['Review the Phase 1 proof against the agreed measures','Compare scoped proposals for Option A and Option B','Confirm the platform direction if Option B is chosen'],
+      get:['A clear go/no-go with scoped options and investment','No commitment to a rebuild until this point'],
+      need:['A decision meeting with marketing leadership and JD']},
+    a:{k:'Option A · After the gate', t:'Modernize the current site', c:2,
+      lead:'A visible new look across xinsurance.com, delivered fast, with the lead engine untouched.',
+      do:['AI-accelerated design directions, then a design system: type, color, imagery, spacing','A new homepage and the navigation that is already designed','New editable templates for risk-class landing pages','A 1–3 page pilot measured on quote starts, then rollout in batches','Retire pages Prime no longer markets, with redirects','Optional AI-assisted copy, routed through legal'],
+      get:['A modern site without a platform migration','Forms, CRM, tracking and consent exactly as they are today','The quickest time to a visible change'],
+      need:['Design approvals','A list of pages to retire','A decision on any copy changes']},
+    p3:{k:'Option B · Phase 3', t:'New stack: AI assembles, it doesn’t architect', c:3,
+      lead:'A modern platform where AI tools build pages from approved components, and automated checks guard every release.',
+      do:['Recommended: a rebuild on modern WordPress (block-based, using the AI features in WordPress 7.0). Alternatives below','A governed component library that AI assembles pages from','Quote forms and CRM reconnected using the Phase 2 data rules','Automated checks for accessibility, consent and pixel firing, forms through to CRM, and visual changes'],
+      get:['A platform Prime’s team can extend with AI safely','Lower cost per change over time','Legacy theme and page-builder layers retired'],
+      need:['A platform decision (see the explorer below)','Licensing approvals if a non-WordPress option is chosen']},
+    p4:{k:'Option B · Phase 4', t:'Build, migrate and launch', c:3,
+      lead:'Launch in stages, with search visibility and lead flow monitored throughout.',
+      do:['A pilot cluster: homepage plus the highest-traffic risk-class pages, measured on quote starts','Migrate the remaining risk-class pages, blog and e-books, with a redirect map','Protect AI-search visibility: keep URLs where possible and track share of answers through cutover','Run in parallel, cut over, then provide hypercare support','Move to ongoing AI-enabled content operations'],
+      get:['An AI-native xinsurance.com','Visibility and lead flow protected through launch','An operating rhythm for continuous improvement'],
+      need:['Content approvals for the pilot cluster','A launch window that avoids peak campaign periods']}
+  };
+  function showPhase(key){
+    var p = phases[key];
+    $$('.roadmap [data-p]').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-p') === key ? 'true' : 'false'); });
+    function list(a){ return '<ul>' + a.map(function(x){ return '<li>' + x + '</li>'; }).join('') + '</ul>'; }
+    $('#panel').innerHTML = '<div class="eyebrow">' + p.k + '</div><h3>' + p.t + '</h3><p class="muted" style="margin:6px 0 0">' + p.lead + '</p>' +
+      (p.c ? '<p class="small" style="margin:10px 0 0">Relative investment ' + cost(p.c) + '</p>' : '') +
+      '<div class="cols"><div><h4>What we do</h4>' + list(p.do) + '</div><div><h4>What Prime gets</h4>' + list(p.get) + '</div><div><h4>What we need from Prime</h4>' + list(p.need) + '</div></div>';
+  }
+  $$('.roadmap [data-p]').forEach(function(b){ b.addEventListener('click', function(){ showPhase(b.getAttribute('data-p')); }); });
+  showPhase('p1');
+
+  /* ---------- 4. Platforms ---------- */
+  var plats = [
+    {id:'wp', name:'Modern WordPress', rec:true,
+     how:'Rebuild xinsurance.com on a modern, block-based WordPress foundation with a governed component library. The current Bridge theme and WPBakery page builder are retired.',
+     ai:'WordPress 7.0 (May 2026) adds AI to the core platform: one AI client for any provider (OpenAI, Gemini, Claude), a central screen for managing AI connections, and an Abilities API that lets AI agents take approved actions inside WordPress.',
+     forms:'Lowest risk. Gravity Forms and the ClickDimensions / Dynamics 365 connection carry over and are re-attached to the new templates.',
+     edit:'Familiar to the Prime team, with AI assistance inside the editor and approved components to build from.',
+     pros:['Least disruption to lead flow and compliance controls','Large plugin ecosystem for future integrations','The current team can keep editing'],
+     cons:['Plugins still need governance and regular patching','AI features are new and still maturing'],
+     s:{speed:4, ai:4, forms:5, own:4, safe:4}, build:3, run:2,
+     best:'Prime wants AI speed with the least risk to leads and compliance.'},
+    {id:'headless', name:'Headless CMS + modern front end',
+     how:'Content lives in a structured content platform (for example Contentful, Sanity or Storyblok). A separate front end, such as Next.js, is hosted in the cloud (for example on Vercel or Google Cloud).',
+     ai:'Leading platforms provide official MCP servers and content agents. AI tools can read and update structured content while the platform enforces its validation rules. Some offer AI-search monitoring and automated workflows.',
+     forms:'The biggest change. Gravity Forms does not come across, so the Quote Qualifier (multi-step flow, Save &amp; Continue, conditional logic) and the ClickDimensions / Dynamics 365 connection must be rebuilt, either on a form platform or as custom code.',
+     edit:'Editors work in structured fields. Visual page editing varies by vendor.',
+     pros:['Structured content is ideal for AI agents and AI-search visibility','Fast, secure front end with a smaller attack surface','The same content can serve the website, apps and portals'],
+     cons:['Two systems to license and run','More reliance on developers for day-to-day change','The longest migration, with the most rebuilt integrations'],
+     s:{speed:3, ai:5, forms:2, own:3, safe:2}, build:4, run:3,
+     best:'Content needs to power more than the website (apps, portals, AI agents) and Prime will invest in that.'},
+    {id:'saas', name:'Visual SaaS builder',
+     how:'A hosted visual site builder, with Webflow as the leading example, where design, content and hosting are in one subscription platform.',
+     ai:'The closest match to the experience of generating a site with ChatGPT. Webflow’s AI site builder (Feb 2026) creates multi-page sites, with structure, styles and animation, from a prompt, then hands them to the visual editor.',
+     forms:'Native forms cover simple lead capture. Prime’s multi-step quote flow and CRM mapping would need a third-party form tool or an embedded form, plus custom tracking setup.',
+     edit:'A strong visual editor that marketing teams can own.',
+     pros:['Fastest path from concept to a polished page','Hosting, security patching and performance handled by the vendor','Marketing-friendly editing'],
+     cons:['Less control over integrations, tracking and consent behavior','Platform lock-in and subscription pricing','The complex quote flow sits outside the platform'],
+     s:{speed:5, ai:4, forms:2, own:5, safe:3}, build:3, run:2,
+     best:'The site’s main job is brand and simple lead capture. That is not Prime’s situation today.'}
+  ];
+  var dims = [['speed','Speed to new pages'],['ai','AI capability'],['forms','Fit with current forms and CRM'],['own','Marketing self-serve'],['safe','Lower migration risk']];
+  var tabs = $('#ptabs'), toggle = $('.toggle', tabs);
+  plats.forEach(function(p, i){
+    var t = el('button', {type:'button', role:'tab', 'class':'ptab', id:'tab-' + p.id, 'aria-selected': i === 0 ? 'true' : 'false', 'aria-controls':'pdetail'}, p.name + (p.rec ? '<span class="rec">Recommended</span>' : ''));
+    t.addEventListener('click', function(){ $('#cmpToggle').checked = false; setCompare(false); showPlat(p.id); });
+    tabs.insertBefore(t, toggle);
+  });
+  function list(a){ return '<ul>' + a.map(function(x){ return '<li>' + x + '</li>'; }).join('') + '</ul>'; }
+  function showPlat(id){
+    var p = plats.filter(function(x){ return x.id === id; })[0];
+    $$('.ptab').forEach(function(t){ t.setAttribute('aria-selected', t.id === 'tab-' + id ? 'true' : 'false'); });
+    $('#pdetail').setAttribute('aria-labelledby', 'tab-' + id);
+    $('#pdetail').innerHTML = '<div class="pview">' +
+      '<div class="pblock wide"><h4>How it works</h4><p>' + p.how + '</p></div>' +
+      '<div class="pblock"><h4>AI capability today</h4><p>' + p.ai + '</p></div>' +
+      '<div class="pblock"><h4>Quote forms and CRM</h4><p>' + p.forms + '</p></div>' +
+      '<div class="pblock"><h4>Strengths</h4>' + list(p.pros) + '</div>' +
+      '<div class="pblock"><h4>Watch-outs</h4>' + list(p.cons) + '</div>' +
+      '<div class="pblock wide"><h4>At a glance</h4><div class="fit">' +
+        dims.map(function(d){ return '<div>' + d[1] + dots(p.s[d[0]]) + '</div>'; }).join('') +
+        '<div>Relative build investment ' + cost(p.build) + '</div><div>Relative running cost ' + cost(p.run) + '</div>' +
+      '</div><p style="margin:14px 0 0"><strong>Best fit if:</strong> ' + p.best + '</p><p class="small muted" style="margin:6px 0 0">Editing: ' + p.edit + '</p></div>' +
+      '</div>';
+  }
+  function buildTable(){
+    var h = '<thead><tr><th scope="col"></th>' + plats.map(function(p){ return '<th scope="col">' + p.name + (p.rec ? ' (recommended)' : '') + '</th>'; }).join('') + '</tr></thead><tbody>';
+    var rows = [['How it works','how'],['AI capability today','ai'],['Quote forms and CRM','forms'],['Editing','edit']];
+    rows.forEach(function(r){ h += '<tr><th scope="row">' + r[0] + '</th>' + plats.map(function(p){ return '<td>' + p[r[1]] + '</td>'; }).join('') + '</tr>'; });
+    dims.forEach(function(d){ h += '<tr><th scope="row">' + d[1] + '</th>' + plats.map(function(p){ return '<td>' + dots(p.s[d[0]]) + '</td>'; }).join('') + '</tr>'; });
+    h += '<tr><th scope="row">Relative build investment</th>' + plats.map(function(p){ return '<td>' + cost(p.build) + '</td>'; }).join('') + '</tr>';
+    h += '<tr><th scope="row">Relative running cost</th>' + plats.map(function(p){ return '<td>' + cost(p.run) + '</td>'; }).join('') + '</tr>';
+    h += '<tr><th scope="row">Best fit if</th>' + plats.map(function(p){ return '<td>' + p.best + '</td>'; }).join('') + '</tr></tbody>';
+    $('#ptable').innerHTML = h;
+  }
+  function setCompare(on){
+    $('#pcompare').hidden = !on; $('#pdetail').hidden = on;
+    if (on) $$('.ptab').forEach(function(t){ t.setAttribute('aria-selected', 'false'); });
+  }
+  $('#cmpToggle').addEventListener('change', function(e){ setCompare(e.target.checked); if (!e.target.checked) showPlat('wp'); });
+  buildTable(); showPlat('wp');
+
+  /* ---------- nav highlight ---------- */
+  var links = $$('.navlinks a');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting) {
+          var id = en.target.id;
+          links.forEach(function(a){ a.classList.toggle('active', a.getAttribute('href') === '#' + id); });
+        }
+      });
+    }, {rootMargin:'-40% 0px -55% 0px'});
+    ['start','new','hood','roadmap','compare','platforms','next'].forEach(function(id){ var s = document.getElementById(id); if (s) io.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>
