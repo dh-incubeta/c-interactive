@@ -1,0 +1,909 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>YouTube Go-to-Market</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap">
+<style>
+/* One long page under a fixed bar. Each section opens with its answer, then the evidence.
+   Incubeta tokens; teal marks RocketSource frameworks, blue marks the Google layer. */
+:root{
+  --bg:#F8F8F8; --surface:#FFFFFF; --sunken:#F2F1F5; --line:#E4E3E8;
+  --fg:#1C1B22; --muted:#3F3D47; --soft:#5E5B68;
+  --accent:#5801F7; --accent-soft:#EEE6FE; --accent-ink:#4400C2;
+  --orange:#C25E00; --orange-soft:#FFF0E2; --coral:#D8401F;
+  --rs:#0B7F68; --rs-soft:#E2F6F1; --g:#1F5FCC; --g-soft:#E5EEFC;
+  --bar:#15131C; --bar-fg:#F8F8F8; --bar-muted:#B9B4C4;
+  --display:"Montserrat","Helvetica Neue",Arial,sans-serif;
+  --body:"Figtree","Helvetica Neue",Arial,sans-serif;
+  --radius:12px; --barh:60px; --navh:46px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#15131C; --surface:#1D1A26; --sunken:#24202E; --line:#332E3E;
+  --fg:#F4F3F7; --muted:#D5D2DC; --soft:#B3AEBD;
+  --accent:#C3ABFF; --accent-soft:#2C2148; --accent-ink:#D9CBFF;
+  --orange:#FFB36B; --orange-soft:#3A2816; --coral:#FF8A6E;
+  --rs:#5FE0C3; --rs-soft:#173A33; --g:#8DB4FF; --g-soft:#1C2A45;
+  --bar:#0E0C14; color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#15131C; --surface:#1D1A26; --sunken:#24202E; --line:#332E3E;
+  --fg:#F4F3F7; --muted:#D5D2DC; --soft:#B3AEBD;
+  --accent:#C3ABFF; --accent-soft:#2C2148; --accent-ink:#D9CBFF;
+  --orange:#FFB36B; --orange-soft:#3A2816; --coral:#FF8A6E;
+  --rs:#5FE0C3; --rs-soft:#173A33; --g:#8DB4FF; --g-soft:#1C2A45;
+  --bar:#0E0C14; color-scheme:dark; }
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--barh) + var(--navh) + 12px)}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+a{color:var(--accent-ink)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1140px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);color:var(--fg);letter-spacing:-.01em;text-wrap:balance}
+h1{font-size:clamp(30px,5vw,50px);line-height:1.08;margin:.2em 0 .35em;font-weight:800}
+h2{font-size:clamp(24px,3.3vw,34px);line-height:1.15;margin:0 0 .4em;font-weight:800}
+h3{font-size:18px;line-height:1.3;margin:0 0 .35em;font-weight:700}
+p{margin:0 0 1em;max-width:72ch}
+.eyebrow{font-family:var(--display);font-weight:700;font-size:12.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent-ink)}
+.lede{font-size:clamp(18px,2vw,21px);color:var(--muted);max-width:66ch}
+.small{font-size:14px;color:var(--soft)}
+.muted{color:var(--muted)}
+
+/* Top bar */
+.top{position:fixed;inset:0 0 auto 0;z-index:30;background:var(--bar);color:var(--bar-fg);padding-top:env(safe-area-inset-top,0px)}
+.top .row{height:var(--barh);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.lockup{display:flex;align-items:center;gap:14px;min-width:0}
+.lockup img{display:block;height:30px;width:auto}
+.lockup .iw{height:18px}
+.lk-div{width:1px;height:28px;background:var(--bar-fg);opacity:.3;flex:none}
+.top .ttl{font-family:var(--display);font-weight:700;font-size:14px;color:var(--bar-muted);white-space:nowrap}
+.tag-int{font-size:12px;font-weight:600;color:var(--bar-fg);border:1px solid rgba(248,248,248,.3);padding:3px 9px;border-radius:999px;white-space:nowrap}
+.secnav{background:var(--surface);border-bottom:1px solid var(--line)}
+.secnav .wrap{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;height:var(--navh);align-items:center}
+.secnav .wrap::-webkit-scrollbar{display:none}
+.secnav a{flex:none;text-decoration:none;color:var(--soft);font-weight:600;font-size:14px;padding:7px 11px;border-radius:8px;white-space:nowrap}
+.secnav a:hover{color:var(--fg);background:var(--sunken)}
+.secnav a.on{color:var(--accent-ink);background:var(--accent-soft)}
+main{padding-top:calc(var(--barh) + var(--navh) + env(safe-area-inset-top,0px))}
+section{padding:64px 0;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:0}
+.sec-head{margin-bottom:28px}
+.sec-head .eyebrow{margin-bottom:6px;display:block}
+
+/* Hero */
+.hero{padding:56px 0 48px;background:linear-gradient(180deg,var(--accent-soft),transparent 75%)}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--muted)}
+.chip.rs{background:var(--rs-soft);border-color:transparent;color:var(--rs)}
+.chip.g{background:var(--g-soft);border-color:transparent;color:var(--g)}
+.chip.ac{background:var(--accent-soft);border-color:transparent;color:var(--accent-ink)}
+.chip.or{background:var(--orange-soft);border-color:transparent;color:var(--orange)}
+.steps3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:30px 0 26px}
+.step{display:block;text-decoration:none;color:inherit;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px 18px 16px;position:relative;transition:border-color .15s, transform .15s}
+.step:hover{border-color:var(--accent);transform:translateY(-1px)}
+.step .n{font-family:var(--display);font-weight:800;font-size:13px;color:var(--accent-ink);letter-spacing:.06em}
+.step h3{margin:6px 0 4px}
+.step p{margin:0;font-size:15px;color:var(--muted)}
+.step .go{position:absolute;right:14px;top:14px;color:var(--soft);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px}
+.stat .v{font-family:var(--display);font-weight:800;font-size:clamp(26px,3.2vw,34px);line-height:1.1;color:var(--fg)}
+.stat .v.hl{color:var(--accent-ink)}
+.stat .l{font-size:14.5px;color:var(--muted);margin-top:4px;line-height:1.45}
+.src{font-size:13px;color:var(--soft);margin-top:12px;max-width:none}
+
+/* Generic blocks */
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+.card p:last-child,.card ul:last-child{margin-bottom:0}
+.card.tint{background:var(--sunken);border-color:transparent}
+.callout{border-left:4px solid var(--accent);background:var(--accent-soft);border-radius:0 var(--radius) var(--radius) 0;padding:16px 20px;margin:22px 0 0}
+.callout.or{border-color:var(--orange);background:var(--orange-soft)}
+.callout.rs{border-color:var(--rs);background:var(--rs-soft)}
+.callout p{margin:0;max-width:none}
+.callout strong{color:var(--fg)}
+ul.tight{margin:0;padding-left:20px}
+ul.tight li{margin:0 0 6px}
+.label{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin:0 0 8px;display:block}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--surface)}
+.vs > div{padding:20px}
+.vs > div + div{border-left:1px solid var(--line);background:var(--accent-soft)}
+.vs h3{font-size:16px}
+
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--display);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);font-weight:700}
+.tbl{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:auto}
+.tbl tr:last-child td{border-bottom:0}
+.num{font-family:var(--display);font-weight:800;color:var(--accent-ink);white-space:nowrap}
+
+/* Flywheel */
+.fly{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:24px;align-items:start}
+.fly svg{width:100%;height:auto;display:block}
+.node{cursor:pointer}
+.node circle.bg{fill:var(--surface);stroke:var(--line);stroke-width:2;transition:stroke .15s, fill .15s}
+.node:hover circle.bg{stroke:var(--accent)}
+.node.on circle.bg{fill:var(--accent);stroke:var(--accent)}
+.node text{font-family:var(--display);fill:var(--fg);pointer-events:none}
+.node .k{font-size:12px;font-weight:700;letter-spacing:.08em;fill:var(--soft)}
+.node .t{font-size:19px;font-weight:800}
+.node .s{font-size:12.5px;font-family:var(--body);fill:var(--muted);font-weight:500}
+.node.on text{fill:#FFFFFF}
+:root[data-theme="dark"] .node.on text{fill:#15131C}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .node.on text{fill:#15131C} }
+.node:focus{outline:none}
+.node:focus-visible circle.bg{stroke:var(--accent);stroke-width:4}
+.arc{fill:none;stroke:var(--accent);stroke-width:2.5;opacity:.55}
+.arrowhead{fill:var(--accent);opacity:.75}
+.arclbl{font-family:var(--body);font-size:12.5px;fill:var(--soft);font-weight:600}
+.hub circle{fill:var(--accent-soft);stroke:var(--accent);stroke-dasharray:4 5;stroke-width:1.5}
+.hub text{font-family:var(--display);fill:var(--accent-ink);text-anchor:middle}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;min-height:100%}
+.panel h3{font-size:22px;margin-bottom:4px}
+.panel .what{color:var(--muted);margin-bottom:14px}
+.kv{display:grid;grid-template-columns:118px 1fr;gap:8px 14px;font-size:15px;margin:0}
+.kv dt{font-weight:700;color:var(--soft);font-size:13px;padding-top:2px}
+.kv dd{margin:0}
+.hint{font-size:13.5px;color:var(--soft);margin-top:10px}
+
+/* Doors */
+.doors{display:grid;grid-template-columns:1.35fr repeat(2,minmax(0,1fr));grid-template-rows:auto auto;gap:14px}
+.door{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+.door.primary{grid-row:span 2;border:2px solid var(--accent);background:linear-gradient(160deg,var(--accent-soft),var(--surface) 70%)}
+.door .tagp{display:inline-block;font-size:12px;font-weight:700;color:#fff;background:var(--accent);padding:3px 9px;border-radius:999px;margin-bottom:10px}
+:root[data-theme="dark"] .door .tagp{color:#15131C}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .door .tagp{color:#15131C} }
+.door p{font-size:15px;color:var(--muted);margin:0}
+.door.primary p{font-size:16px}
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;margin-top:26px;counter-reset:f}
+.flow li{list-style:none;position:relative;padding:16px 16px 16px 16px;background:var(--surface);border:1px solid var(--line);margin-left:-1px}
+.flow li:first-child{border-radius:var(--radius) 0 0 var(--radius);margin-left:0}
+.flow li:last-child{border-radius:0 var(--radius) var(--radius) 0}
+.flow li::before{counter-increment:f;content:counter(f);font-family:var(--display);font-weight:800;color:var(--accent-ink);font-size:13px;display:block;margin-bottom:4px}
+.flow b{display:block;font-family:var(--display);font-size:15.5px;margin-bottom:4px}
+.flow span{font-size:14px;color:var(--muted);display:block;line-height:1.45}
+.flow{padding:0}
+
+/* POC workstreams */
+.ws{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.ws .card h3{display:flex;gap:10px;align-items:baseline}
+.ws .card h3 i{font-style:normal;font-family:var(--display);font-size:13px;color:var(--accent-ink)}
+.ws .card p{font-size:15px;color:var(--muted)}
+.ws .card .proof{font-size:14px;color:var(--fg);border-top:1px dashed var(--line);padding-top:10px;margin-top:10px}
+.money{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:22px}
+.money .card .v{font-family:var(--display);font-weight:800;font-size:28px;color:var(--accent-ink);line-height:1.1}
+.money .card .l{font-size:14.5px;color:var(--muted);margin-top:6px}
+
+/* Roadmap */
+.rm{display:grid;grid-template-columns:150px repeat(4,minmax(0,1fr));border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--surface)}
+.rm > div{padding:14px;border-bottom:1px solid var(--line);border-left:1px solid var(--line);font-size:14.5px;line-height:1.5}
+.rm > .rh{border-left:0;font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);background:var(--sunken)}
+.rm > .ph{background:var(--sunken)}
+.rm > .ph .m{font-size:12.5px;color:var(--soft);font-weight:600}
+.rm > .ph b{display:block;font-family:var(--display);font-size:20px;font-weight:800;color:var(--fg)}
+.rm > .ph.p1 b{color:var(--accent-ink)}
+.rm > .gate{background:var(--orange-soft)}
+.rm > .last{border-bottom:0}
+.rm ul{margin:0;padding-left:17px}
+.rm li{margin:0 0 4px}
+.rm .gl{color:var(--g)}
+.rm-mobile{display:none}
+
+/* Frameworks matrix */
+.fx{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;align-items:start}
+.fxt th.c,.fxt td.c{text-align:center;width:13%}
+.fxt tbody tr{cursor:pointer}
+.fxt tbody tr:hover td{background:var(--sunken)}
+.fxt tbody tr.on td{background:var(--rs-soft)}
+.fxt td.n{font-weight:700}
+.fxt td.n small{display:block;font-weight:500;color:var(--soft);font-size:12.5px}
+.dot{display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--rs)}
+.dot.o{background:transparent;border:2px solid var(--rs);opacity:.7}
+.fxt button.rowbtn{all:unset;cursor:pointer}
+.fxpanel{position:sticky;top:calc(var(--barh) + var(--navh) + 16px)}
+.fxpanel .card{border-color:var(--rs);border-width:2px}
+.fxpanel .card h3{color:var(--rs);font-size:20px}
+
+/* Google layer */
+.glayer{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.gcol{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+.gcol h3{font-size:15px;margin-bottom:10px}
+.gcol .stage{font-family:var(--display);font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
+.gitem{border-top:1px solid var(--line);padding:9px 0 0;margin-top:9px;font-size:14px;color:var(--muted);line-height:1.45}
+.gitem b{display:block;color:var(--g);font-size:14.5px}
+
+/* Baseline vs layer */
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 12px}
+.tabs button{font:600 14px var(--body);color:var(--soft);background:var(--sunken);border:1px solid transparent;padding:7px 13px;border-radius:999px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--accent);color:#fff}
+:root[data-theme="dark"] .tabs button[aria-selected="true"]{color:#15131C}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .tabs button[aria-selected="true"]{color:#15131C} }
+.spec{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.spec .fmt{background:var(--sunken);border-radius:10px;padding:12px}
+.spec .fmt b{font-family:var(--display);font-size:13px;display:block;margin-bottom:6px}
+.spec .fmt ul{margin:0;padding-left:16px;font-size:14px;color:var(--muted)}
+.abcd{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+.abcd div{background:var(--sunken);border-radius:10px;padding:12px;font-size:14px;color:var(--muted)}
+.abcd b{display:block;font-family:var(--display);color:var(--fg);font-size:15px}
+.layer li{margin-bottom:10px}
+.layer li b{color:var(--fg)}
+
+/* Proof */
+.tl{position:relative;margin:8px 0 28px;padding:0;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:0}
+.tl li{list-style:none;position:relative;padding:22px 10px 0 0;font-size:13.5px;color:var(--muted);line-height:1.4}
+.tl li::before{content:"";position:absolute;top:6px;left:0;right:0;height:2px;background:var(--line)}
+.tl li::after{content:"";position:absolute;top:1px;left:0;width:12px;height:12px;border-radius:50%;background:var(--surface);border:2px solid var(--accent)}
+.tl li.done::after{background:var(--accent)}
+.tl li.next::after{border-color:var(--orange);background:var(--orange-soft)}
+.tl b{display:block;font-family:var(--display);color:var(--fg);font-size:13px}
+
+/* Team + decisions */
+.who td:first-child{font-weight:700;white-space:nowrap}
+.asks{counter-reset:a;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:0;margin:0}
+.asks li{list-style:none;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px 16px 56px;position:relative}
+.asks li::before{counter-increment:a;content:counter(a);position:absolute;left:16px;top:15px;width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;font:800 14px/28px var(--display);text-align:center}
+:root[data-theme="dark"] .asks li::before{color:#15131C}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .asks li::before{color:#15131C} }
+.asks b{display:block;font-family:var(--display);font-size:15.5px;margin-bottom:4px}
+.asks span{font-size:14.5px;color:var(--muted);display:block}
+.asks .own{font-size:13px;color:var(--soft);margin-top:6px}
+.rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:22px}
+.rules div{border-top:3px solid var(--accent);background:var(--surface);border-radius:0 0 10px 10px;padding:14px 16px;font-size:14.5px;color:var(--muted)}
+.rules b{display:block;color:var(--fg);font-family:var(--display);font-size:15px;margin-bottom:4px}
+footer{padding:36px 0 60px;font-size:13.5px;color:var(--soft)}
+footer p{max-width:none}
+
+@media (max-width: 980px){
+  .glayer{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fly,.fx{grid-template-columns:1fr}
+  .fxpanel{position:static}
+  .flow{grid-template-columns:1fr}
+  .flow li,.flow li:first-child,.flow li:last-child{margin-left:0;margin-top:-1px;border-radius:0}
+  .flow li:first-child{border-radius:var(--radius) var(--radius) 0 0}
+  .flow li:last-child{border-radius:0 0 var(--radius) var(--radius)}
+  .tl{grid-template-columns:repeat(4,minmax(0,1fr));row-gap:18px}
+}
+@media (max-width: 760px){
+  body{font-size:16px}
+  section{padding:46px 0}
+  .top .ttl{display:none}
+  .steps3,.grid3,.ws,.money,.rules,.asks,.grid2{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .doors{grid-template-columns:1fr}
+  .door.primary{grid-row:auto}
+  .vs{grid-template-columns:1fr}
+  .vs > div + div{border-left:0;border-top:1px solid var(--line)}
+  .rm{display:none}
+  .rm-mobile{display:grid;gap:12px}
+  .glayer{grid-template-columns:1fr}
+  .spec,.abcd{grid-template-columns:1fr}
+  .tl{grid-template-columns:1fr 1fr}
+  .kv{grid-template-columns:1fr}
+  .kv dt{padding-top:6px}
+  .fxt th.c,.fxt td.c{width:auto;padding-left:6px;padding-right:6px}
+  table.stack thead{display:none}
+  table.stack tr{display:block;padding:12px 14px;border-bottom:1px solid var(--line)}
+  table.stack tr:last-child{border-bottom:0}
+  table.stack td{display:block;border:0;padding:3px 0}
+  table.stack td::before{content:attr(data-l);display:block;font:700 11px var(--display);letter-spacing:.06em;text-transform:uppercase;color:var(--soft);margin-top:6px}
+  table.stack td:first-child::before{display:none}
+  table.stack td:first-child{font-size:16px}
+  .lockup img{height:24px}
+  .lockup .iw{height:14px}
+}
+@media (max-width: 420px){ .tag-int{display:none} }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap row">
+    <div class="lockup">
+      <img src="data:image/png;base64,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" alt="RocketSource by Incubeta">
+      <span class="lk-div" aria-hidden="true"></span>
+      <img class="iw" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+CjxzdmcgZmlsbD0iI0Y4RjhGOCIgaWQ9IkxheWVyXzEiIGRhdGEtbmFtZT0iTGF5ZXIgMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAxODY2IDM4OS4zIj4KICAKICA8Zz4KICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTQ1NC4zLDEwNi40YzAtMywyLjctNS43LDUuNy01LjdoMzUuOGMzLDAsNS43LDIuNyw1LjcsNS43djE5Ny41YzAsMy0yLjcsNS43LTUuNyw1LjdoLTM1LjhjLTMsMC01LjctMi43LTUuNy01LjdWMTA2LjRoMFoiPjwvcGF0aD4KICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTEyOTMuMiwxODUuNWM1LjIsMi42LDEyLjMsNi45LDE2LjIsMTAuNywxMi44LDEzLDE5LjMsMjguNiwxOS4zLDQ2LjlzLTYuNCwzNC0xOS4zLDQ2LjljLTEyLjgsMTMuMS0yOC40LDE5LjYtNDYuNiwxOS42aC02OS45Yy00LjcsMC04LjUtMy44LTguNS04LjVWMTA3YzAtNC43LDMuOC04LjUsOC41LTguNWg1MC40YzE2LjMsMCwzMC4zLDUuOCw0MS45LDE3LjUsMTEuMiwxMS40LDE2LjgsMjQuOCwxNi44LDQwLjJzLTQuOSwyMi4zLTguOCwyOS4yaDBaTTEyNDMuMywxMzkuOGgtMTYuNnYzNy43YzMuOC0uMiw5LC40LDE1LjgsMCwxMC0xLjEsMTguNi04LjYsMTguNi0xOS40cy03LjktMTguMi0xNy44LTE4LjJaTTEyODcuMywyNDMuMWMwLTE0LTExLjQtMjUuMS0yNC41LTI1LjktMTIuNi0uNy0yMy40LDAtMzYuMSwwdjUxLjJoMzYuMWMxMy44LDAsMjQuNS0xMS40LDI0LjUtMjUuMWgwWiI+PC9wYXRoPgogICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNTQyLjgsMTAzLjFjMC0zLDIuNy01LjQsNS43LTUuNGg0LjVjMywwLDUuMSwyLjEsNy41LDQuNWwxMTQuNiwxMTAuMWguM3YtMTA1LjljMC0zLDIuNC01LjcsNS43LTUuN2gzNS44YzMsMCw1LjcsMi43LDUuNyw1Ljd2MjAwLjhjMCwzLjYtMi43LDUuNC01LjcsNS40aC0zYy0zLDAtNS4xLS45LTcuNS0zLjNsLTExNi4xLTExNi43aC0uM3YxMTEuM2MwLDMtMi40LDUuNy01LjcsNS43aC0zNS41Yy0zLDAtNS43LTIuNy01LjctNS43bC0uMy0yMDAuOGgwWiI+PC9wYXRoPgogICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNODY0LjMsOTcuOGMyOS44LDAsNTEuOSw5LjMsNzIuMiwyNy44LDIuNywyLjQsMi43LDYsLjMsOC40bC0yMy4zLDI0LjJjLTIuMSwyLjEtNS40LDIuMS03LjUsMC0xMi4yLTEwLjctMjUuNy0xNS4yLTQwLjMtMTUuMi0zMy43LDAtNTguNSwyOC4xLTU4LjUsNjEuNXMyNS4xLDYwLjYsNTguOCw2MC42LDI5LjItNS4xLDQwLTE0LjNjMi4xLTEuOCw2LTEuOCw3LjguM2wyMy4zLDI0LjhjMi4xLDIuMSwxLjgsNi0uMyw4LjEtMjAuMywxOS43LTQ2LDI4LjktNzIuNSwyOC45LTU5LjcsMC0xMDcuNy00Ny40LTEwNy43LTEwNy4xczQ4LTEwNy43LDEwNy43LTEwNy43di0uM1oiPjwvcGF0aD4KICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTk2OC40LDEwNi40YzAtMywyLjctNS43LDUuNy01LjdoMzYuN2MzLjMsMCw1LjcsMi43LDUuNyw1Ljd2MTI0LjRjMCwyMS44LDE1LjUsMzQsMzYuNywzNHMzNy4zLTEyLjIsMzcuMy0zNHYtMTI0LjRjMC0zLDIuNC01LjcsNS43LTUuN2gzNi43YzMsMCw1LjcsMi43LDUuNyw1Ljd2MTI2LjhjMCw0NS40LTM4LjIsNzkuNC04NS4zLDc5LjRzLTg0LjctMzQtODQuNy03OS40di0xMjYuOGgtLjJaIj48L3BhdGg+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xMzY3LjcsMTA2LjRjMC0zLDIuNC01LjcsNS43LTUuN2gxMTVjMy41LjUsNS40LDQuNSwzLjksNy43bC0xMy41LDI5LjhjLTEuNywzLjgtNS41LDYuMy05LjcsNi4zaC01NC44djMyLjdoNDQuNmMzLjEsMCw1LjcsMi42LDUuNyw1Ljd2MzIuNWMwLDMuMy0yLjcsNS43LTUuNyw1LjdoLTQ0LjZ2NDQuNWg4Mi43YzMuMywwLDUuNywyLjcsNS43LDUuN3YzMi41YzAsMy0yLjQsNS43LTUuNyw1LjdoLTEyMy41Yy0zLjMsMC01LjctMi43LTUuNy01LjdWMTA2LjNoMFoiPjwvcGF0aD4KICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTE1NzQuNiwxNDQuNmgtNDYuOWMtMS42LDAtMy4xLS43LTQuMS0xLjctMS40LTEuNS0xLjctMy44LS45LTUuN2wxMS44LTI5LjdjMS42LTQuMSw1LjUtNi43LDkuOS02LjdoMTU3YzMuNi41LDUuNCw0LjYsMy43LDcuOGwtMTMuMSwyOS42Yy0xLjcsMy45LTUuNSw2LjQtOS44LDYuNGgtNjAuNnYxNTkuM2MwLDMuMS0yLjYsNS43LTUuNyw1LjdoLTM1LjhjLTMuMSwwLTUuNy0yLjYtNS43LTUuN3YtMTU5LjNoLjJaIj48L3BhdGg+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xNjY1LjQsMzAxLjlsOTMuNC0yMDAuOGMuOS0xLjgsMy0zLjMsNS4xLTMuM2gzYzIuMSwwLDQuMiwxLjUsNS4xLDMuM2w5My40LDIwMC44YzEuOCwzLjktLjYsNy44LTUuMSw3LjhoLTMzLjFjLTUuNCwwLTcuOC0xLjgtMTAuNC03LjVsLTEwLjctMjMuNmgtODEuMmwtMTAuNywyMy45Yy0xLjUsMy42LTQuOCw3LjItMTAuNyw3LjJoLTMyLjhjLTQuNSwwLTYuOS0zLjktNS4xLTcuOGgtLjJaTTE3ODgsMjM4bC0yMi43LTQ5LjJoLS4zbC0yMi40LDQ5LjJoNDUuNFoiPjwvcGF0aD4KICA8L2c+CiAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTkwLjUsOC4zQzg1LjMsOC4zLDAsOTMuNiwwLDE5OC44czg1LjMsMTkwLjUsMTkwLjUsMTkwLjUsMTkwLjUtODUuMywxOTAuNS0xOTAuNVMyOTUuNyw4LjMsMTkwLjUsOC4zWk02Ny4yLDIzNi4xaDBjLTEyLjEtMTIuMS0xMi4xLTMxLjksMC00NGw5NC43LTk0LjdjMTIuMS0xMi4xLDMxLjktMTIuMSw0NCwwaDBjMTIuMSwxMi4xLDEyLjEsMzEuOSwwLDQ0bC05NC43LDk0LjdjLTEyLjEsMTIuMS0zMS45LDEyLjEtNDQsMFpNMjcxLjIsMzAzLjZjLTE1LjYsMTUuNi00MC44LDE1LjYtNTYuMywwcy0xNS42LTQwLjgsMC01Ni4zYzE1LjYtMTUuNiw0MC44LTE1LjYsNTYuMywwLDE1LjYsMTUuNiwxNS42LDQwLjgsMCw1Ni4zWk0zMDQsMTQ1LjdsLTE0MS42LDE0MS42Yy0xMi4xLDEyLjEtMzEuOSwxMi4xLTQ0LDBoMGMtMTIuMS0xMi4xLTEyLjEtMzEuOSwwLTQ0bDE0MS43LTE0MS42YzEyLjEtMTIuMSwzMS45LTEyLjEsNDQsMGgwYzEyLjEsMTIuMSwxMi4xLDMxLjksMCw0NGgtLjFaIj48L3BhdGg+Cjwvc3ZnPg==" alt="Incubeta">
+      <span class="ttl">YouTube go-to-market</span>
+    </div>
+    <span class="tag-int">Internal draft · Oct 2026</span>
+  </div>
+  <nav class="secnav" aria-label="Sections">
+    <div class="wrap">
+      <a href="#why">Why now</a>
+      <a href="#system">The system</a>
+      <a href="#door">The door</a>
+      <a href="#paid">First paid</a>
+      <a href="#roadmap">12 months</a>
+      <a href="#frameworks">Our frameworks</a>
+      <a href="#google">Google layer</a>
+      <a href="#baseline">Baseline vs us</a>
+      <a href="#proof">Proof</a>
+      <a href="#team">Team</a>
+      <a href="#decisions">Decisions</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+<!-- HERO -->
+<div class="hero">
+  <div class="wrap">
+    <div class="meta">
+      <span class="chip ac">Incubeta US + RocketSource by Incubeta</span>
+      <span class="chip">For internal buy-in</span>
+      <span class="chip rs">RocketSource framework</span>
+      <span class="chip g">Google layer</span>
+    </div>
+    <h1>AI answers lean on YouTube. We make our clients the brand it recommends.</h1>
+    <p class="lede">One system, sold as one offer. An AI Visibility Score opens the door, a 120-day proof of concept earns the first paid engagement, and a 12-month roadmap turns organic, paid and production into a single flywheel. It's built on what we just did for biBerk.</p>
+
+    <div class="steps3">
+      <a class="step" href="#door"><span class="n">1 · WHAT OPENS THE DOOR</span><h3>The AI Visibility Score</h3><p>Runs on public data before a contract. Shows which videos AI cites for the client's questions, and that none are theirs.</p><span class="go" aria-hidden="true">↓</span></a>
+      <a class="step" href="#paid"><span class="n">2 · HOW WE GET TO PAID</span><h3>The 120-day proof of concept</h3><p>Answer polls, a gap read, a channel fix, the first new videos and a hold-out test that proves cause.</p><span class="go" aria-hidden="true">↓</span></a>
+      <a class="step" href="#roadmap"><span class="n">3 · WHAT 12 MONTHS LOOKS LIKE</span><h3>Prove, Build, Amplify, Scale</h3><p>Organic tells paid what to run. Paid tells organic what to make next. Production fills the gaps.</p><span class="go" aria-hidden="true">↓</span></a>
+    </div>
+
+    <div class="stats" role="list">
+      <div class="stat" role="listitem"><div class="v">58 of 99</div><div class="l">small-business owner questions where AI answers cite YouTube</div></div>
+      <div class="stat" role="listitem"><div class="v">0 of 94</div><div class="l">YouTube videos AI cites that are biBerk's own, though its channel has 49</div></div>
+      <div class="stat" role="listitem"><div class="v">9.0%</div><div class="l">of AI search answers cite biBerk's site. The top three insurers: 22% to 30%</div></div>
+      <div class="stat" role="listitem"><div class="v hl">$325K</div><div class="l">signed: $125K AEO program plus $200K of Google-funded video production</div></div>
+    </div>
+    <p class="src">Source: Incubeta AI answer poll 1 for biBerk, Oct 14, 2026 (each question asked 3 times on 7 engines). Client names appear for internal use. The client-facing version anonymizes them.</p>
+  </div>
+</div>
+
+<!-- WHY NOW -->
+<section id="why">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Why now</span>
+      <h2>AI answers keep citing YouTube, and they rarely cite our clients' videos</h2>
+      <p class="lede">We've seen the same pattern in three very different accounts. Clients treat YouTube as a paid awareness channel. AI engines treat it as a source of answers.</p>
+    </div>
+    <div class="vs">
+      <div><span class="label">What clients believe</span><h3>"YouTube is a media line, and ranking in search means we're found."</h3><p class="muted" style="margin:0">Video is bought for reach. The organic channel is a library of ads. Search rank is the visibility KPI.</p></div>
+      <div><span class="label">What the data shows</span><h3>"You rank, but you're not the answer."</h3><p class="muted" style="margin:0">AI answers pull from long-form, question-shaped videos. A brand can rank on page one and still be missing from the answer, while a competitor's or a creator's video gets the citation.</p></div>
+    </div>
+
+    <div class="tbl" style="margin-top:20px">
+      <table class="stack">
+        <thead><tr><th>Account</th><th>What AI cites</th><th>Whose videos</th><th>What it tells us</th></tr></thead>
+        <tbody>
+          <tr><td data-l="<tr><th>Account"><b>biBerk</b><br><span class="small">Direct-to-small-business insurer</span></td><td data-l="What AI cites">YouTube on 58 of 99 owner questions; 94 videos from 43 channels</td><td data-l="Whose videos">None are biBerk's. Its 49 videos are mostly under 60 seconds and 7 have captions. Cited videos run about 5 minutes</td><td data-l="What it tells us">The library exists but is built for ads, not answers</td></tr>
+          <tr><td data-l="<tr><th>Account"><b>Multi-location dental group</b></td><td data-l="What AI cites">AI Overviews and AI Mode cite YouTube on 25 of 37 questions (60 videos)</td><td data-l="Whose videos">None are the brand's yet, even after a summer of channel work (one sample, Oct 15)</td><td data-l="What it tells us">Channel fixes lift clicks first; citations take longer. Recheck in November</td></tr>
+          <tr><td data-l="<tr><th>Account"><b>Enterprise software company</b></td><td data-l="What AI cites">YouTube is the most-cited domain in the run: 61 of 487 citations (12.5%)</td><td data-l="Whose videos">The brand's best event talks sit behind a form on another video host</td><td data-l="What it tells us">Gated video can't be cited</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">Market signal: in the BCG and Google partnerships study, 84% of marketers expect to increase investment in AI-driven discovery (global, n=387, stated intent).</p>
+
+    <div class="callout">
+      <p><strong>So what:</strong> the video a brand already owns is a source AI isn't using. Fixing that is organic work. Scaling it is paid media. Filling the gaps is production. Most agencies sell those as three separate things. We sell them as one system with one measure: <strong>is the client the brand AI recommends?</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- SYSTEM -->
+<section id="system">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">The system</span>
+      <h2>Four moves, one flywheel</h2>
+      <p class="lede">Find the gap, fix the channel, amplify what works with paid, and make what's missing. Every turn is re-measured against the AI answer. Select a stage to see who owns it, which frameworks drive it and where Google fits.</p>
+    </div>
+    <div class="fly">
+      <div>
+        <svg viewBox="-44 0 648 540" role="group" aria-label="YouTube flywheel: Find, Fix, Amplify, Make">
+          <defs>
+            <marker id="ah" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrowhead" d="M0,0 L10,5 L0,10 z"/></marker>
+          </defs>
+          <!-- arcs clockwise: N->E, E->S, S->W, W->N -->
+          <path class="arc" d="M 345 92 A 200 200 0 0 1 462 200" marker-end="url(#ah)"/>
+          <path class="arc" d="M 462 340 A 200 200 0 0 1 345 448" marker-end="url(#ah)"/>
+          <path class="arc" d="M 215 448 A 200 200 0 0 1 98 340" marker-end="url(#ah)"/>
+          <path class="arc" d="M 98 200 A 200 200 0 0 1 215 92" marker-end="url(#ah)"/>
+          <text class="arclbl" x="452" y="118" text-anchor="start">gap read says</text>
+          <text class="arclbl" x="452" y="134" text-anchor="start">what to fix first</text>
+          <text class="arclbl" x="452" y="412" text-anchor="start">organic winners</text>
+          <text class="arclbl" x="452" y="428" text-anchor="start">tell paid what to run</text>
+          <text class="arclbl" x="108" y="412" text-anchor="end">paid learnings tell</text>
+          <text class="arclbl" x="108" y="428" text-anchor="end">us what to make next</text>
+          <text class="arclbl" x="108" y="118" text-anchor="end">new videos answer;</text>
+          <text class="arclbl" x="108" y="134" text-anchor="end">re-poll proves it</text>
+
+          <g class="hub" data-k="hub" tabindex="0" role="button" aria-label="The answer and the data spine">
+            <circle cx="280" cy="270" r="88"/>
+            <text x="280" y="250" font-size="11.5" font-weight="700" letter-spacing="1.2">THE MEASURE</text>
+            <text x="280" y="273" font-size="17" font-weight="800">Recommended,</text>
+            <text x="280" y="293" font-size="17" font-weight="800">not just cited</text>
+            <text x="280" y="316" font-size="11.5" font-weight="600" opacity=".85">GA4 → BigQuery spine</text>
+          </g>
+
+          <g class="node" data-k="find" tabindex="0" role="button" aria-label="Find: the AI Visibility Score">
+            <circle class="bg" cx="280" cy="78" r="70"/>
+            <text class="k" x="280" y="60" text-anchor="middle">1 · FIND</text>
+            <text class="t" x="280" y="84" text-anchor="middle">The door</text>
+            <text class="s" x="280" y="104" text-anchor="middle">AI Visibility Score</text>
+          </g>
+          <g class="node" data-k="fix" tabindex="0" role="button" aria-label="Fix: the organic channel">
+            <circle class="bg" cx="480" cy="270" r="70"/>
+            <text class="k" x="480" y="252" text-anchor="middle">2 · FIX</text>
+            <text class="t" x="480" y="276" text-anchor="middle">Organic</text>
+            <text class="s" x="480" y="296" text-anchor="middle">channel as answers</text>
+          </g>
+          <g class="node" data-k="amp" tabindex="0" role="button" aria-label="Amplify: paid YouTube">
+            <circle class="bg" cx="280" cy="462" r="70"/>
+            <text class="k" x="280" y="444" text-anchor="middle">3 · AMPLIFY</text>
+            <text class="t" x="280" y="468" text-anchor="middle">Paid</text>
+            <text class="s" x="280" y="488" text-anchor="middle">YouTube media</text>
+          </g>
+          <g class="node" data-k="make" tabindex="0" role="button" aria-label="Make: strategic production">
+            <circle class="bg" cx="80" cy="270" r="70"/>
+            <text class="k" x="80" y="252" text-anchor="middle">4 · MAKE</text>
+            <text class="t" x="80" y="276" text-anchor="middle">Production</text>
+            <text class="s" x="80" y="296" text-anchor="middle">strategy-led</text>
+          </g>
+        </svg>
+      </div>
+      <div class="panel" id="flyPanel" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- DOOR -->
+<section id="door">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">1 · What opens the door</span>
+      <h2>Many doors, one primary: the AI Visibility Score</h2>
+      <p class="lede">We can run it on public data before a contract exists, and it lands a finding no media plan can answer: AI is citing someone else's videos for your buyers' questions. Every door leads to the same first paid engagement.</p>
+    </div>
+    <div class="doors">
+      <div class="door primary">
+        <span class="tagp">Primary door</span>
+        <h3>AI Visibility Score and YouTube citation read</h3>
+        <p>Share of answer across six engines. Three answer from memory (ChatGPT, Claude, Gemini) and three search the web (Perplexity, AI Overviews, AI Mode). Questions come from <span class="chip rs" style="font-size:12px;padding:1px 7px">StoryVesting</span> <span class="chip rs" style="font-size:12px;padding:1px 7px">Bow Tie Funnel</span> <span class="chip rs" style="font-size:12px;padding:1px 7px">Behavioral Insights Matrix</span>, not a keyword list. Each answer is scored absent, ghost-cited, mentioned or recommended. The YouTube read lists every video AI cites and whose channel it sits on.</p>
+      </div>
+      <div class="door"><h3>Google referral</h3><p>Google brings us in when an advertiser qualifies for funded creative (Creative Works, the Media Readiness Program). biBerk's production is Google-funded.</p></div>
+      <div class="door"><h3>Incubeta US media clients</h3><p>Accounts already buying YouTube with no organic or AI-answer layer. The score shows what their media spend isn't buying.</p></div>
+      <div class="door"><h3>Channel audit</h3><p>For brands that know their channel is weak: an audit of metadata, playlists, captions and links, set against the videos AI cites.</p></div>
+      <div class="door"><h3>Webinars and roadshows</h3><p>"You rank, but you're not the answer" as the session. Every attendee is offered a score.</p></div>
+    </div>
+
+    <h3 style="margin-top:34px">How a score becomes a meeting, then a proposal</h3>
+    <ol class="flow">
+      <li><b>Run it</b><span>Public data only. No client systems, no contract.</span></li>
+      <li><b>Resample</b><span>Ask any headline question 3 to 5 times. Single runs flip about 1 in 5 times.</span></li>
+      <li><b>Read out</b><span>"You rank, but you're not the answer." Show the videos AI cites, and that none are theirs.</span></li>
+      <li><b>Validate in their data</b><span>Search Console AI Overviews and AI Mode impressions, plus Bing citations. This removes the "third-party proxy" objection.</span></li>
+      <li><b>Propose the proof</b><span>The 120-day proof of concept, with two staked outcomes and a client owner for each.</span></li>
+    </ol>
+
+    <div class="callout or">
+      <p><strong>The score opens the door. It's never the KPI.</strong> A single blended score hides the fact that most AI citations never name the brand they cite: 61.7% of them in a 2026 Semrush study. A citation can even feed a competitor's recommendation. We sell against the <strong>recommendation rate</strong>, reported by engine group, with sample counts and dates.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FIRST PAID -->
+<section id="paid">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">2 · How we get to a paid engagement</span>
+      <h2>The 120-day proof of concept, shaped by biBerk</h2>
+      <p class="lede">Six workstreams that prove cause, not just activity. The client sees a baseline, a prioritized fix list, a rebuilt channel, the first new videos and a controlled test, all in four months.</p>
+    </div>
+    <div class="ws">
+      <div class="card"><h3><i>01</i>Answer poll</h3><p>100 unbranded buyer questions plus brand and current-customer checks. Each is asked 3 times on 7 engines. Polls 1 to 3 set the baseline, then we poll every two weeks to Day 120.</p><div class="proof">biBerk: 2,090 of 2,100 discovery answers collected, at about $63 a poll.</div></div>
+      <div class="card"><h3><i>02</i>Gap read</h3><p>Every question is classed A (no page), B (page exists, not cited), C (cited, a competitor leads) or D (client leads), then ranked by demand.</p><div class="proof">biBerk: 55 questions already had a page AI passes over. Only 7 needed new pages.</div></div>
+      <div class="card"><h3><i>03</i>Channel fix</h3><p>Playlists organized by question, titles rewritten as answers, one description template (the answer, a tracked link, FAQ), captions, chapters and a thumbnail system tested in YouTube.</p><div class="proof">biBerk: 7 playlists, 43 retitles, one Legal-approved template, five thumbnail templates.</div></div>
+      <div class="card"><h3><i>04</i>First new videos (Batch A)</h3><p>Net-new videos only for questions where AI cites someone else's video. Each spec carries the question, evidence, audience, key points, placement, metadata, Legal flags and a success measure.</p><div class="proof">biBerk: Batch A covers 6 of the 58 YouTube questions.</div></div>
+      <div class="card"><h3><i>05</i>Hold-out test</h3><p>Some playlists get the changes and the rest stay as they are, so movement can be credited to the work and not to the season or to other teams.</p><div class="proof">biBerk: two playlists change, three hold until poll 3 (Oct 28).</div></div>
+      <div class="card"><h3><i>06</i>Two Outcome Cards</h3><p>Two staked outcomes with a named client owner each. The target is set after poll 3, not before, so it rests on a real baseline.</p><div class="proof">biBerk: (1) be the insurer AI names when owners choose and buy; (2) AI tells biBerk's side on reputation questions.</div></div>
+    </div>
+
+    <div class="money">
+      <div class="card"><div class="v">$57,750</div><div class="l">Standard AEO pilot price (HubSpot). The entry point for most accounts.</div></div>
+      <div class="card"><div class="v">$125K + $200K</div><div class="l">biBerk: a client-funded 120-day AEO program, plus video production funded by Google's Media Readiness Program.</div></div>
+      <div class="card tint"><div class="v" style="font-size:20px;color:var(--fg)">What earns year one</div><div class="l">Treated playlists move against the hold-out, the recommendation rate trends up on the search engines, and each outcome has a client owner.</div></div>
+    </div>
+    <p class="src">Other prices are set per account in the price calculator. Confirm Google funding eligibility for the production route before staffing it.</p>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">3 · What a 12-month roadmap looks like</span>
+      <h2>Prove, Build, Amplify, Scale</h2>
+      <p class="lede">The proof of concept is the first four months of the year, not a separate sale. Each phase ends with a gate the client can see, and each one adds a revenue stream for us.</p>
+    </div>
+
+    <div class="rm" role="table" aria-label="12-month roadmap">
+      <div class="rh" role="rowheader"></div>
+      <div class="ph p1" role="columnheader"><span class="m">Months 1 to 4</span><b>Prove</b></div>
+      <div class="ph" role="columnheader"><span class="m">Months 5 and 6</span><b>Build</b></div>
+      <div class="ph" role="columnheader"><span class="m">Months 7 to 9</span><b>Amplify</b></div>
+      <div class="ph" role="columnheader"><span class="m">Months 10 to 12</span><b>Scale</b></div>
+
+      <div class="rh" role="rowheader">What we do</div>
+      <div><ul><li>Polls 1 to 3 and the gap read</li><li>Channel fix on treated playlists</li><li>Batch A videos</li><li>Hold-out test</li></ul></div>
+      <div><ul><li>Roll the fix to the whole channel</li><li>Batch B, plus a Shorts series that answers single questions</li><li>Personas from Seamless Audience Insights feed the briefs</li><li>Build the GA4 to BigQuery spine</li></ul></div>
+      <div><ul><li>Organic winners become paid asset sets</li><li>Paid learnings choose the next organic topics</li><li>Score creative with the CPI</li><li>Entity work toward the branded channel result</li></ul></div>
+      <div><ul><li>Renew as a retainer with a production annuity</li><li>Expand to more questions, products or markets</li><li>Plan year two from the poll trend</li><li>Open Seamless: unified search intelligence</li></ul></div>
+
+      <div class="rh" role="rowheader">What the client sees</div>
+      <div>Baseline, then the recommendation rate on treated vs held-out playlists</div>
+      <div>Own videos cited in AI answers. YouTube search views and click-through, adjusted for last year</div>
+      <div>Paid results reported apart from organic. Cost per qualified action from the spine</div>
+      <div>Recommendation rate vs competitors on the questions closest to a sale, tied to leads</div>
+
+      <div class="rh" role="rowheader">Google layer</div>
+      <div class="gl">AI Overviews, AI Mode and Gemini measured. Search Console validation</div>
+      <div class="gl">YouTube Data API, Test &amp; Compare, GA4 and BigQuery</div>
+      <div class="gl">Demand Gen, Video View and Video Reach. ABCDs. Creative Works where eligible</div>
+      <div class="gl">Co-sell planning with Google. Next year's funded programs</div>
+
+      <div class="rh" role="rowheader">How we're paid</div>
+      <div>Pilot fee, plus Google-funded production where eligible</div>
+      <div>Retainer starts. Data spine as a fixed-fee build</div>
+      <div>Paid YouTube media through Incubeta US. Production annuity</div>
+      <div>Renewal (AEO ongoing benchmark: $166,320 a year) plus Seamless expansion</div>
+
+      <div class="rh gate last" role="rowheader">Gate</div>
+      <div class="gate last">Poll 3 baseline and the hold-out read</div>
+      <div class="gate last">The client's own videos start being cited</div>
+      <div class="gate last">Paid lifts what organic proved</div>
+      <div class="gate last">Year-two plan signed</div>
+    </div>
+
+    <div class="rm-mobile" id="rmMobile"></div>
+
+    <div class="callout rs">
+      <p><strong>The flywheel in one line:</strong> organic tells paid what to run, and paid tells organic what to make next. AI answers sit on top. Done this way, the client's YouTube spend grows because it's working, which is also why Google wants to bring us in.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FRAMEWORKS -->
+<section id="frameworks">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Where RocketSource by Incubeta frameworks fit</span>
+      <h2>Google's ABCDs tell everyone what good looks like. Our frameworks tell us which question, which audience and why they'll act.</h2>
+      <p class="lede">This is the layer a competitor can't copy from a cheat sheet. Select a framework to see what it does in the system and where it showed up for biBerk.</p>
+    </div>
+    <div class="fx">
+      <div class="tbl">
+        <table class="fxt">
+          <thead><tr><th>Framework</th><th class="c">Find</th><th class="c">Fix</th><th class="c">Amplify</th><th class="c">Make</th></tr></thead>
+          <tbody id="fxBody"></tbody>
+        </table>
+        <p class="small" style="padding:10px 12px 12px;margin:0"><span class="dot"></span> leads this stage &nbsp; <span class="dot o"></span> supports it</p>
+      </div>
+      <div class="fxpanel"><div class="card" id="fxPanel" aria-live="polite"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GOOGLE -->
+<section id="google">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">The Google partnership layer</span>
+      <h2>Google runs through every stage, and every stage grows Google</h2>
+      <p class="lede">We measure Google's AI surfaces, build on Google's data stack, activate in Google's video formats and fill Google-funded programs with strategy-led briefs. That's the co-sell story Google reps can repeat.</p>
+    </div>
+    <div class="glayer">
+      <div class="gcol"><span class="stage">Find</span><h3>Measure Google's AI surfaces</h3>
+        <div class="gitem"><b>AI Overviews and AI Mode</b>Two of the three search engines in the headline citation rate</div>
+        <div class="gitem"><b>Gemini</b>Measured from memory and with search, reported apart</div>
+        <div class="gitem"><b>Search Console</b>First-party proof of AI Overviews and AI Mode impressions</div></div>
+      <div class="gcol"><span class="stage">Fix</span><h3>Make the channel citable</h3>
+        <div class="gitem"><b>YouTube Data API</b>Metadata, playlists and captions at scale, with rollback</div>
+        <div class="gitem"><b>Test &amp; Compare</b>Up to three thumbnails, judged on watch time</div>
+        <div class="gitem"><b>Knowledge Graph</b>Entity work behind the branded channel result</div></div>
+      <div class="gcol"><span class="stage">Amplify</span><h3>Activate in Google video formats</h3>
+        <div class="gitem"><b>Demand Gen</b>Organic winners as 9+ video sets with images and copy</div>
+        <div class="gitem"><b>Video View and Video Reach</b>Consideration and reach, sized by asset variety</div>
+        <div class="gitem"><b>ABCDs</b>Google's effectiveness check on every paid asset</div></div>
+      <div class="gcol"><span class="stage">Make</span><h3>Fill funded programs</h3>
+        <div class="gitem"><b>Creative Works</b>Agentic interviews, then CPI and our frameworks, then smart briefs. We already run it across 11 brands</div>
+        <div class="gitem"><b>Media Readiness Program</b>Google-funded production: $200K for biBerk</div>
+        <div class="gitem"><b>Gemini agents</b>Run stakeholder interviews at the start of Creative Works</div></div>
+      <div class="gcol"><span class="stage">Measure + sell</span><h3>Join the data, co-sell the result</h3>
+        <div class="gitem"><b>GA4 to BigQuery</b>Joins YouTube, site and leads, and feeds the client's own warehouse</div>
+        <div class="gitem"><b>Looker Studio</b>The reporting surface on top of the spine</div>
+        <div class="gitem"><b>Google co-sell</b>Tim's Google network. biBerk is the story the reps can tell</div></div>
+    </div>
+    <p class="src">Keep Google's funds distinct in anything we write: the Media Readiness Program and other creative funds have different rules. Confirm eligibility per account.</p>
+  </div>
+</section>
+
+<!-- BASELINE -->
+<section id="baseline">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Baseline vs our layer</span>
+      <h2>Google's 2026 cheat sheet is the floor every agency meets. We start where it stops.</h2>
+      <p class="lede">The cheat sheet says how many assets to make and what a good asset looks like. It can't say which question each video should answer, for whom, or whether AI now recommends the brand.</p>
+    </div>
+    <div class="grid2" style="align-items:start">
+      <div class="card">
+        <span class="label">The baseline · Google's YouTube creative cheat sheet 2026</span>
+        <div class="tabs" role="tablist" aria-label="Campaign type">
+          <button role="tab" aria-selected="true" data-t="dg">Demand Gen</button>
+          <button role="tab" aria-selected="false" data-t="vv">Video View</button>
+          <button role="tab" aria-selected="false" data-t="vr">Video Reach</button>
+        </div>
+        <p class="small" id="specLead" style="margin-bottom:10px"></p>
+        <div class="spec" id="specGrid"></div>
+        <div class="abcd">
+          <div><b>Attention</b>Hook fast. Lead with reasons to believe</div>
+          <div><b>Branding</b>Brand early and often. YouTube is 95% sound-on</div>
+          <div><b>Connection</b>Humanize. Show the product in real use</div>
+          <div><b>Direction</b>A clear call to action, said and shown</div>
+        </div>
+      </div>
+      <div class="card" style="border-color:var(--accent);border-width:2px">
+        <span class="label" style="color:var(--accent-ink)">Our layer · what the system adds</span>
+        <ul class="tight layer">
+          <li><b>Which questions to answer.</b> The answer poll ranks the questions where AI cites someone else's video. No brief, no draft.</li>
+          <li><b>Why the audience acts.</b> Seamless Audience Insights and the Behavioral Insights Matrix set the stage and motive for each brief.</li>
+          <li><b>What paid should run.</b> Organic winners, not guesses, become the 9+ asset sets the cheat sheet asks for.</li>
+          <li><b>What's working creatively.</b> The CPI scores what performs. Our frameworks explain why.</li>
+          <li><b>Proof AI recommends the brand.</b> Re-polled every two weeks, with a hold-out, by engine group.</li>
+          <li><b>A line to revenue.</b> The GA4 to BigQuery spine ties video to leads in the client's own warehouse.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF -->
+<section id="proof">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Proof</span>
+      <h2>biBerk is the story. Two more accounts show the pattern and the honest limits.</h2>
+    </div>
+    <ol class="tl" aria-label="biBerk timeline">
+      <li class="done"><b>Jan 2026</b>First meeting. biBerk's questions shape our AEO offer</li>
+      <li class="done"><b>Sep 2026</b>Production path set, funded by Google</li>
+      <li class="done"><b>Oct 2026</b>$325K AEO and YouTube program signed</li>
+      <li class="done"><b>Oct 8</b>Kickoff</li>
+      <li class="done"><b>Oct 14</b>Poll 1: 2,090 answers</li>
+      <li class="done"><b>Oct 15</b>Baseline and gap read presented</li>
+      <li class="done"><b>Oct 22</b>Thumbnail system set</li>
+      <li class="next"><b>Oct 28</b>Poll 3: baseline complete, hold-out read begins</li>
+    </ol>
+    <div class="grid3">
+      <div class="card"><span class="label">biBerk · insurer</span><h3>The full system, signed</h3><ul class="tight"><li>AI names biBerk in 27.8% of "which insurer" answers, level with two national carriers, yet rarely sends people to its site</li><li>0 of 160 cost and comparison answers cite biBerk</li><li>Channel plan, Batch A specs and thumbnails in flight, with Steven's creative direction</li></ul></div>
+      <div class="card"><span class="label">Dental group · multi-location</span><h3>Channel work moves clicks first</h3><ul class="tight"><li>Click-through up 1.5 points, adjusted for last year</li><li>YouTube search views up 119% adjusted, from a small base (19 to 32 a day)</li><li>Paid drove 91% of view growth, so we report it apart from organic</li><li>AI citations of its own videos: not yet. Recheck in November</li></ul></div>
+      <div class="card"><span class="label">Data center company · B2B</span><h3>The paid and organic loop, scoped</h3><ul class="tight"><li>YouTube AI content engine scoped, with an organic CPI point of view</li><li>Audience insights demo: "found is not chosen"</li><li>Three client re-orgs slowed the program. The lesson: multi-thread early</li></ul></div>
+    </div>
+    <div class="callout">
+      <p><strong>How we talk about proof:</strong> lead with what moved and say what hasn't yet. Keep paid separate from organic. Never quote a single-run AI number. Candor is what makes a technical buyer trust the rest.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">One collective system</span>
+      <h2>Who does what across RocketSource by Incubeta and Incubeta US</h2>
+      <p class="lede">The stages map onto lanes in the One Sales Experience. One client team, one plan, one measure.</p>
+    </div>
+    <div class="tbl who">
+      <table class="stack">
+        <thead><tr><th>Stage</th><th>Who</th><th>What they own</th><th>Constraint to plan for</th></tr></thead>
+        <tbody>
+          <tr><td data-l="<tr><th>Stage">Find</td><td data-l="Who">Jonathan, Max (RocketSource by Incubeta)</td><td data-l="What they own">AI Visibility Score, answer polls, gap read, Outcome Cards</td><td data-l="Constraint to plan for">Poll rigor takes time: 3 polls before any target</td></tr>
+          <tr><td data-l="<tr><th>Stage">Fix</td><td data-l="Who">Owned &amp; Organic lane, with the client's web team</td><td data-l="What they own">Channel ops, metadata, playlists, captions, page fixes</td><td data-l="Constraint to plan for">Client Legal and IT sign-off (biBerk's IT review took over two weeks)</td></tr>
+          <tr><td data-l="<tr><th>Stage">Make</td><td data-l="Who">Steven, with an Americas production team and vetted partners</td><td data-l="What they own">Creative direction, briefs, Seamless Audience Insights, production</td><td data-l="Constraint to plan for">Audience insights rely on one expert today. The production team needs Americas approval. Talent rights for voice and likeness</td></tr>
+          <tr><td data-l="<tr><th>Stage">Amplify</td><td data-l="Who">Incubeta US paid media</td><td data-l="What they own">Demand Gen, Video View and Video Reach activation of organic winners</td><td data-l="Constraint to plan for">A clear handoff from organic results to paid plans</td></tr>
+          <tr><td data-l="<tr><th>Stage">Measure</td><td data-l="Who">Data lane</td><td data-l="What they own">GA4 to BigQuery spine into the client's warehouse, Looker Studio</td><td data-l="Constraint to plan for">The export is forward-only, so start it on day one</td></tr>
+          <tr><td data-l="<tr><th>Stage">Google</td><td data-l="Who">Tim</td><td data-l="What they own">Co-sell, funded programs, rep enablement with the biBerk story</td><td data-l="Constraint to plan for">Funding rules differ by program and account</td></tr>
+          <tr><td data-l="<tr><th>Stage">Client health</td><td data-l="Who">Charisse</td><td data-l="What they own">Account health and expansion signals across the year</td><td data-l="Constraint to plan for">Owners named on the client side for each outcome</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- DECISIONS -->
+<section id="decisions">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">What we need from this group</span>
+      <h2>Six decisions to take this from one win to a repeatable offer</h2>
+    </div>
+    <ol class="asks">
+      <li><b>Back YouTube as one offer</b><span>Door, proof of concept and 12-month roadmap, sold together by RocketSource by Incubeta and Incubeta US, with the recommendation rate as the shared measure.</span><span class="own">All</span></li>
+      <li><b>Approve the Americas production team</b><span>Steven builds the team, process and partner bench now, sized to the biBerk pipeline and the next two accounts.</span><span class="own">Amy, Steven</span></li>
+      <li><b>Agree the organic-to-paid handoff</b><span>Organic winners go to the media team with a brief and an asset set. Paid results are reported apart from organic.</span><span class="own">Incubeta US media, Owned &amp; Organic</span></li>
+      <li><b>Take biBerk to Google</b><span>Tim takes the story to Google's YouTube and Creative Works contacts for co-sell and funded-program referrals.</span><span class="own">Tim</span></li>
+      <li><b>Pick the first score targets</b><span>One list of accounts across new business and Incubeta US media clients, each to get an AI Visibility Score this quarter.</span><span class="own">Jonathan, Charisse, Tim</span></li>
+      <li><b>Set the price ladder</b><span>Confirm the pilot, retainer and production annuity in the price calculator, so every seller quotes the same way.</span><span class="own">Jonathan, Greg</span></li>
+    </ol>
+
+    <h3 style="margin:34px 0 0">Six rules we hold in every account</h3>
+    <div class="rules">
+      <div><b>Recommended, not just cited</b>The measure we sell against, by engine group.</div>
+      <div><b>Resample before any headline</b>3 to 5 runs, with sample counts and dates.</div>
+      <div><b>No brief, no draft</b>Every video answers a question AI already answers with someone else's video.</div>
+      <div><b>Paid and organic reported apart</b>So each one is credited for what it did.</div>
+      <div><b>Human-led video</b>No AI-generated video without a clear client signal and cleared talent rights.</div>
+      <div><b>The score is the door</b>Never the KPI.</div>
+    </div>
+
+    <div class="callout" style="margin-top:26px">
+      <p><strong>Next, the client-facing version:</strong> anonymize client names, remove prices, the team table and these decisions, and add a "your score" panel for each prospect. Same page, same system.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Sources: Incubeta AI answer poll 1 and gap read for biBerk (Oct 14 to 15, 2026); biBerk thumbnail recommendations (Oct 22, 2026); dental group YouTube impact analysis (Oct 15, 2026); enterprise software retention research (Sep 2026); AEO GTM Playbook and Learnings; Google's YouTube Creative Best Practice cheat sheet (2026); BCG and Google, new era of marketing partnerships (2026). Pricing from HubSpot. Internal draft for RocketSource by Incubeta and Incubeta US. Not for client distribution.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* ---------- Flywheel ---------- */
+  var FLY = {
+    find:{t:"Find · the door", w:"The AI Visibility Score and the answer poll: share of answer across six engines, the four-tier score, and every YouTube video AI cites for the client's questions.",
+      own:"RocketSource by Incubeta AEO team (Jonathan, Max)",
+      fx:"StoryVesting, Bow Tie Funnel and the Behavioral Insights Matrix shape the questions",
+      g:"AI Overviews, AI Mode, Gemini. Search Console validates",
+      out:"The gap read: each question classed A to D and ranked by demand",
+      m:"Recommendation rate, by engine group"},
+    fix:{t:"Fix · organic", w:"Turn the channel from a library of ads into a library of answers. Playlists by question, titles as answers, one description template, captions, chapters, tracked links and tested thumbnails.",
+      own:"Owned & Organic lane, with the client's web team",
+      fx:"Behavioral Insights Matrix sets the playlist stage. Behavioral Economics (authority, social proof, consistency) guides the entity work",
+      g:"YouTube Data API, Test & Compare, Knowledge Graph",
+      out:"A rebuilt channel and a hold-out test",
+      m:"The client's own videos cited. YouTube search views and click-through, adjusted for last year"},
+    amp:{t:"Amplify · paid", w:"Organic winners become paid asset sets. Paid learnings choose the next organic topics. Reported apart from organic so each gets credit for its own work.",
+      own:"Incubeta US paid media",
+      fx:"CPI says what works. Seamless Audience Insights says why",
+      g:"Demand Gen, Video View, Video Reach, ABCDs",
+      out:"9+ video asset sets built from proven organic content",
+      m:"Cost per qualified action from the data spine"},
+    make:{t:"Make · production", w:"Strategy-led production. Each video starts from a question AI already answers with someone else's video. No brief, no draft.",
+      own:"Steven, with an Americas production team and vetted partners",
+      fx:"StoryVesting for the story. Seamless Audience Insights personas, set to a Behavioral Insights Matrix stage, become the brief. CPI checks it",
+      g:"Creative Works, Media Readiness Program funding, Gemini interview agents",
+      out:"Video specs and finished videos, Legal-cleared",
+      m:"Is the new video cited, and is the brand recommended, by the next poll?"},
+    hub:{t:"The measure · recommended, not just cited", w:"Every turn of the wheel is re-polled. The GA4 to BigQuery spine joins YouTube, site and lead data inside the client's own warehouse, so AI visibility can be traced to revenue.",
+      own:"Data lane, with the AEO team",
+      fx:"Outcome Cards: two staked outcomes, each with a client owner",
+      g:"GA4, BigQuery, Looker Studio",
+      out:"One view from AI answer to lead",
+      m:"Recommendation rate, leads and revenue. Never a blended score"}
+  };
+  var panel=document.getElementById('flyPanel');
+  var nodes=[].slice.call(document.querySelectorAll('#system [data-k]'));
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+  function showFly(k){
+    var d=FLY[k]; if(!d) return;
+    nodes.forEach(function(n){ var on=n.getAttribute('data-k')===k; n.classList.toggle('on',on); n.setAttribute('aria-pressed',on?'true':'false'); });
+    panel.innerHTML='<span class="label">Stage detail</span><h3>'+esc(d.t)+'</h3><p class="what">'+esc(d.w)+'</p>'+
+      '<dl class="kv"><dt>Owner</dt><dd>'+esc(d.own)+'</dd>'+
+      '<dt><span class="chip rs" style="font-size:11.5px;padding:1px 7px">Frameworks</span></dt><dd>'+esc(d.fx)+'</dd>'+
+      '<dt><span class="chip g" style="font-size:11.5px;padding:1px 7px">Google</span></dt><dd>'+esc(d.g)+'</dd>'+
+      '<dt>Output</dt><dd>'+esc(d.out)+'</dd><dt>Measured by</dt><dd>'+esc(d.m)+'</dd></dl>'+
+      '<p class="hint">Select another stage, or the center, to compare.</p>';
+  }
+  nodes.forEach(function(n){
+    n.addEventListener('click',function(){showFly(n.getAttribute('data-k'));});
+    n.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();showFly(n.getAttribute('data-k'));} });
+  });
+  showFly('find');
+
+  /* ---------- Frameworks ---------- */
+  var FX=[
+    {n:"StoryVesting",s:"The customer's why",c:[2,0,1,2],
+     d:"Shapes the questions we poll, in the buyer's words and motives, and gives each video its story spine. It also scores the click from ad to landing page.",
+     p:"biBerk's 100 owner questions were written from the owner's point of view, not from biBerk's product list."},
+    {n:"Bow Tie Funnel",s:"Both sides of the sale",c:[2,1,1,0],
+     d:"Covers questions before and after the sale, so we see discovery and loyalty separately. It also sets which audiences paid should reach at each stage.",
+     p:"Cited on about 9% of unbranded questions but 96% of current-customer questions: brand recall, not discovery."},
+    {n:"Behavioral Insights Matrix",s:"Awareness stage",c:[2,2,1,2],
+     d:"Places each question at an awareness stage. That stage sets the playlist, the paid sequence and the brief.",
+     p:"Question intent set the playlist structure and the order of Batch A."},
+    {n:"Behavioral Economics",s:"Why AI skips a brand",c:[1,2,0,1],
+     d:"Social proof, authority and consistency explain why AI passes a brand over. That drives the entity clean-up and named-expert content.",
+     p:"biBerk's site states three different company-size claims. Consistency is a fix, not a nice-to-have."},
+    {n:"Business Impact Analysis",s:"Effort vs impact",c:[0,1,0,2],
+     d:"Ranks fixes and new videos by demand and effort, so the first batch is the one most likely to move the number.",
+     p:"Used to choose Batch A: 6 of the 58 YouTube questions first."},
+    {n:"Outcome Cards",s:"Two staked outcomes",c:[2,1,1,1],
+     d:"Two measurable outcomes, each with a client-side owner and a target set from the baseline. Every workstream traces to one of them.",
+     p:"(1) Be the insurer AI names when owners choose and buy. (2) AI tells biBerk's side on reputation questions."},
+    {n:"Creative Performance Index",s:"CPI: the what",c:[0,0,2,1],
+     d:"Scores which creative elements perform across the library and the paid tests. It tells us what to keep, cut and repeat.",
+     p:"Organic CPI point of view built for the data center account. biBerk's paid read starts in the Amplify phase."},
+    {n:"Seamless Audience Insights",s:"SAI: the why",c:[0,0,1,2],
+     d:"Synthetic personas (10,000 in one engagement) give the why behind the CPI's what. Persona, then insight, then stage, then brief.",
+     p:"Run as a demo for the data center account. Capacity today: one expert orchestrator, so plan it per account."}
+  ];
+  var body=document.getElementById('fxBody'), fp=document.getElementById('fxPanel');
+  function cell(v){ return '<td class="c">'+(v===2?'<span class="dot" title="Leads"></span>':v===1?'<span class="dot o" title="Supports"></span>':'')+'</td>'; }
+  body.innerHTML=FX.map(function(f,i){ return '<tr data-i="'+i+'" tabindex="0" aria-label="'+esc(f.n)+'"><td class="n">'+esc(f.n)+'<small>'+esc(f.s)+'</small></td>'+f.c.map(cell).join('')+'</tr>'; }).join('');
+  var rows=[].slice.call(body.querySelectorAll('tr'));
+  var STG=["Find","Fix","Amplify","Make"];
+  function showFx(i){
+    var f=FX[i];
+    rows.forEach(function(r){ r.classList.toggle('on', +r.getAttribute('data-i')===i); });
+    var lead=STG.filter(function(_,j){return f.c[j]===2;}).join(', ')||'n/a';
+    var sup=STG.filter(function(_,j){return f.c[j]===1;}).join(', ');
+    fp.innerHTML='<span class="label">RocketSource by Incubeta framework</span><h3>'+esc(f.n)+'</h3><p>'+esc(f.d)+'</p>'+
+      '<dl class="kv"><dt>Leads</dt><dd>'+esc(lead)+'</dd>'+(sup?'<dt>Supports</dt><dd>'+esc(sup)+'</dd>':'')+'<dt>In biBerk</dt><dd>'+esc(f.p)+'</dd></dl>';
+  }
+  rows.forEach(function(r){
+    var i=+r.getAttribute('data-i');
+    r.addEventListener('click',function(){showFx(i);});
+    r.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();showFx(i);} });
+  });
+  showFx(0);
+
+  /* ---------- Cheat-sheet spec tabs ---------- */
+  var SPEC={
+    dg:{lead:"Demand Gen: create demand and convert attention across YouTube and Google's visual surfaces. 9+ videos, 9 images, 5 headlines and 5 descriptions. Headlines of 20 to 30 characters, descriptions of 40 to 60.",
+      f:[["Vertical",["3 videos, 15 to 30s, 9:16 or 4:5 (skippable or Shorts)","3 images, 9:16 or 4:5"]],["Square",["3 videos, 15 to 30s, 1:1","3 images, 1:1"]],["Horizontal",["3 videos, 15 to 30s, 16:9","3 images, 1.91:1"]]]},
+    vv:{lead:"Video View: drive consideration in moments of discovery. 9+ videos. The more assets, the better the campaign performs.",
+      f:[["Vertical",["15 to 30s, 9:16","30 to 60s, 9:16","Long-form, 9:16"]],["Square",["15 to 30s, 1:1","30 to 60s, 1:1","Long-form, 1:1"]],["Horizontal",["2+ videos, 15 to 60s, 16:9","Long-form, 16:9"]]]},
+    vr:{lead:"Video Reach: maximize reach for awareness and recall. 9+ videos, including 6-second bumpers.",
+      f:[["Vertical",["Under 6s, 9:16","6 to 30s, 9:16","Long-form, 9:16"]],["Square",["Under 6s, 1:1","6 to 30s, 1:1","Long-form, 1:1"]],["Horizontal",["3 bumpers, 6s, 16:9","1 to 2 videos, 10 to 30s, 16:9","Long-form, 16:9"]]]}
+  };
+  var tabs=[].slice.call(document.querySelectorAll('#baseline .tabs button'));
+  function showSpec(k){
+    tabs.forEach(function(b){ b.setAttribute('aria-selected', b.getAttribute('data-t')===k?'true':'false'); });
+    document.getElementById('specLead').textContent=SPEC[k].lead;
+    document.getElementById('specGrid').innerHTML=SPEC[k].f.map(function(x){return '<div class="fmt"><b>'+esc(x[0])+'</b><ul>'+x[1].map(function(y){return '<li>'+esc(y)+'</li>';}).join('')+'</ul></div>';}).join('');
+  }
+  tabs.forEach(function(b){ b.addEventListener('click',function(){showSpec(b.getAttribute('data-t'));}); });
+  showSpec('dg');
+
+  /* ---------- Roadmap, stacked for phones ---------- */
+  (function(){
+    var rm=document.querySelector('.rm'), out=document.getElementById('rmMobile');
+    var cells=[].slice.call(rm.children), cols=5, rowsN=cells.length/cols, html='';
+    for(var c=1;c<cols;c++){
+      var head=cells[c].innerHTML, inner='';
+      for(var r=1;r<rowsN;r++){
+        inner+='<span class="label" style="margin-top:10px">'+cells[r*cols].textContent+'</span><div style="font-size:15px">'+cells[r*cols+c].innerHTML+'</div>';
+      }
+      html+='<div class="card">'+head.replace('<b>','<b style="font-family:var(--display);font-size:20px;display:block">')+inner+'</div>';
+    }
+    out.innerHTML=html;
+  })();
+
+  /* ---------- Scroll spy ---------- */
+  var links=[].slice.call(document.querySelectorAll('.secnav a'));
+  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+  function spy(){
+    var y=window.scrollY+140, cur=-1;
+    secs.forEach(function(s,i){ if(s && s.offsetTop<=y) cur=i; });
+    links.forEach(function(a,i){ a.classList.toggle('on',i===cur); });
+    if(cur>=0){ var a=links[cur], bar=a.parentNode; if(a.offsetLeft<bar.scrollLeft||a.offsetLeft+a.offsetWidth>bar.scrollLeft+bar.clientWidth){ bar.scrollLeft=a.offsetLeft-16; } }
+  }
+  window.addEventListener('scroll',spy,{passive:true}); spy();
+})();
+</script>
+</body>
+</html>
