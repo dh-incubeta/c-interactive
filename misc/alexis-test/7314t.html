@@ -1,0 +1,13 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Protected page</title>
+<style>body{font-family:system-ui,sans-serif;background:#0a3d62;display:grid;place-items:center;min-height:100vh;margin:0}form{background:#fff;padding:32px;border-radius:12px;width:min(340px,86vw)}input,button{width:100%;padding:10px;margin-top:12px;font-size:16px;box-sizing:border-box}button{background:#0a3d62;color:#fff;border:0;border-radius:6px;cursor:pointer}#e{color:#b00020;min-height:1.2em;margin:8px 0 0}</style></head>
+<body><form id="f"><strong>Enter password</strong><input id="p" type="password" autocomplete="off" autofocus><button>Unlock</button><p id="e"></p></form>
+<script>
+const D={s:"qVVKug3bjJGiCGkvvOjUUA==",i:"4bJ1Y+1/voU4ORcT",c:"Ejjb4s7PHS6ZjbMXLuMp2D+ef9PcaAtLlJK/tS6rq5ECFVFm/l7zpAE94XzOw67r3G+NXuLDSwoudUm2WSGK0d9GJmyw3gvnlB59su554SyZMmls8Sq7zG3ehLEBJ83fJNyPEJuNeCLi3O4jAwnCybDXM8Cyv8XradCJkMnJCvEYcgrHhyg1OiwL7FOb8GXNeWfF1BAHhvp2pKP+wk+vEG9XOiWjSzqbDTyy8LT4BppCx8yKrekuJTowZvyyYmEMB9l3nDqmzg79ABZjUbxvdDGk0loZqIZvYK3iT0qrWbKK+a68yMMg91ZegLY142pkBHYyOHD41g61nPBe+M0htP7kTv4VUhzaWHblUsxVKRmevO5bcGnaulqzo1SbaCm6XEVjKVqAkxtCpLTMuLlE2E9YYLEjKZXJp+scPfR/smApZ4Rcg6o+5fEO14j2I2zt3kjVZAWVxcpQRuxHdkQ7Bre8u8UyXBCL6jJkJPclV/Wmq7/71B0ufWG4BUeyb3Jxv2Rewjrqbr2EB8AD2njNalq+5bE9uwBNxKTU5JU1DjKDCgA8ng0iE+0zusLFVKjJQhJYSOxjJAkuZQVymY//B5cRrZp2NV8RDcJO9TWAKs5w5WaPwwMDgILPqBVbq+RlZRFTNAc/mZjgpJ3fnS27ZaYw0K3T5I2NmxhNRS7Nm+8fhyK6fusNaqY=",n:600000};
+const u=s=>Uint8Array.from(atob(s),x=>x.charCodeAt(0));
+f.onsubmit=async e=>{e.preventDefault();try{
+const km=await crypto.subtle.importKey('raw',new TextEncoder().encode(p.value),'PBKDF2',false,['deriveKey']);
+const k=await crypto.subtle.deriveKey({name:'PBKDF2',salt:u(D.s),iterations:D.n,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']);
+const t=await crypto.subtle.decrypt({name:'AES-GCM',iv:u(D.i)},k,u(D.c));
+document.open();document.write(new TextDecoder().decode(t));document.close();
+}catch(x){document.getElementById('e').textContent='Wrong password'}};
+</script></body></html>
